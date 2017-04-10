@@ -12,6 +12,6 @@ match({history: browserHistory, routes}, (error, redirectLocation, renderProps) 
         <Provider store={store}>
             <Router {...renderProps}/>
         </Provider>,
-        document.getElementById('root')
+        document.getElementById('root') 
     )
 })
