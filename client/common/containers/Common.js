@@ -3,10 +3,10 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import Header from '../components/Header'
 import Navbar from '../components/Navbar'
-import Main from '../components/Main'
+import Main from '../components/Main' 
 import actions from '../actions'
-import styles from '../sass/Common'
-import '../sass/global'
+ 
+ 
  
 class Common extends Component {
     constructor() {
@@ -17,7 +17,7 @@ class Common extends Component {
         const {children, ...props} = this.props
 
         return (
-            <div className={styles.app}>
+            <div className="page">
                 <Header/>
                 <Navbar/>
                 <Main>

@@ -1,24 +1,27 @@
 import React, {Component} from 'react'
-import styles from '../sass/Header'
-import imgAvatar from '../assets/avatar.png'
+ 
 
 class Header extends Component {
-    constructor() {
-        super()
+    componentDidMount() {
+        $('.ui.dropdown').dropdown();
     }
 
     render() {
         return (
-            <header className={styles.header}>
-                <div className={styles.left}>
-                    <span className={styles.span}>Boilerplate</span>
-                    
-                </div>
-                <div className={styles.right}>
-                    <span className={styles.description}>Hello, world！</span>
-
-                    <img className={styles.img} src={imgAvatar}/>
-
+            <header>
+                <div className="bigcontainer">
+                    <div id="logo">
+                        <a href="./">首页</a>
+                    </div>
+                    <div className="user"> 
+                        <div className="ui inline labeled icon top right pointing dropdown"> 欢迎，$用户名
+                        <i className="dropdown icon"></i>
+                            <div className="menu">
+                                <a className="item" href="http://www.yeelink.net"><i className="reply mail icon"></i>返回首页</a>
+                                <a className="item" href="/user/logout"><i className="sign out icon"></i>注销登录</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </header>
         )
