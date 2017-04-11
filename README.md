@@ -84,7 +84,7 @@ react-isomorphic-boilerplate/                // root directory
 
 An application that can only run in the client-side cannot serve HTML to crawlers, so it will have poor [SEO](https://en.wikipedia.org/wiki/Search_engine_optimization) by default. Web crawlers function by making a request to a web server and interpreting the result. but if the server returns a blank page, it’s not of much value. There are workarounds, but not without jumping through some hoops.
 
-#### Performance
+#### Performance 
 
 By the same token, if the server doesn’t render a full page of HTML but instead waits for client-side JavaScript to do so, users will experience a few critical seconds of blank page or loading spinner before seeing the content on the page. There are plenty of studies showing the drastic effect a slow site has on users, and thus revenue.
 
