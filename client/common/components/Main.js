@@ -11,7 +11,7 @@ class Main extends Component {
 
         return (
             <main className={styles.main}>
-                {children}
+                {children} 
             </main>
         )
     }

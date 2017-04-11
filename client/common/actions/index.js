@@ -1,6 +1,7 @@
 import types from '../constants/actionTypes'
 import utils from '../../shared/utils'
 
+
 function replaceUserInfo(userInfo) {
     return {
         type: types.REPLACE_USER_INFO,
@@ -13,6 +14,7 @@ function clearUserInfo() {
 }
 
 function fetchUserInfo() {
+  
     return dispatch => {
         utils.ajax({
             url: '/api/user/getUserInfo',

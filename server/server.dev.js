@@ -41,6 +41,7 @@ const app = require('./app.js'),
     clientRoute = require('./middlewares/clientRoute'),
     config = require('../build/webpack.dev.config'),
     port = process.env.port || 3000,
+    static = require('koa-static'),
     compiler = webpack(config)
 
 // Webpack hook event to write html file into `/views/dev` from `/views/tpl` due to server render
@@ -57,8 +58,9 @@ compiler.plugin('emit', (compilation, callback) => {
     })
     callback()
 })
-
 app.use(views(path.resolve(__dirname, '../views/dev'), {map: {html: 'ejs'}}))
+app.use(convert(static( path.join( __dirname, '..', './static') )))
+
 app.use(clientRoute)
 app.use(router.routes())
 app.use(router.allowedMethods())
