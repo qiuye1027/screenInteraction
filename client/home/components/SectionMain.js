@@ -33,10 +33,9 @@ class SectionMain extends Component {
               
                <div className="ui small message" id="showApiKey">
                    <div className="ui form segment">
-                        <div className="inline field">
-                            <label>筛选</label>
-                            <div className="ui text menu"> 
-                              <div className="ui right dropdown item">More <i className="dropdown icon"></i> <div className="menu">
+                        <div className="inline field"> 
+                            <div className="ui text menu left"> 
+                              <div className="ui left dropdown item">筛选 <i className="dropdown icon"></i> <div className="menu">
                                   <div className="item">Applications</div>
                                   <div className="item">International Students</div>
                                   <div className="item">Scholarships</div>
