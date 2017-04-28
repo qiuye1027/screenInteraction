@@ -65,7 +65,7 @@
 .ui.breadcrumb .divider {
   display: inline-block;
   opacity: 0.5;
-  margin: 0em 0.15em 0em;
+  
   font-size: 1em;
   color: rgba(0, 0, 0, 0.3);
 }
@@ -5108,8 +5108,7 @@ i.massive.basic.icon {
   outline: none;
   border: none;
   background-color: #FAFAFA;
-  color: #808080;
-  margin: 0em;
+  color: #808080; 
   padding: 0.8em 1.5em;
   font-size: 1rem;
   text-transform: uppercase;
@@ -6295,7 +6294,7 @@ i.massive.basic.icon {
 
 .ui.blue.buttons .button,
 .ui.blue.button {
-  background-color: #6ECFF5;
+
   color: #FFFFFF;
 }
 
@@ -6303,7 +6302,7 @@ i.massive.basic.icon {
 .ui.blue.button:hover,
 .ui.blue.buttons .active.button,
 .ui.blue.button.active {
-  background-color: #1AB8F3;
+  
   color: #FFFFFF;
 }
 
@@ -12180,17 +12179,15 @@ a.ui.teal.label:hover:before {
   border: 0.2em solid #333333;
   border-top: none;
   border-right: none;
-  -webkit-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  transform: rotate(-45deg);
+ 
 }
 
 .ui.checkbox .box:after,
 .ui.checkbox label:after {
-  top: 0.275em;
-  left: 0.2em;
-  width: 0.45em;
-  height: 0.15em;
+  top: 0.075em;
+  left: 0em;
+  width: 0em;
+  height: 0em;
 }
 
 /*--- Inside Label ---*/
@@ -12498,7 +12495,7 @@ a.ui.teal.label:hover:before {
   position: absolute;
   top: 0em !important;
   left: 0em !important;
-  width: 0%;
+  
   height: 0%;
   text-align: center;
   vertical-align: middle;

@@ -1,0 +1,46 @@
+.app {
+    padding: 5px 15px;
+	width:600px;height:400px;border:1px solid red;
+
+   .divblok { 
+        background-color:rgba(172,16,172,0.5);
+        width:200px;
+        height:100px;
+        position:absolute;
+        left:20px;
+        top:20px;
+    }
+
+
+}
+
+
+.testDiv{ 
+      height: 300px; 
+   left: 30px; overflow: hidden; width: 500; z-index: 2; 
+   border:1px solid red;
+    
+
+   .innerNice{
+      
+      color: #3969A5; height: 100%; overflow: auto;   padding: 8px; 
+        
+   }
+}
+
+.content{
+    width:500px;
+    height:300px;
+}
+
+
+.programArea{
+     width:980px;border:1px solid;
+    height:600px;
+        float: left; margin-top: 20px;
+}
+
+.programBtn{    width: 150px;
+    float: left;margin-right: 10px;
+    margin-top: 50px;}
+
