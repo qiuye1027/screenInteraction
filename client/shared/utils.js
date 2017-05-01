@@ -69,14 +69,9 @@ function formatDate(timestamp, format) {
  * @param  {String} str
  * @return {Date}
  */
-function parseDate(str) {
-    let results
-
-    if (results = str.match(/^\s*(\d{4})-(\d{1,2})-(\d{1,2})\s*$/)) {
-        return new Date(+results[1], +results[2] - 1, +results[3])
-    } else if (results = str.match(/^\s*(\d{4})-(\d{1,2})-(\d{1,2})\s+(\d{1,2}):(\d{1,2}):(\d{1,2})\s*$/)) {
-        return new Date(+results[1], +results[2] - 1, +results[3], +results[4], +results[5], +results[6])
-    }
+function parseDate(str) { 
+    var da = new Date(str.replace("/Date(", "").replace(")/" , "").split( "+")[0]);
+    return da.getFullYear() + "-" + ((da.getMonth() + 1) < 10 ? "0" + (da.getMonth() + 1):(da.getMonth() + 1))+ "-" + (da.getDate() < 10 ? "0" + da.getDate():da.getDate()) + " " + (da.getHours()<10?"0"+da.getHours():da.getHours()) + ":" + (da.getMinutes()<10?"0"+da.getMinutes():da.getMinutes()) + ":" + (da.getSeconds()<10?"0"+da.getSeconds():da.getSeconds());
 }
 
 /**
@@ -115,11 +110,24 @@ function getDeviceType() {
 
     return res
 }
+
+/**
+ * 数据体积换算
+ * @return ‘ios’
+ */
+function bytesToSize(bytes) {
+    if (bytes === 0) return '0 B';
+    var k = 1000, // or 1024
+        sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+        i = Math.floor(Math.log(bytes) / Math.log(k));
+   return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
+}
  
 export default {
     ajax,
     formatDate,
     parseDate,
     getUrlParams,
-    getDeviceType
+    getDeviceType,
+    bytesToSize
 }

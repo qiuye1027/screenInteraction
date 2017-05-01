@@ -8,11 +8,11 @@ class App extends Component {
     }
 
     render() {
-        const {userInfo, actions} = this.props
+        const {actions} = this.props
 
         return (
             <div className={styles.app}>
-                <SectionMain userInfo={userInfo} actions={actions}></SectionMain>
+                <SectionMain actions={actions}></SectionMain>
             </div>
         )
     }

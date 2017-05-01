@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
-import styles from '../sass/App'
-import dbConnect from '../../shared/DBConnect'
+import styles from '../sass/App' 
 
 class SectionMain extends Component {
     constructor() {

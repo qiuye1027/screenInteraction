@@ -23,7 +23,7 @@ class SectionMain extends Component {
 
         return (
             <section className={styles.sectionMain}>
-                Explore
+                DB search
                 <a href="javascript:void(0)"
                     className={styles.btn}
                     onClick={this.handleFetch.bind(this)}>

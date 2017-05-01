@@ -9,7 +9,7 @@ function getDBAdress(){
 		 port: '3306',
 		 query: {pool: true},
 		 user: 'root',
-		 password: 'qiuye3788'
+		 password: '123456'
 		}; 
 }
 
