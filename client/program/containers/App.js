@@ -9,7 +9,13 @@ class App extends Component {
     componentDidMount() {
         $('.newareacent.modal').modal('attach events','.newarea','show');
 
-        $( "#draggable" ).draggable({ containment: ".App__programArea__1KiBa8n0", scroll: false });
+        $( ".App__content__ZN0n6XZn" ).draggable({ 
+            containment: ".App__programArea__1KiBa8n0", 
+            scroll: false ,
+            stack: ".App__content__ZN0n6XZn"
+          });
+
+        
     }
 
  
@@ -49,13 +55,22 @@ class App extends Component {
                           </div>
                         </div>
                     </div>
+
+                     <div  className={styles.content}>
+                        <div className={styles.testDiv} >
+                          <div className={styles.innerNice} > 
+                            <p >本特效由 收集于互联网，只为兴趣与学习交流，不作商业用途。</p> 
+                          </div>
+                        </div>
+                    </div>
+                    
                 </div>
 
 
                 <div className="ui fullscreen newareacent modal transition hidden">
                     <i className="close icon"></i>
                     <div className="header">区域设置</div>
-                    <div className="content">
+                    <div className="contents">
                       <div className="ui form">
                         
                         <div className="field">

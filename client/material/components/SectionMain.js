@@ -6,7 +6,7 @@ class SectionMain extends Component {
         super()
 
         this.state = {
-           folderlist:'<tr><td colspan="4"> 暂无文件 </td> </tr>',
+           folderlist:'<tr><td colspan="4">暂无文件</td></tr>',
            breadcrumb : '<a class="section" data-id="0">全部素材</a>'
         }
 
@@ -226,37 +226,13 @@ function getFolder(id,_this,fn){
           str += '</tr>'
         }
         _this.setState({folderlist:str})
-
-        
-
-
-        $(".folders").unbind('click') 
-        $(".folders").click(function(){
-          let id = $(this).parents("tr").attr("data-id") 
-
-          let name = $(this).find("span").html()
-          let breadStr = '<i class="right angle icon divider"></i><a class="section" data-id="'+id+'">'+name+'</a>' 
-         
-          _this.setState({breadcrumb:_this.state.breadcrumb + breadStr})
-           
  
-           $("#path").val($("#path").val()+'/'+name)
-           getFolder(id,_this,function(id,_this){
-            getFile(id,_this)
-          })
-        })
-        $(".section").unbind('click')
-
-     
- 
-        
       }else{
-        $(".folders").unbind('click')
-         
-        _this.setState({folderlist:'<tr><td colspan="4"> 暂无文件 </td> </tr>'})
+          
+        _this.setState({folderlist:'<tr><td colspan="4">暂无文件</td></tr>'})
         
       } 
-
+      $(".section").unbind('click')
       $(".section").click(function(){
  
 
@@ -315,9 +291,9 @@ function getFile(id,_this){
         str += '<a class="ui tiny basic  button download"><i class="download icon"></i>下载</a>'
         str += '</td>'
         str += '</tr>'
-      }
+      } 
+      if(_this.state.folderlist == '<tr><td colspan="4">暂无文件</td></tr>'){
 
-      if(_this.state.folderlist == '暂无文件'){
         _this.setState({folderlist:str})
       }else{
         _this.setState({folderlist:_this.state.folderlist+str})
@@ -344,7 +320,7 @@ function getFile(id,_this){
 
 
        $('.button.delfloder').click(function(){
-        console.log(1)
+        
         let _tr = $(this).parents("tr"),
           id = _tr.attr("data-id"),
           datas = {}
@@ -362,12 +338,30 @@ function getFile(id,_this){
             }
           })
       })
-
-
-      
-
+ 
 
     }
+
+
+      $(".folders").click(function(){
+           
+          let id = $(this).parents("tr").attr("data-id") 
+
+          let name = $(this).find("span").html()
+          let breadStr = '<i class="right angle icon divider"></i><a class="section" data-id="'+id+'">'+name+'</a>' 
+         
+          _this.setState({breadcrumb:_this.state.breadcrumb + breadStr})
+           
+ 
+           $("#path").val($("#path").val()+'/'+name)
+           
+           getFolder(id,_this,function(id,_this){
+            getFile(id,_this)
+          })
+        })
+
+
+
   })
 
 
