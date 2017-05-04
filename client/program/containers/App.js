@@ -83,6 +83,7 @@ class App extends Component {
                 </div> 
                 <div className="ui list" dangerouslySetInnerHTML={{__html:this.state.folderlists}}></div>
 
+                <embed src="/fileupload/test.pdf" />
 
 
 
