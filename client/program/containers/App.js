@@ -7,7 +7,8 @@ class App extends Component {
         super()
 
         this.state = {
-           folderlists:'<div class="item"> <div class="content"> <div class="header">没有文件</div> </div> </div>'
+           folderlists:'<div class="item"> <div class="content"> <div class="header">没有文件</div> </div> </div>'　,
+           bapic : ''
            
            
         }
@@ -21,10 +22,14 @@ class App extends Component {
             scroll: false ,
             stack: ".App__content__ZN0n6XZn"
           });
- 
+      this.setState({bapic:'images/devicedomo01.jpg'}, ()=>{
+        
+        $(".App__programArea__1KiBa8n0").css('backgroundImage','url("'+_this.state.bapic+'")')
+      })
 
  
       findFile('',_this)
+      
       
     }
 
@@ -187,4 +192,6 @@ function findFile(path,_this){
       })
 
    }) 
+
+
 } 
