@@ -9,7 +9,8 @@ class App extends Component {
     constructor() {
         super()
         this.state = {
-           programAreas:''  
+           programAreas:'' ,
+           folderlists:'<div class="item"> <div class="content"> <div class="header">没有文件</div> </div> </div>'　 
         
         } 
 
@@ -135,7 +136,7 @@ class App extends Component {
 
                 <embed src="/fileupload/test.pdf" />
 
-
+<Swiper height="300" width="300"/>
 
                 <div className="ui fullscreen newareacent modal transition hidden">
                     <i className="close icon"></i>
