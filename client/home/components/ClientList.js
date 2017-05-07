@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import styles from '../sass/App'
 
-class SectionMain extends Component {
+class ClientList extends Component {
     constructor() {
         super()
     }
@@ -64,4 +64,4 @@ class SectionMain extends Component {
     }
 }
 
-export default SectionMain
+export default ClientList

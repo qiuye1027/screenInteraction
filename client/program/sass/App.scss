@@ -35,12 +35,25 @@
 
 
 .programArea{
-     width:980px;border:1px solid;
-    height:600px;
+     width:980px;border:1px solid; 
         float: left; margin-top: 20px;
+    overflow:auto;
+height: 600px;
+    #container{
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+    }
 }
 
 .programBtn{    width: 150px;
     float: left;margin-right: 10px;
     margin-top: 50px;}
+
+.swipercont{
+  display:inline-block;
+  width: 300px;
+  height: 300px;
+}
+
 
