@@ -1,9 +1,8 @@
 import React, {Component} from 'react'
-import styles from '../sass/App'
-
+import styles from '../sass/App' 
 import Swiper from 'react-id-swiper';
 
-class ClientList extends Component {
+class Swipercont extends Component {
     constructor() {
         super()
     }
@@ -51,4 +50,4 @@ class ClientList extends Component {
     }
 }
 
-export default ClientList
+export default Swipercont

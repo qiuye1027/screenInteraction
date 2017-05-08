@@ -1,16 +1,15 @@
-import React, {Component} from 'react'
- 
-import styles from '../sass/App'
- 
+import React, {Component} from 'react' 
+import styles from '../sass/App' 
 import FileUpload from './fileUpload'
-import Swiper from './Swiper'
+//import Swipercont from './Swipercont'
+
+
  
 class App extends Component {
     constructor() {
         super()
-        this.state = {
-           programAreas:'' ,
-           folderlists:'<div class="item"> <div class="content"> <div class="header">没有文件</div> </div> </div>'　 
+        this.state = { 
+           programArr : []
         
         } 
 
@@ -26,13 +25,17 @@ class App extends Component {
           closable  : false, 
           onApprove : function() {
    
-            _this.setState({programAreas:_this.state.programAreas + '<div id="draggable" class="contents"><div class="testDiv" ><div class="innerNice" ><p >本特效由 收集于互联网，只为兴趣与学习交流，不作商业用途。</p></div></div></div>'})
-            
+          //  _this.setState({programAreas:_this.state.programAreas + '<div id="draggable" class="contents"><div class="testDiv" ><div class="innerNice" ><p >本特效由 收集于互联网，只为兴趣与学习交流，不作商业用途。</p></div></div></div>'})
+           let programArrList = _this.state.programArr
+            _this.setState({
+                programArr:programArrList.concat(getSwiper(100,100))
+                
+              })
             //可拖拽
-            $( ".contents" ).draggable({ 
+            $( ".App__swipercont__On3D7KLV" ).draggable({ 
               containment: ".App__programArea__1KiBa8n0", 
               scroll: false ,
-              stack: ".contents"
+              stack: ".App__swipercont__On3D7KLV"
             });
 
 
@@ -40,44 +43,50 @@ class App extends Component {
         })
  
  
-      //创建新节目
-        $('.newPergram.modal').modal('attach events', '.newPergram','show').modal({
+     
+
+
+
+        //模板
+        $('.newmodel.modal').modal('attach events','.newmodel','show');
+        //页面列表
+        $('.pagelist.modal').modal('attach events','.pagelist','show');
+
+ 
+       $('.coupled.modal')
+        .modal({
+          allowMultiple: true
+        })
+      ;
+      // open second modal on first modal buttons
+      $('.fileList.modal')
+        .modal('attach events', '.newPergram.modal .button.add')
+      ;
+       //创建新节目
+        $('.newPergram.modal').modal('attach events', '.button.newPergram','show').modal({
           closable  : false, 
           onApprove : function() {
 
             let pergramHight = $(this).find(".hightq").val(),
-                pergramWidth = $(this).find(".widthq").val()
+                pergramWidth = $(this).find(".widthq").val(),
+                programBg = $("#filepath").val()
+
    
             $("#container").css({
               'height':pergramHight,
               'width':pergramWidth,
-              'backgroundImage':'url(images/devicedomo01.jpg)',
+              'backgroundImage':'url('+programBg+')',
               'background-repeat': 'no-repeat',
               'background-size': 'cover',
               'background-position': 'center center'
 
             })
     
-       
+       console.log(12)
 
           }
         })
  
-        $('.newmodel.modal').modal('attach events','.newmodel','show');
-
-        $('.pagelist.modal').modal('attach events','.pagelist','show');
-
-
-
-
-       
-
-
-       
-
- 
-      findFile('',_this)
-      
       
     }
  
@@ -103,9 +112,8 @@ class App extends Component {
         //                   </div>
         //                 </div>
         //             </div>
-
-
-    
+        //<embed src="/fileupload/test.pdf" />
+ 
 
         return (
             <div className="container">
@@ -122,7 +130,7 @@ class App extends Component {
                 </div>
                 <div className={styles.programBtn}>
                     <div className="ui vertical teal buttons">
-                    <button className="ui button newprogram">新建节目</button>
+                    <button className="ui button newPergram">新建节目</button>
                       <button className="ui button pagelist">页面列表</button>
                       <button className="ui button newarea">新建交互区域</button>
                       <button className="ui button newmodel">创建模板</button>
@@ -130,15 +138,29 @@ class App extends Component {
                     </div>
                 </div>
                 <div className={styles.programArea}>
-                  <div  dangerouslySetInnerHTML={{__html:this.state.programAreas}} id="container"></div>
+                  <div  id="container">
+                   {   
+                      this.state.programArr.map(function (item) {
+                          return   item
+                      })
+                    }
+                  </div>
                 </div> 
-                <div className="ui list" dangerouslySetInnerHTML={{__html:this.state.folderlists}}></div>
+                
+             
+                 
 
-                <embed src="/fileupload/test.pdf" />
+                
 
-<Swiper height="300" width="300"/>
+ 
 
-                <div className="ui fullscreen newareacent modal transition hidden">
+    
+                {/*
+
+                  新建交互区域弹出框
+                    */}
+
+                <div className="ui fullscreen newareacent coupled modal transition hidden">
                     <i className="close icon"></i>
                     <div className="header">区域设置</div>
                     <div className="contents">
@@ -225,51 +247,11 @@ class App extends Component {
 
 
 
+                {/*
+                  创建模板出框
+                    */}
 
-
-
-                   <div className="ui small  newPergram modal">
-                    
-                      <div className="header">
-                          新建节目
-                      </div>
-                      <div className="ui form "> 
-                          
-                        <div className="field">
-                          <label>素材名称</label>
-                          <div className="two inline fields">
-                           
-                            <div className="field">
-                              高(px)
-                              <input type="number" name="hight" className="hightq"/>
-                            </div>
-                            <div className="inline field">
-                              宽(px)
-                              <input type="number" name="width" className="widthq" />
-                            </div>
-                          </div>
-                        </div> 
-                        <div className="field">
-                          <label>背景图片</label>
-                         
-                           
-                            <FileUpload /> 
-                           
-                        </div>  
-                      </div>
-                      
-                      <div className="actions">
-                          <div className="ui small negative button">
-                                 不
-                          </div> 
-                            <input type="button" value="是" className="ui small positive button"/> 
-                      </div>
-                  </div>
-
-
-
-
-                <div className="ui small  newmodel modal">
+                <div className="ui    newmodel modal">
                     
                     <div className="header">
                         模板创建
@@ -319,8 +301,10 @@ class App extends Component {
                     </div>
                 </div>
 
-
-                <div className="ui small  pagelist modal">
+                  {/*
+                  节目列表弹出框
+                    */}
+                <div className="ui    pagelist modal">
                     
                     <div className="header">
                         节目列表
@@ -361,8 +345,56 @@ class App extends Component {
                 </div>
 
 
- 
+                  {/*
+                      新建节目弹出框
+                    */}
+                  <div className="ui newPergram coupled modal">
+                      <div className="header">新建节目</div>
+                      <div className="ui form "> 
+                          
+                        <div className="field">
+                          <label>素材名称</label>
+                          <div className="two inline fields">
+                           
+                            <div className="field">
+                              高(px)
+                              <input type="number" name="hight" className="hightq"/>
+                            </div>
+                            <div className="inline field">
+                              宽(px)
+                              <input type="number" name="width" className="widthq" />
+                            </div>
+                          </div>
+                        </div> 
+                        <div className="field">
+                          <label>背景图片</label>
+                          <div className="ui primary button add">添加素材</div> 
+                        </div>  
+                      </div>
+                      <div className="actions">
+                          <div className="ui small negative button">
+                                 不
+                          </div> 
+                            <input type="button" value="是" className="ui small positive button"/> 
+                      </div>
+                    </div>
 
+
+                    {/*
+                      文件上传弹出框
+                    */}
+
+                    <div className="ui small fileList coupled modal">
+                      <div className="header">素材列表</div>
+                      <div className="content">
+                          <FileUpload /> 
+                      </div>
+
+                      <div className="actions"> 
+                        <div className={styles.chosefile} id="chosefile">请选择文件</div>
+                        <input type="button" value="确定" className="ui small positive button"/> 
+                      </div> 
+                    </div>
 
  
                 
@@ -375,28 +407,12 @@ export default App
 
 
 
-function findFile(path,_this){
-   let datas = {}; 
-  datas.path = "/"+path;
-   utils.ajax({url: '/api/programFileList',data:datas}).then(re => {
-    let str = ''
-     for(let i of re){
-       str += '<div class="item fileitem">';
-       str += '<i class="file icon"></i>'
-       str += '<div class="content">'
-       str += '<div class="header">'+i.name+'</div>' 
-       str += '</div>'
-       str += '</div>'
-     }
-
-      _this.setState({folderlists:str})
-
-      $(".fileitem").click(function(){
- 
-        findFile($(this).find(".header").html(),_this)
-      })
-
-   }) 
 
 
+
+
+
+function getSwiper (hei,wid){
+  return // <Swipercont height={hei} width={wid}/>
+  
 } 

@@ -5,10 +5,10 @@ async function getFileList(ctx) {
 	let fileList =[],path = ctx.request.body.path
 
 	 ctx.body = await new Promise((resolve, reject) => {
-
+ 
 	  
 
-		fs.readdir('static'+path, 'r', (err, fd) => {
+		fs.readdir('static/fileupload'+path, 'r', (err, fd) => {
 		  if (err) {
 		    if (err.code === 'ENOENT') {
 		      console.error('myfile does not exist');
