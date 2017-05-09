@@ -1,7 +1,7 @@
 import React, {Component} from 'react' 
 import styles from '../sass/App' 
 import FileUpload from './fileUpload'
-//import Swipercont from './Swipercont'
+import Swipercont from './Swipercont'
 
 
  
@@ -24,6 +24,8 @@ class App extends Component {
         $('.newareacent.modal').modal('attach events','.newarea','show').modal({
           closable  : false, 
           onApprove : function() {
+
+   
    
           //  _this.setState({programAreas:_this.state.programAreas + '<div id="draggable" class="contents"><div class="testDiv" ><div class="innerNice" ><p >本特效由 收集于互联网，只为兴趣与学习交流，不作商业用途。</p></div></div></div>'})
            let programArrList = _this.state.programArr
@@ -35,8 +37,16 @@ class App extends Component {
             $( ".App__swipercont__On3D7KLV" ).draggable({ 
               containment: ".App__programArea__1KiBa8n0", 
               scroll: false ,
-              stack: ".App__swipercont__On3D7KLV"
+              stack: ".App__swipercont__On3D7KLV",
+
+              
+              stop: function(e,ui) { 
+                console.log(ui.position)
+              }
+
+
             });
+
 
 
           }
@@ -82,7 +92,24 @@ class App extends Component {
 
             })
     
-       console.log(12)
+       
+
+          }
+        })
+
+
+        $('.saveProgram.modal').modal('attach events', '.button.saveProgram','show').modal({
+          closable  : false, 
+          onApprove : function() {
+
+            let obj = $("#container .ui-draggable")
+
+            obj.each(function(i){
+              console.log(obj.eq(i).attr("style").split(";"))
+              //把这个style直接存放进db中
+            })
+    
+       
 
           }
         })
@@ -121,7 +148,7 @@ class App extends Component {
                   <a className="ui button">打开节目</a>
                   <a className="ui button ">修改节目</a>
                   <a className="ui button ">删除节目</a>
-                  <a className="ui button ">保存节目</a>
+                  <a className="ui button saveProgram">保存节目</a>
                   <a className="ui button ">另存节目</a>
                   <a className="ui button ">保存模板</a>
                   <a className="ui button ">加载模板</a>
@@ -150,6 +177,20 @@ class App extends Component {
              
                  
 
+                 {/*
+                  保存节目 弹出框
+                    */}
+
+               <div className="ui small saveProgram modal transition  " >
+                <div className="header">保存节目</div>
+                <div className="content">
+                  <p>你的节目将被保存，以便日后查看</p>
+                </div>
+                <div className="actions">
+                  <div className="ui negative button">取消 </div>
+                  <div className="ui positive right labeled icon button">确定 <i className="checkmark icon"></i> </div>
+                </div>
+              </div>
                 
 
  
@@ -160,7 +201,7 @@ class App extends Component {
                   新建交互区域弹出框
                     */}
 
-                <div className="ui fullscreen newareacent coupled modal transition hidden">
+                <div className="ui fullscreen newareacent modal transition hidden">
                     <i className="close icon"></i>
                     <div className="header">区域设置</div>
                     <div className="contents">
@@ -239,9 +280,9 @@ class App extends Component {
                     </div>
                     <div className="actions">
                         <div className="ui small negative button">
-                               不
+                               取消
                         </div> 
-                          <input type="button" value="是"  className="ui small positive button"/> 
+                          <input type="button" value="创建"  className="ui small positive button"/> 
                     </div>
                   </div>
 
@@ -381,7 +422,7 @@ class App extends Component {
 
 
                     {/*
-                      文件上传弹出框
+                      文件上传弹出框 单个文件
                     */}
 
                     <div className="ui small fileList coupled modal">
@@ -395,6 +436,11 @@ class App extends Component {
                         <input type="button" value="确定" className="ui small positive button"/> 
                       </div> 
                     </div>
+
+
+
+
+
 
  
                 
@@ -413,6 +459,6 @@ export default App
 
 
 function getSwiper (hei,wid){
-  return // <Swipercont height={hei} width={wid}/>
+  return  <Swipercont height={hei} width={wid}/>
   
 } 

@@ -39,7 +39,7 @@ class Swipercont extends Component {
           
           <div className={styles.swipercont} style={swipeStyle}>
             <Swiper {...params}>
-              <div>Slide 1</div>
+              <div><img src={'https://sf-sponsor.b0.upaiyun.com/edb742492eb935dd53a8083765c9fa7b.png'}/></div>
               <div>Slide 2</div>
               <div>Slide 3</div>
               <div>Slide 4</div>
