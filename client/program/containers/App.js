@@ -1,7 +1,11 @@
 import React, {Component} from 'react' 
 import styles from '../sass/App' 
+import utils from '../../shared/utils'
 import FileUpload from './fileUpload'
 import Swipercont from './Swipercont'
+import Btn from './btn'
+import Cont from './cont'
+
 
 
  
@@ -9,7 +13,8 @@ class App extends Component {
     constructor() {
         super()
         this.state = { 
-           programArr : []
+           programArr : [],
+           ID : ''
         
         } 
 
@@ -17,22 +22,83 @@ class App extends Component {
     
     componentDidMount() {
       let _this = this
-      //下拉框效果
+//下拉框效果
       $('.menu .item').tab()
 
-      //创建新交互区
+//创建新交互区
+      $(".ptcont").hide()
+
+      $('.selection.nac.dropdown')
+        .dropdown({
+          onChange: function(value) {
+            $("#nac").val(value)
+            if(value == 'swiper'){
+              $(".addSwiper").show()
+              $(".swiperList").show()
+              $(".addCont").hide()
+              $(".btncont").hide()
+              
+
+            }else if(value == 'button'){
+              $(".addSwiper").hide()
+              $(".swiperList").hide()
+              $(".addCont").hide()
+              $(".btncont").show()
+
+            }else if(value == 'cont'){
+              $(".addSwiper").hide()
+              $(".swiperList").show()
+              $(".addCont").show()
+              $(".btncont").hide()
+
+            }
+          }
+        })
+
+
         $('.newareacent.modal').modal('attach events','.newarea','show').modal({
           closable  : false, 
           onApprove : function() {
 
    
-   
-          //  _this.setState({programAreas:_this.state.programAreas + '<div id="draggable" class="contents"><div class="testDiv" ><div class="innerNice" ><p >本特效由 收集于互联网，只为兴趣与学习交流，不作商业用途。</p></div></div></div>'})
-           let programArrList = _this.state.programArr
-            _this.setState({
-                programArr:programArrList.concat(getSwiper(100,100))
+           let programArrList = _this.state.programArr , type = $("#nac").val()
+
+            if(type == 'swiper'){
+              _this.setState({
+                programArr:programArrList.concat(getSwiper(100,100,_this.setState.ID))
+              
                 
               })
+
+            }else if(type == 'button'){
+               _this.setState({
+                  programArr:programArrList.concat(getBtn (100,100,'name','href',_this.setState.ID))
+                
+                
+              })
+            }else if(type == 'cont'){
+               _this.setState({
+                 programArr:programArrList.concat(getCont(100,100,'cont','path',1,_this.setState.ID))
+              
+                
+              })
+            }
+            
+
+             $( ".Plugin" ).draggable({ 
+              containment: ".App__programArea__1KiBa8n0", 
+              scroll: false ,
+              stack: ".Plugin",
+
+              
+              stop: function(e,ui) { 
+                console.log(ui.position)
+              }
+
+
+            });
+
+
             //可拖拽
             $( ".App__swipercont__On3D7KLV" ).draggable({ 
               containment: ".App__programArea__1KiBa8n0", 
@@ -57,9 +123,9 @@ class App extends Component {
 
 
 
-        //模板
+//模板
         $('.newmodel.modal').modal('attach events','.newmodel','show');
-        //页面列表
+//页面列表
         $('.pagelist.modal').modal('attach events','.pagelist','show');
 
  
@@ -69,17 +135,34 @@ class App extends Component {
         })
       ;
       // open second modal on first modal buttons
-      $('.fileList.modal')
-        .modal('attach events', '.newPergram.modal .button.add')
-      ;
-       //创建新节目
+      $('.fileList1.modal').modal('attach events', '.newPergram.modal .button.add').modal({
+          onHidden: function(){
+            $(".newPergramCont").append('你选择的图片为：'+$("#selectFileName1").val())
+          }
+        })
+      
+//创建新节目
         $('.newPergram.modal').modal('attach events', '.button.newPergram','show').modal({
           closable  : false, 
           onApprove : function() {
 
+            
+
             let pergramHight = $(this).find(".hightq").val(),
                 pergramWidth = $(this).find(".widthq").val(),
-                programBg = $("#filepath").val()
+                pergramName = $("#programName").val(),
+                programBg = $("#selectFileName1").val(),
+                datas = {}; 
+
+
+                datas.height =pergramHight;
+                datas.width =pergramWidth;
+                datas.name =pergramName;
+
+                utils.ajax({url: '/api/creatProgram',data:datas}).then(re => {
+                   
+                  _this.setState({ID:re.ID})
+                })
 
    
             $("#container").css({
@@ -113,6 +196,25 @@ class App extends Component {
 
           }
         })
+
+        
+
+        $('.fileList.modal').modal('attach events', '#newswiper').modal({
+          onHidden: function(){
+            $(".swiperList").append('<a class="item">'+$("#selectFileName0").val()+'<div class="ui horizontal label">删除</div></a>')
+          }
+        })
+
+
+         $('.fileList2.modal').modal('attach events', '#newcont').modal({
+          onHidden: function(){
+             
+            $(".swiperList").html('<a class="item">'+$("#selectFileName2").val()+'<div class="ui horizontal label">删除</div></a>')
+          }
+        })
+
+
+      
  
       
     }
@@ -123,22 +225,7 @@ class App extends Component {
 
 
     render() {
-        // 可移动区域块
-        // <div id="draggable" className={styles.content}>
-        //                 <div className={styles.testDiv} >
-        //                   <div className={styles.innerNice} > 
-        //                     <p >本特效由 收集于互联网，只为兴趣与学习交流，不作商业用途。</p> 
-        //                   </div>
-        //                 </div>
-        //             </div>
-
-        //              <div  className={styles.content}>
-        //                 <div className={styles.testDiv} >
-        //                   <div className={styles.innerNice} > 
-        //                     <p >本特效由 收集于互联网，只为兴趣与学习交流，不作商业用途。</p> 
-        //                   </div>
-        //                 </div>
-        //             </div>
+ 
         //<embed src="/fileupload/test.pdf" />
  
 
@@ -177,9 +264,9 @@ class App extends Component {
              
                  
 
-                 {/*
-                  保存节目 弹出框
-                    */}
+{/*
+保存节目 弹出框
+  */}
 
                <div className="ui small saveProgram modal transition  " >
                 <div className="header">保存节目</div>
@@ -196,10 +283,10 @@ class App extends Component {
  
 
     
-                {/*
+{/*
 
-                  新建交互区域弹出框
-                    */}
+  新建交互区域弹出框
+    */}
 
                 <div className="ui fullscreen newareacent modal transition hidden">
                     <i className="close icon"></i>
@@ -210,69 +297,65 @@ class App extends Component {
                         <div className="field">
                           <label>区域属性</label> 
                           <div className="ui grid">
-                              <div className=" four wide column">
+                              <div className=" three wide column">
                                 <label>交互类型</label>
                                
-                                <div className="ui dropdown selection"> 
+                                <div className="ui dropdown selection nac"> 
                                   <div className="default text">幻灯区</div>
                                   <span><i className="dropdown icon"></i></span>
                                   
                                   <div className="menu">
-                                    <div className="item active" data-value="IP">幻灯区</div>
-                                    <div className="item" data-value="室外">按钮</div>
-                                    <div className="item" data-value="室外">内容区</div>
+                                    <div className="item active" data-value="swiper">幻灯区</div>
+                                    <div className="item" data-value="button">按钮</div>
+                                    <div className="item" data-value="cont">内容区</div>
                                   </div>
+                                  <input type="hidden" id="nac" value="swiper"/>
                                 </div>
 
 
                               </div>
-                              <div className=" four wide column">
+                              <div className=" three wide column">
                                 <label>宽</label>
                                 <div className="ui small left labeled icon input">  
-                                    <input type="text" id="actName" name="actName" /> 
+                                    <input type="number" id="actName" name="actName" /> 
                                 </div>
                               </div>
-                              <div className=" four wide column">
+                              <div className=" three wide column">
                                 <label>高</label>
                                 <div className="ui small left labeled icon input">  
-                                    <input type="text" id="actName" name="actName" /> 
+                                    <input type="number" id="actName" name="actName" /> 
                                 </div>
                               </div> 
-                              <div className="four wide column">
-                                <label>素材</label>
-                                <div className="ui small left labeled icon input">  
-                                    <input type="file" id="actName" name="actName" /> 
-                                </div>
+
+                              <div className=" three wide column">
+                                <input type="button" value="添加新幻灯片" id="newswiper" className=" ui small blue button addSwiper"/> 
+                                <input type="button" value="添加内容" id="newcont" className="ui small ptcont blue button addCont"/> 
                               </div> 
+                               
                             </div>
 
-                            <label>交互属性</label> 
-                            <div className="ui grid">
-                              <div className=" four wide column">
-                                <label></label>
+                            <div className="ui grid btncont ptcont" >
+                              <div className=" three wide column">
+                                <label>名称</label>
                                 <div className="ui small left labeled icon input">  
                                     <input type="text" id="actName" name="actName" /> 
                                 </div>
                               </div>
-                              <div className=" four wide column">
-                                <label>动作名</label>
+                              <div className=" three wide column">
+                                <label>链接地址</label>
                                 <div className="ui small left labeled icon input">  
                                     <input type="text" id="actName" name="actName" /> 
                                 </div>
                               </div>
-                              <div className=" four wide column">
-                                <label>动作名</label>
-                                <div className="ui small left labeled icon input">  
-                                    <input type="text" id="actName" name="actName" /> 
-                                </div>
-                              </div> 
-                              <div className="four wide column">
-                                <label>动作名</label>
-                                <div className="ui small left labeled icon input">  
-                                    <input type="text" id="actName" name="actName" /> 
-                                </div>
-                              </div> 
-                            </div> 
+
+                            </div>
+
+                            <div className={"ui ptcont divided selection list swiperList "+styles.swiperList}></div>
+
+
+ 
+                            
+                            
 
                         </div>
                         
@@ -288,9 +371,9 @@ class App extends Component {
 
 
 
-                {/*
-                  创建模板出框
-                    */}
+{/*
+  创建模板出框
+    */}
 
                 <div className="ui    newmodel modal">
                     
@@ -342,9 +425,9 @@ class App extends Component {
                     </div>
                 </div>
 
-                  {/*
-                  节目列表弹出框
-                    */}
+{/*
+节目列表弹出框
+  */}
                 <div className="ui    pagelist modal">
                     
                     <div className="header">
@@ -386,24 +469,28 @@ class App extends Component {
                 </div>
 
 
-                  {/*
-                      新建节目弹出框
-                    */}
-                  <div className="ui newPergram coupled modal">
+{/*
+    新建节目弹出框
+  */}
+                    
+                  <div className="ui newPergram coupled modal transition hidden">
                       <div className="header">新建节目</div>
                       <div className="ui form "> 
                           
                         <div className="field">
-                          <label>素材名称</label>
-                          <div className="two inline fields">
                            
+                          <div className="two inline fields">
+                           <div className="field">
+                              节目名称
+                              <input type="text" id="programName" />
+                            </div>
                             <div className="field">
                               高(px)
-                              <input type="number" name="hight" className="hightq"/>
+                              <input type="number" id="programHight" className="hightq"/>
                             </div>
                             <div className="inline field">
                               宽(px)
-                              <input type="number" name="width" className="widthq" />
+                              <input type="number" id="programWidth" className="widthq" />
                             </div>
                           </div>
                         </div> 
@@ -413,6 +500,7 @@ class App extends Component {
                         </div>  
                       </div>
                       <div className="actions">
+                        <div className={"newPergramCont "+styles.NPcont}></div>
                           <div className="ui small negative button">
                                  不
                           </div> 
@@ -428,11 +516,37 @@ class App extends Component {
                     <div className="ui small fileList coupled modal">
                       <div className="header">素材列表</div>
                       <div className="content">
-                          <FileUpload /> 
+                          <FileUpload name='selectFileName0'/> 
                       </div>
 
                       <div className="actions"> 
-                        <div className={styles.chosefile} id="chosefile">请选择文件</div>
+                        <div className={styles.chosefile +' chosefile'}>请选择文件</div>
+                        <input type="button" value="确定" className="ui small positive button"/> 
+                      </div> 
+                    </div>
+
+
+                     <div className="ui small fileList1 coupled modal">
+                      <div className="header">素材列表</div>
+                      <div className="content">
+                          <FileUpload name='selectFileName1'/> 
+                      </div>
+
+                      <div className="actions"> 
+                        <div className={styles.chosefile +' chosefile'}>请选择文件</div>
+                        <input type="button" value="确定" className="ui small positive button"/> 
+                      </div> 
+                    </div>
+
+
+                    <div className="ui small fileList2 coupled modal">
+                      <div className="header">素材列表</div>
+                      <div className="content">
+                          <FileUpload name='selectFileName2'/> 
+                      </div>
+
+                      <div className="actions"> 
+                        <div className={styles.chosefile +' chosefile'}>请选择文件</div>
                         <input type="button" value="确定" className="ui small positive button"/> 
                       </div> 
                     </div>
@@ -458,7 +572,29 @@ export default App
 
 
 
-function getSwiper (hei,wid){
-  return  <Swipercont height={hei} width={wid}/>
+function getSwiper (hei,wid,ID){
+  return  <Swipercont height={hei} width={wid} ID={ID}/>
   
 } 
+
+function getBtn (hei,wid,name,href,ID){
+
+  return  <Btn height={hei} width={wid} name={name} href={href} ID={ID}/>
+  
+} 
+
+function getCont (hei,wid,cont,path,type,ID){
+  return  <Cont height={hei} width={wid} cont={cont} path={path} type={type} ID={ID}/>
+  
+} 
+
+
+
+
+
+
+
+
+
+
+

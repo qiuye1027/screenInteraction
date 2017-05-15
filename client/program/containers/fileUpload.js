@@ -16,21 +16,22 @@ class FileUpload extends Component {
     }
     componentDidMount() {
       let _this = this
-      $(".filechose").click(function(){
-        $(".chosepath").html("你选择的素材为："+$(this).html())
-        $("#chosepath").val($(this).html())
-        
-      })
+
+      let {name} = this.props
+
+ 
 
 
-      findFile('',_this)
+      findFile('',_this,name)
          
     }
 
     render() {
+
+      let {name} = this.props
         return (
           <div>
-            <input type="hidden" id="filepath" />
+            <input type="hidden" id={name} />
             <div className="ui breadcrumb">
               <a className="section" data-path="">全部素材</a>
             </div>
@@ -46,7 +47,7 @@ export default FileUpload
 
 
 
-function findFile(path,_this){
+function findFile(path,_this,name){
    let datas = {}; 
   datas.path =path;
    utils.ajax({url: '/api/programFileList',data:datas}).then(re => {
@@ -70,8 +71,8 @@ function findFile(path,_this){
           $(".breadcrumb").append('<i class="right angle icon divider"></i><a class="section" data-path="'+filePath+'">'+$(this).find(".header").html()+'</a>')
           findFile(filePath,_this)
         }else{
-          $("#filepath").val('fileupload/'+filePath+'/'+$(this).find(".header").html())
-          $("#chosefile").html('所选文件： '+ $(this).find(".header").html())
+          $("#"+name).val('fileupload/'+filePath+'/'+$(this).find(".header").html())
+          $(this).parents(".coupled").find(".chosefile").html('所选文件： '+ $(this).find(".header").html())
         }
           
       })

@@ -1,19 +1,20 @@
 import React, {Component} from 'react'
 import styles from '../sass/App' 
 import Swiper from 'react-id-swiper';
+import utils from '../../shared/utils'
 
 class Swipercont extends Component {
     constructor() {
         super()
     }
     componentDidMount() {
-    
+      utils.ajax({url: '/api/savePlugin',data:this.props}).then(re => {})
         
     }
 
     render() {
 
-      let {width,height} = this.props
+      let {width,height,ID} = this.props
 
       let swipeStyle = {  
             width:width,  

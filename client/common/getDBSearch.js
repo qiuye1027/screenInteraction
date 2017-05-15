@@ -11,6 +11,8 @@ async function searchData(sql){
 	return new Promise((resolve, reject) => {
 
 		db.driver.execQuery(sql,function (err, data) {
+
+			 
   
 		 	resolve(data) 
 
