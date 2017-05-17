@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import styles from '../sass/App' 
 import utils from '../../shared/utils'
 import FileUpload from './fileUpload'
-import Swipercont from './Swipercont'
+//import Swipercont from './Swipercont'
 import Btn from './btn'
 import Cont from './cont'
 
@@ -573,7 +573,7 @@ export default App
 
 
 function getSwiper (hei,wid,ID){
-  return  <Swipercont height={hei} width={wid} ID={ID}/>
+  return  //<Swipercont height={hei} width={wid} ID={ID}/>
   
 } 
 
