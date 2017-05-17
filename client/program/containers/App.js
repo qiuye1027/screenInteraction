@@ -14,7 +14,8 @@ class App extends Component {
         super()
         this.state = { 
            programArr : [],
-           ID : ''
+           ID : '',
+           swiperList:[]
         
         } 
 
@@ -27,16 +28,18 @@ class App extends Component {
 
 //创建新交互区
       $(".ptcont").hide()
+      $(".swiperList").show()
 
       $('.selection.nac.dropdown')
         .dropdown({
-          onChange: function(value) {
+          onChange: function(value) {  
             $("#nac").val(value)
             if(value == 'swiper'){
               $(".addSwiper").show()
               $(".swiperList").show()
               $(".addCont").hide()
               $(".btncont").hide()
+              $(".cont").hide()
               
 
             }else if(value == 'button'){
@@ -44,12 +47,14 @@ class App extends Component {
               $(".swiperList").hide()
               $(".addCont").hide()
               $(".btncont").show()
+              $(".cont").hide()
 
             }else if(value == 'cont'){
               $(".addSwiper").hide()
               $(".swiperList").show()
               $(".addCont").show()
               $(".btncont").hide()
+              $(".cont").show()
 
             }
           }
@@ -61,24 +66,30 @@ class App extends Component {
           onApprove : function() {
 
    
-           let programArrList = _this.state.programArr , type = $("#nac").val()
+           let programArrList = _this.state.programArr , type = $("#nac").val(),
+           width = $("#areaWidth").val(),
+           height = $("#areaHeight").val()
 
-            if(type == 'swiper'){
+            if(type == 'swiper'){ 
+
               _this.setState({
-                programArr:programArrList.concat(getSwiper(100,100,_this.setState.ID))
+                programArr:programArrList.concat(getSwiper(height,width,_this.state.swiperList))
               
                 
               })
 
             }else if(type == 'button'){
+              let name = $("#btnName").val(),
+                  link = $("#btnLink").val()
                _this.setState({
-                  programArr:programArrList.concat(getBtn (100,100,'name','href',_this.setState.ID))
+                  programArr:programArrList.concat(getBtn (height,width,name,link,_this.state.ID))
                 
                 
               })
             }else if(type == 'cont'){
+           
                _this.setState({
-                 programArr:programArrList.concat(getCont(100,100,'cont','path',1,_this.setState.ID))
+                 programArr:programArrList.concat(getCont(height,width,$("#conts").val(),'path',1,_this.state.ID))
               
                 
               })
@@ -202,6 +213,10 @@ class App extends Component {
         $('.fileList.modal').modal('attach events', '#newswiper').modal({
           onHidden: function(){
             $(".swiperList").append('<a class="item">'+$("#selectFileName0").val()+'<div class="ui horizontal label">删除</div></a>')
+            _this.setState({
+              swiperList : _this.state.swiperList.concat($("#selectFileName0").val())
+            })
+
           }
         })
 
@@ -317,13 +332,13 @@ class App extends Component {
                               <div className=" three wide column">
                                 <label>宽</label>
                                 <div className="ui small left labeled icon input">  
-                                    <input type="number" id="actName" name="actName" /> 
+                                    <input type="number" id="areaWidth" name="areaWidth" /> 
                                 </div>
                               </div>
                               <div className=" three wide column">
                                 <label>高</label>
                                 <div className="ui small left labeled icon input">  
-                                    <input type="number" id="actName" name="actName" /> 
+                                    <input type="number" id="areaHeight" name="areaHeight" /> 
                                 </div>
                               </div> 
 
@@ -338,17 +353,30 @@ class App extends Component {
                               <div className=" three wide column">
                                 <label>名称</label>
                                 <div className="ui small left labeled icon input">  
-                                    <input type="text" id="actName" name="actName" /> 
+                                    <input type="text" id="btnName" name="btnName" /> 
                                 </div>
                               </div>
                               <div className=" three wide column">
                                 <label>链接地址</label>
                                 <div className="ui small left labeled icon input">  
-                                    <input type="text" id="actName" name="actName" /> 
+                                    <input type="text" id="btnLink" name="btnLink" /> 
                                 </div>
                               </div>
 
                             </div>
+
+
+                            <div className="ui grid cont ptcont" >
+                              <div className=" three wide column">
+                                <label>文字内容</label>
+                                <div className="ui small left labeled icon input">  
+                                    <textarea id="conts" ></textarea>
+                                </div>
+                              </div> 
+                            </div>
+
+
+
 
                             <div className={"ui ptcont divided selection list swiperList "+styles.swiperList}></div>
 
@@ -572,8 +600,8 @@ export default App
 
 
 
-function getSwiper (hei,wid,ID){
-  return  <Swipercont height={hei} width={wid} ID={ID}/>
+function getSwiper (hei,wid,datalist){
+  return  <Swipercont height={hei} width={wid} datalist={datalist}/>
   
 } 
 

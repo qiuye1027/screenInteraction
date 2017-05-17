@@ -32,27 +32,37 @@ class Swipercont extends Component {
 
     render() {
 
-      let {width,height,ID} = this.props
+      let {width,height,datalist} = this.props
+
+
 
       let swipeStyle = {  
             width:width,  
             height:height 
         };
-     
+      let imgstyle = {
+        width: '100%'
+      }
  
 
  
         return (
           
-         <div className="swiper-container" ref="container" style={swipeStyle}>
-        <div className="swiper-wrapper">
-          <div className="swiper-slide"><img src="//placehold.it/500x300" /></div>
-          <div className="swiper-slide"><img src="//placehold.it/500x300" /></div>
-          <div className="swiper-slide"><img src="//placehold.it/500x300" /></div>
-        </div>
-        <div className="swiper-pagination"></div>
- 
-      </div>      
+        <div className="swiper-container Plugin" ref="container" style={swipeStyle}>
+          <div className="swiper-wrapper">
+          {
+            datalist.map(function (item) {
+              console.log(item)
+                return (
+                   <div className="swiper-slide"><img src={item}  style={imgstyle}/></div>
+                )})
+          }
+            
+            
+          </div>
+          <div className="swiper-pagination"></div>
+   
+        </div>      
         )
     }
 }
