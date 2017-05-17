@@ -1,28 +1,19 @@
 import React, {Component} from 'react'
-import styles from '../sass/App' 
-import Swiper from 'react-id-swiper';
+import styles from '../sass/App'  
 import utils from '../../shared/utils'
+ 
 
 class Swipercont extends Component {
     constructor() {
         super()
+        
     }
     componentDidMount() {
       utils.ajax({url: '/api/savePlugin',data:this.props}).then(re => {})
-        
-    }
 
-    render() {
-
-      let {width,height,ID} = this.props
-
-      let swipeStyle = {  
-            width:width,  
-            height:height 
-        };  
-
-           // swipes 的配置
-         let params = {
+      const Swiper = require('swiper');
+      const swiper = new Swiper(this.refs.container,            
+         {
             pagination: '.swiper-pagination',
             paginationClickable: true,
            // nextButton: '.swiper-button-next',
@@ -35,18 +26,33 @@ class Swipercont extends Component {
             onInit: (swiper) => {
               this.swiper = swiper
             }
-          }
+          });
+        
+    }
+
+    render() {
+
+      let {width,height,ID} = this.props
+
+      let swipeStyle = {  
+            width:width,  
+            height:height 
+        };
+     
+ 
+
+ 
         return (
           
-          <div className={styles.swipercont} style={swipeStyle}>
-            <Swiper {...params}>
-              <div><img src={'https://sf-sponsor.b0.upaiyun.com/edb742492eb935dd53a8083765c9fa7b.png'}/></div>
-              <div>Slide 2</div>
-              <div>Slide 3</div>
-              <div>Slide 4</div>
-              <div>Slide 5</div>
-            </Swiper>
-          </div>        
+         <div className="swiper-container" ref="container" style={swipeStyle}>
+        <div className="swiper-wrapper">
+          <div className="swiper-slide"><img src="//placehold.it/500x300" /></div>
+          <div className="swiper-slide"><img src="//placehold.it/500x300" /></div>
+          <div className="swiper-slide"><img src="//placehold.it/500x300" /></div>
+        </div>
+        <div className="swiper-pagination"></div>
+ 
+      </div>      
         )
     }
 }
