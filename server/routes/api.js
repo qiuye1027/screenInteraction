@@ -4,6 +4,8 @@ import getFloder from '../controllers/getFloder'
 import program from '../controllers/program'
 import savePlugin from '../controllers/savePlugin'
 import creatProgram from '../controllers/creatProgram'
+import programList from '../controllers/programList'
+//import componentList from '../controllers/componentList'
 
 
 const router = new Router()
@@ -23,5 +25,9 @@ router.post('/programFileList', program.getFileList)
 router.post('/savePlugin', savePlugin.save)
 
 router.post('/creatProgram', creatProgram.save)
+
+router.post('/programList', programList.list)
+
+//router.post('/componentList', componentList.list)
 
 export default router

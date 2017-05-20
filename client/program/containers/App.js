@@ -15,9 +15,12 @@ class App extends Component {
         this.state = { 
            programArr : [],
            ID : '',
-           swiperList:[]
+           swiperList:[],
+           programList : []
         
         } 
+
+        this.showProgram = this.showProgram.bind(this)
 
     }
     
@@ -142,6 +145,12 @@ class App extends Component {
 //模板
         $('.newmodel.modal').modal('attach events','.newmodel','show');
 //页面列表
+
+       utils.ajax({url: '/api/programList'}).then(re => {
+              
+          _this.setState({programList:re})
+        })
+
         $('.pagelist.modal').modal('attach events','.pagelist','show');
 
  
@@ -239,7 +248,55 @@ class App extends Component {
       
     }
  
+    showProgram(id){
+      //展示对应节目
 
+      $('.pagelist.modal').modal('hide')
+
+      let datas = {}
+      data.id = id
+
+      utils.ajax({url: '/api/componentList',datas}).then(re => {
+            
+       
+
+
+
+
+         // let programArrList = _this.state.programArr , type = $("#nac").val(),
+         //   width = $("#areaWidth").val(),
+         //   height = $("#areaHeight").val()
+
+         //    if(type == 'swiper'){ 
+
+         //      _this.setState({
+         //        programArr:programArrList.concat(getSwiper(height,width,_this.state.swiperList))
+              
+                
+         //      })
+
+         //    }else if(type == 'button'){
+         //      let name = $("#btnName").val(),
+         //          link = $("#btnLink").val()
+         //       _this.setState({
+         //          programArr:programArrList.concat(getBtn (height,width,name,link,_this.state.ID))
+                
+                
+         //      })
+         //    }else if(type == 'cont'){
+           
+         //       _this.setState({
+         //         programArr:programArrList.concat(getCont(height,width,$("#conts").val(),_this.state.swiperList,1,_this.state.ID))
+              
+                
+         //      })
+         //    }
+
+
+
+
+      })
+    }
 
 
 
@@ -247,6 +304,22 @@ class App extends Component {
     render() {
  
         //<embed src="/fileupload/test.pdf" />
+
+        let proList ,_this = this
+
+        proList = this.state.programList.map(function(item){
+
+          return (
+            <div className="item" key={item.id}>
+              <div className="right floated content">
+                <div className="ui button tiny" data-id={item.id}>删除</div>
+              </div> 
+              <a className="header" onClick={_this.showProgram.bind(this,item.id)} data-id={item.id}>{item.name}</a>
+            </div>
+            )  
+          
+        })
+
  
 
         return (
@@ -461,44 +534,15 @@ class App extends Component {
 {/*
 节目列表弹出框
   */}
-                <div className="ui    pagelist modal">
-                    
+                <div className="ui pagelist modal"> 
                     <div className="header">
                         节目列表
                     </div>
-                        <div className="ui form "> 
-                          <div className="ui middle aligned divided list">
-                             
-                               
-                            <div className="item">
-                              <div className="right floated content">
-                                <div className="ui button tiny">删除</div>
-                              </div>
-                               
-                              <a className="header">Daniel Louise1</a>
-                            </div>
-
-                            <div className="item">
-                              <div className="right floated content">
-                                <div className="ui button tiny">删除</div>
-                              </div>
-                               
-                              <a className="header">Daniel Louise2</a>
-                            </div>
-
-                            <div className="item">
-                              <div className="right floated content">
-                                <div className="ui button tiny">删除</div>
-                              </div>
-                               
-                              <a className="header">Daniel Louise3</a>
-                            </div>
-                           
-                          </div>  
-                             
+                     <div className="ui form "> 
+                        <div className="ui middle aligned divided list">
+                          {proList}
                         </div>
-                    
-                   
+                    </div> 
                 </div>
 
 
