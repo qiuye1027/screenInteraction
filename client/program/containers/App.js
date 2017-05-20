@@ -36,7 +36,7 @@ class App extends Component {
             $("#nac").val(value)
             if(value == 'swiper'){
               $(".addSwiper").show()
-              $(".swiperList").show()
+              $(".swiperList").show().html('')
               $(".addCont").hide()
               $(".btncont").hide()
               $(".cont").hide()
@@ -61,10 +61,15 @@ class App extends Component {
         })
 
 
-        $('.newareacent.modal').modal('attach events','.newarea','show').modal({
+        $('.newareacent.modal').modal('attach events','.newarea').modal({
           closable  : false, 
+          onShow : function(){
+            alert(1)
+            // $(".swiperList").html('')
+            // _this.setState({swiperList : []})
+          },
           onApprove : function() {
-
+            
    
            let programArrList = _this.state.programArr , type = $("#nac").val(),
            width = $("#areaWidth").val(),
@@ -89,7 +94,7 @@ class App extends Component {
             }else if(type == 'cont'){
            
                _this.setState({
-                 programArr:programArrList.concat(getCont(height,width,$("#conts").val(),'path',1,_this.state.ID))
+                 programArr:programArrList.concat(getCont(height,width,$("#conts").val(),_this.state.swiperList,1,_this.state.ID))
               
                 
               })

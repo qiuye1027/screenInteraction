@@ -7,13 +7,13 @@ class btn extends Component {
     }
     componentDidMount() {
      utils.ajax({url: '/api/savePlugin',data:this.props}).then(re => {})
-        
+     
     }
 
     render() {
 
       let {width,height,cont,path,type,ID} = this.props
-
+console.log(path)   
       let Style = {  
             width:width,  
             height:height,
