@@ -6,7 +6,7 @@ import savePlugin from '../controllers/savePlugin'
 import creatProgram from '../controllers/creatProgram'
 import programList from '../controllers/programList'
 //import componentList from '../controllers/componentList'
-
+import componentListDel from '../controllers/componentListDel'
 
 const router = new Router()
 
@@ -29,5 +29,7 @@ router.post('/creatProgram', creatProgram.save)
 router.post('/programList', programList.list)
 
 //router.post('/componentList', componentList.list)
+
+router.post('/componentListDel', componentListDel.del)
 
 export default router

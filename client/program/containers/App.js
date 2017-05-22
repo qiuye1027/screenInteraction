@@ -21,6 +21,7 @@ class App extends Component {
         } 
 
         this.showProgram = this.showProgram.bind(this)
+        
 
     }
     
@@ -298,6 +299,17 @@ class App extends Component {
       })
     }
 
+     delProgram(id){
+
+       $('.pagelist.modal').modal('hide')
+
+      let datas = {}
+      datas.id = id 
+     
+      utils.ajax({url: '/api/componentListDel',datas}).then(re => { })
+
+     }
+
 
 
 
@@ -312,7 +324,7 @@ class App extends Component {
           return (
             <div className="item" key={item.id}>
               <div className="right floated content">
-                <div className="ui button tiny" data-id={item.id}>删除</div>
+                <div className="ui button tiny" onClick={_this.delProgram.bind(this,item.id)}  >删除</div>
               </div> 
               <a className="header" onClick={_this.showProgram.bind(this,item.id)} data-id={item.id}>{item.name}</a>
             </div>
