@@ -255,46 +255,11 @@ class App extends Component {
       $('.pagelist.modal').modal('hide')
 
       let datas = {}
-      data.id = id
-
-      utils.ajax({url: '/api/componentList',datas}).then(re => {
+      datas.id = id
+ 
+      utils.ajax({url: '/api/componentList',data:datas}).then(re => {
             
-       
-
-
-
-
-         // let programArrList = _this.state.programArr , type = $("#nac").val(),
-         //   width = $("#areaWidth").val(),
-         //   height = $("#areaHeight").val()
-
-         //    if(type == 'swiper'){ 
-
-         //      _this.setState({
-         //        programArr:programArrList.concat(getSwiper(height,width,_this.state.swiperList))
-              
-                
-         //      })
-
-         //    }else if(type == 'button'){
-         //      let name = $("#btnName").val(),
-         //          link = $("#btnLink").val()
-         //       _this.setState({
-         //          programArr:programArrList.concat(getBtn (height,width,name,link,_this.state.ID))
-                
-                
-         //      })
-         //    }else if(type == 'cont'){
-           
-         //       _this.setState({
-         //         programArr:programArrList.concat(getCont(height,width,$("#conts").val(),_this.state.swiperList,1,_this.state.ID))
-              
-                
-         //      })
-         //    }
-
-
-
+ 
 
       })
     }
@@ -302,11 +267,10 @@ class App extends Component {
      delProgram(id){
 
        $('.pagelist.modal').modal('hide')
-
+ 
       let datas = {}
       datas.id = id 
-     
-      utils.ajax({url: '/api/componentListDel',datas}).then(re => { })
+      utils.ajax({url: '/api/componentListDel',data:datas}).then(re => { })
 
      }
 
@@ -337,9 +301,7 @@ class App extends Component {
         return (
             <div className="container">
                 <div className="ui buttons teal small"> 
-                  <a className="ui button">打开节目</a>
-                  <a className="ui button ">修改节目</a>
-                  <a className="ui button ">删除节目</a>
+                  <a className="ui button">打开节目</a> 
                   <a className="ui button saveProgram">保存节目</a>
                   <a className="ui button ">另存节目</a>
                   <a className="ui button ">保存模板</a>
