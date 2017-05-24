@@ -206,7 +206,7 @@ class App extends Component {
           }
         })
 
-
+// 保存节目
         $('.saveProgram.modal').modal('attach events', '.button.saveProgram','show').modal({
           closable  : false, 
           onApprove : function() {
@@ -214,8 +214,11 @@ class App extends Component {
             let obj = $("#container .ui-draggable")
 
             obj.each(function(i){
-              console.log(obj.eq(i).attr("style").split(";"))
+              
+              let datas = {}
+              datas.style = obj.eq(i).attr("style")
               //把这个style直接存放进db中
+               utils.ajax({url: '/api/saveProgram',data:datas}).then(re => {})
             })
     
        
@@ -300,8 +303,7 @@ class App extends Component {
 
         return (
             <div className="container">
-                <div className="ui buttons teal small"> 
-                  <a className="ui button">打开节目</a> 
+                <div className="ui buttons teal small">  
                   <a className="ui button saveProgram">保存节目</a>
                   <a className="ui button ">另存节目</a>
                   <a className="ui button ">保存模板</a>
