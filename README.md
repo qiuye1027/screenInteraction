@@ -108,4 +108,4 @@ It happens also when run in development mode. This is caused by when you update 
 
 ## License
 
-[MIT](https://github.com/chikara-chan/react-isomorphic-boilerplate/blob/master/LICENSE)
+[MIT](https://github.com/chikara-chan/react-isomorphic-boilerplate/blob/master/LICENSE) 

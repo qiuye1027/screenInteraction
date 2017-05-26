@@ -678,13 +678,13 @@ export default App
 
 
 function getSwiper (hei,wid,datalist){
-  return  <Swipercont height={hei} width={wid} datalist={datalist}/>
+  return  <Swipercont height={hei} width={wid} datalist={datalist} type="1"/>
   
 } 
 
 function getBtn (hei,wid,bg,href,ID){
 
-  return  <Btn height={hei} width={wid} bg={bg} href={href} ID={ID}/>
+  return  <Btn height={hei} width={wid} bg={bg} href={href} ID={ID} type="2"/>
   
 } 
 

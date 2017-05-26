@@ -11,7 +11,7 @@ async function del(ctx) {
 
 	let arrdata = await getDBSearch.searchData(sqlstr)
  
- 	ctx.body  = {res:1}
+ 	ctx.body  =  {res_code:1,res_msg:'deleted'}  
    
 }
 

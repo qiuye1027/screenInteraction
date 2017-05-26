@@ -56,7 +56,7 @@ async function upload(ctx) {
 
 
 
- ctx.body  =  'upload'
+ ctx.body  =  {res_code:1,res_msg:'upload'} 
    
 }
 
