@@ -15,7 +15,7 @@ class btn extends Component {
             width:width + 'px',  
             height:height + 'px',     
           },
-          ele=({type}==1)?<video src={path} controls='controls'/>:<img src={path} />;
+          ele=({type}==1)?<video src={path} controls='controls'></video>:<img src={path} />;
           return(
             <div style={Style} className='Plugin'>
               {ele}
