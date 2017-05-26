@@ -13,10 +13,10 @@ class btn extends Component {
     render() {
 
       let {width,height,cont,path,type,ID} = this.props
-console.log(path)   
+      console.log(path)   
       let Style = {  
-            width:width,  
-            height:height,
+            width:width + 'px',  
+            height:height + 'px',
              
         }; 
 

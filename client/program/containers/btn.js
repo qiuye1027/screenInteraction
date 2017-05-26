@@ -14,16 +14,21 @@ class btn extends Component {
 
     render() {
 
-      let {width,height,name,href,ID} = this.props
+      let {width,height,bg,href,ID} = this.props;
 
       let btnStyle = {  
-            width:width,  
-            height:height,
+            width:width + 'px',  
+            height:height + 'px',
             display:'block',
             border: '1px solid #333',
-            'text-align': 'center',
-            'line-height': height,
-            'border-radius': '5px'
+            'textAlign': 'center',
+            'lineHeight': height + 'px',
+            'borderRadius': '5px',
+            'backgroundImage': 'url('+ bg +')',
+            'backgroundRepeat': 'no-repeat',
+            'backgroundPosition': 'center',
+            'backgroundSize': 'cover',
+
         }; 
 
        
@@ -33,7 +38,7 @@ class btn extends Component {
         return (
           
           <div  className='Plugin' style={area}>
-            <a href={href} style={btnStyle}>{name}</a>
+            <a href={href} style={btnStyle}></a>
           </div>        
         )
     }

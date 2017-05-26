@@ -16,6 +16,7 @@ class App extends Component {
            programArr : [],
            ID : '',
            swiperList:[],
+           NPcont:[],
            programList : []
         
         } 
@@ -33,29 +34,31 @@ class App extends Component {
 //创建新交互区
       $(".ptcont").hide()
       $(".swiperList").show()
-
       $('.selection.nac.dropdown')
         .dropdown({
+          allowReselection: true,//即使用户选择的值与当前所选值匹配，也会触发onChange。
           onChange: function(value) {  
             $("#nac").val(value)
             if(value == 'swiper'){
               $(".addSwiper").show()
               $(".swiperList").show().html('')
+              $(".addbtnBg").hide()
               $(".addCont").hide()
               $(".btncont").hide()
               $(".cont").hide()
-              
 
             }else if(value == 'button'){
               $(".addSwiper").hide()
-              $(".swiperList").hide()
+              $(".swiperList").show().html('')
+              $(".addbtnBg").show()
               $(".addCont").hide()
               $(".btncont").show()
               $(".cont").hide()
 
             }else if(value == 'cont'){
               $(".addSwiper").hide()
-              $(".swiperList").show()
+              $(".swiperList").show().html('')
+              $(".addbtnBg").hide()
               $(".addCont").show()
               $(".btncont").hide()
               $(".cont").show()
@@ -63,7 +66,18 @@ class App extends Component {
             }
           }
         })
-
+        // 初始化新建交互区域，清空数据
+        $('.newareacent.modal').modal({
+          onShow : function(){
+            $(".swiperList").html('');
+            $("#areaWidth").val('');
+            $("#areaHeight").val('');
+            $("#btnName").val('');
+            $("#conts").val('');
+            $("#nac").val('swiper')
+            _this.setState({swiperList : []});
+          },
+        });
 
         $('.newareacent.modal').modal('attach events','.newarea').modal({
           closable  : false, 
@@ -75,10 +89,10 @@ class App extends Component {
           onApprove : function() {
             
    
-           let programArrList = _this.state.programArr , type = $("#nac").val(),
-           width = $("#areaWidth").val(),
-           height = $("#areaHeight").val()
-
+           let programArrList = _this.state.programArr , 
+               type = $("#nac").val(),
+               width = $("#areaWidth").val(),
+               height = $("#areaHeight").val()
             if(type == 'swiper'){ 
 
               _this.setState({
@@ -91,9 +105,7 @@ class App extends Component {
               let name = $("#btnName").val(),
                   link = $("#btnLink").val()
                _this.setState({
-                  programArr:programArrList.concat(getBtn (height,width,name,link,_this.state.ID))
-                
-                
+                  programArr:programArrList.concat(getBtn (height,width,_this.state.swiperList,link,_this.state.ID))
               })
             }else if(type == 'cont'){
            
@@ -163,17 +175,28 @@ class App extends Component {
       // open second modal on first modal buttons
       $('.fileList1.modal').modal('attach events', '.newPergram.modal .button.add').modal({
           onHidden: function(){
-            $(".newPergramCont").append('你选择的图片为：'+$("#selectFileName1").val())
+            $(".newPergramCont").html('').append('你选择的图片为：'+$("#selectFileName1").val())
+            _this.setState({
+              NPcont : [].concat($("#selectFileName").val())
+            })
           }
         })
       
 //创建新节目
+// 初始化新建节目弹出窗，清空数据
+        $('.newPergram.modal').modal({
+          onShow : function(){
+            $(".newPergramCont").html("");
+            $(this).find(".hightq").val("");
+            $(this).find(".widthq").val("");
+            $("#programName").val("");
+            $("#selectFileName1").val("");
+            $(".App__chosefile__2wOvry4v").html("") 
+          },
+        });
         $('.newPergram.modal').modal('attach events', '.button.newPergram','show').modal({
           closable  : false, 
           onApprove : function() {
-
-            
-
             let pergramHight = $(this).find(".hightq").val(),
                 pergramWidth = $(this).find(".widthq").val(),
                 pergramName = $("#programName").val(),
@@ -220,15 +243,12 @@ class App extends Component {
               //把这个style直接存放进db中
                utils.ajax({url: '/api/saveProgram',data:datas}).then(re => {})
             })
-    
-       
-
           }
         })
 
         
 
-        $('.fileList.modal').modal('attach events', '#newswiper').modal({
+        $('.fileList.modal').modal('attach events', '.button#newswiper').modal({
           onHidden: function(){
             $(".swiperList").append('<a class="item">'+$("#selectFileName0").val()+'<div class="ui horizontal label">删除</div></a>')
             _this.setState({
@@ -239,14 +259,23 @@ class App extends Component {
         })
 
 
-         $('.fileList2.modal').modal('attach events', '#newcont').modal({
+         $('.fileList2.modal').modal('attach events', '.button#newcont').modal({
           onHidden: function(){
-             
             $(".swiperList").html('<a class="item">'+$("#selectFileName2").val()+'<div class="ui horizontal label">删除</div></a>')
+            _this.setState({
+              swiperList : [].concat($("#selectFileName2").val())
+            })
           }
         })
 
-
+         $('.fileList3.modal').modal('attach events', '.button#newbtnBg').modal({
+          onHidden: function(){
+            $(".swiperList").html('<a class="item">'+$("#selectFileName3").val()+'<div class="ui horizontal label">删除</div></a>')
+            _this.setState({
+              swiperList : [].concat($("#selectFileName3").val())
+            })
+          }
+        })
       
  
       
@@ -378,7 +407,7 @@ class App extends Component {
                                     <div className="item" data-value="button">按钮</div>
                                     <div className="item" data-value="cont">内容区</div>
                                   </div>
-                                  <input type="hidden" id="nac" value="swiper"/>
+                                  <input type="hidden" id="nac"/>
                                 </div>
 
 
@@ -397,19 +426,15 @@ class App extends Component {
                               </div> 
 
                               <div className=" three wide column">
-                                <input type="button" value="添加新幻灯片" id="newswiper" className=" ui small blue button addSwiper"/> 
+                                <input type="button" value="添加新幻灯片" id="newswiper" className=" ui small blue button addSwiper"/>
+                                <input type="button" value="添加按钮背景" id="newbtnBg" className="ui small ptcont blue button addbtnBg"/>  
                                 <input type="button" value="添加内容" id="newcont" className="ui small ptcont blue button addCont"/> 
                               </div> 
                                
                             </div>
 
                             <div className="ui grid btncont ptcont" >
-                              <div className=" three wide column">
-                                <label>名称</label>
-                                <div className="ui small left labeled icon input">  
-                                    <input type="text" id="btnName" name="btnName" /> 
-                                </div>
-                              </div>
+                              
                               <div className=" three wide column">
                                 <label>链接地址</label>
                                 <div className="ui small left labeled icon input">  
@@ -605,6 +630,19 @@ class App extends Component {
                     </div>
 
 
+                    <div className="ui small fileList3 coupled modal">
+                      <div className="header">素材列表</div>
+                      <div className="content">
+                          <FileUpload name='selectFileName3'/> 
+                      </div>
+
+                      <div className="actions"> 
+                        <div className={styles.chosefile +' chosefile'}>请选择文件</div>
+                        <input type="button" value="确定" className="ui small positive button"/> 
+                      </div> 
+                    </div>
+
+
 
 
 
@@ -630,9 +668,9 @@ function getSwiper (hei,wid,datalist){
   
 } 
 
-function getBtn (hei,wid,name,href,ID){
+function getBtn (hei,wid,bg,href,ID){
 
-  return  <Btn height={hei} width={wid} name={name} href={href} ID={ID}/>
+  return  <Btn height={hei} width={wid} bg={bg} href={href} ID={ID}/>
   
 } 
 

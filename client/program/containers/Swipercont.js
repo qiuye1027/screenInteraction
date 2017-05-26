@@ -37,8 +37,8 @@ class Swipercont extends Component {
 
 
       let swipeStyle = {  
-            width:width,  
-            height:height 
+            width:width + 'px',  
+            height:height + 'px'
         };
       let imgstyle = {
         width: '100%'
