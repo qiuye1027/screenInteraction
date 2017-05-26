@@ -17,6 +17,7 @@ class App extends Component {
            ID : '',
            swiperList:[],
            NPcont:[],
+           sourceType:[],
            programList : []
         
         } 
@@ -110,7 +111,7 @@ class App extends Component {
             }else if(type == 'cont'){
            
                _this.setState({
-                 programArr:programArrList.concat(getCont(height,width,$("#conts").val(),_this.state.swiperList,1,_this.state.ID))
+                 programArr:programArrList.concat(getCont(height,width,$("#conts").val(),_this.state.swiperList,_this.state.sourceType,_this.state.ID))
               
                 
               })
@@ -258,13 +259,26 @@ class App extends Component {
           }
         })
 
-
+        // [A-Za-z0-9_\-\u4e00-\u9fa5]+.(mp4)?(mpeg)?(avi)?(rmvb)?(ra)?(ram)?(mov)?(wmv)?
          $('.fileList2.modal').modal('attach events', '.button#newcont').modal({
           onHidden: function(){
             $(".swiperList").html('<a class="item">'+$("#selectFileName2").val()+'<div class="ui horizontal label">删除</div></a>')
+            let regVideo = /[A-Za-z0-9_\-\u4e00-\u9fa5]+.(mp4)?(mpeg)?(avi)?(rmvb)?(ra)?(ram)?(mov)?(wmv)?/,//需要匹配的内容
+                regImg = /[A-Za-z0-9_\-\u4e00-\u9fa5]+.(gif|jpg|jpeg|bmp|png)/,
+                sourceVal=$("#selectFileName2").val();
+                if(regImg.test(sourceVal)){
+                  _this.setState({
+                    sourceType : [].concat(1)
+                  })      
+                }else if(regVideo.test(sourceVal)){
+                  _this.setState({
+                    sourceType : [].concat(2)
+                  })
+                }
             _this.setState({
               swiperList : [].concat($("#selectFileName2").val())
             })
+            console.log(_this.state.sourceType+"--"+_this.state.swiperList)
           }
         })
 

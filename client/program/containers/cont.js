@@ -6,28 +6,22 @@ class btn extends Component {
         super()
     }
     componentDidMount() {
-     utils.ajax({url: '/api/savePlugin',data:this.props}).then(re => {})
-     
+     utils.ajax({url: '/api/savePlugin',data:this.props}).then(re => {}) 
     }
-
     render() {
 
-      let {width,height,cont,path,type,ID} = this.props
-      console.log(path)   
-      let Style = {  
+      let {width,height,cont,path,type,ID} = this.props,
+          Style = {  
             width:width + 'px',  
-            height:height + 'px',
-             
-        }; 
-
-      
-        return (
-          
-          <div style={Style} className='Plugin'>
-            <img src={path} />
-            <p>{cont}</p>
-          </div>        
-        )
+            height:height + 'px',     
+          },
+          ele=({type}==1)?<video src={path} controls='controls'/>:<img src={path} />;
+          return(
+            <div style={Style} className='Plugin'>
+              {ele}
+              <p>{cont}</p>
+            </div>
+          )
     }
 }
 
