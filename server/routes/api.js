@@ -28,7 +28,7 @@ router.post('/savePlugin', savePlugin.save)
 router.post('/creatProgram', creatProgram.save)
  //获取节目列表
 router.post('/programList', programList.list)
- //获取交互区域列表
+ //预览节目。 获取节目中的交互列表
 router.post('/componentList', componentList.list)
  //删除某个交互区域
 router.post('/componentListDel', componentListDel.del)
