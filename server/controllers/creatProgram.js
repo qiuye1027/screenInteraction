@@ -19,7 +19,7 @@ async function save(ctx) {
 
 	await getDBSearch.searchData(sqlstr)
 
- let sqlstr1 = "SELECT max(id) ID FROM screenDB.program where user_id = '"+ctx.cookies.get('user_id')+"';"
+ let sqlstr1 = "SELECT max(id) ID FROM screenDB.program where user_id = '"+/*ctx.cookies.get('user_id')*/0+"';"
  
  
   

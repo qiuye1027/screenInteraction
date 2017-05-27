@@ -47,6 +47,7 @@ class App extends Component {
               $(".addCont").hide()
               $(".btncont").hide()
               $(".cont").hide()
+              $(".contItem").hide()
 
             }else if(value == 'button'){
               $(".addSwiper").hide()
@@ -63,6 +64,22 @@ class App extends Component {
               $(".addCont").show()
               $(".btncont").hide()
               $(".cont").show()
+              $(".contItem").hide()
+              $(".contItem").hide().eq($("select.addCont").val()).show();
+              $(document).on("change",'select.addCont',function(){
+                  switch ($(this).val()){ 
+                    case '0' : 
+                            $(".contItem").hide().eq(0).show();
+                            break;  
+                    case '1' : 
+                            $(".contItem").hide().eq(1).show();
+                            break;
+                    case '2' : 
+                            $(".contItem").hide().eq(2).show();
+                            break;
+                    default : break; 
+                  }
+              });
 
             }
           }
@@ -83,9 +100,7 @@ class App extends Component {
         $('.newareacent.modal').modal('attach events','.newarea').modal({
           closable  : false, 
           onShow : function(){
-            alert(1)
-            // $(".swiperList").html('')
-            // _this.setState({swiperList : []})
+            
           },
           onApprove : function() {
             
@@ -93,13 +108,10 @@ class App extends Component {
            let programArrList = _this.state.programArr , 
                type = $("#nac").val(),
                width = $("#areaWidth").val(),
-               height = $("#areaHeight").val()
+               height = $("#areaHeight").val();
             if(type == 'swiper'){ 
-
               _this.setState({
-                programArr:programArrList.concat(getSwiper(height,width,_this.state.swiperList))
-              
-                
+                programArr:programArrList.concat(getSwiper(height,width,_this.state.swiperList))           
               })
 
             }else if(type == 'button'){
@@ -109,7 +121,7 @@ class App extends Component {
                   programArr:programArrList.concat(getBtn (height,width,_this.state.swiperList,link,_this.state.ID))
               })
             }else if(type == 'cont'){
-           
+              ($("#conts").val()!='') && (_this.setState({sourceType : [].concat(0)}));
                _this.setState({
                  programArr:programArrList.concat(getCont(height,width,$("#conts").val(),_this.state.swiperList,_this.state.sourceType,_this.state.ID))
               
@@ -165,7 +177,7 @@ class App extends Component {
           _this.setState({programList:re})
         })
 
-        $('.pagelist.modal').modal('attach events','.pagelist','show');
+        $('.pagelist.modal').modal('attach events','button.pagelist','show');
 
  
        $('.coupled.modal')
@@ -259,26 +271,28 @@ class App extends Component {
           }
         })
 
-        // [A-Za-z0-9_\-\u4e00-\u9fa5]+.(mp4)?(mpeg)?(avi)?(rmvb)?(ra)?(ram)?(mov)?(wmv)?
-         $('.fileList2.modal').modal('attach events', '.button#newcont').modal({
+        //[A-Za-z0-9_\-\u4e00-\u9fa5]+.(mp4)?(mpeg)?(avi)?(rmvb)?(ra)?(ram)?(mov)?(wmv)?
+         $('.fileList2.modal').modal('attach events', '.button#newcontVideo').modal({
           onHidden: function(){
             $(".swiperList").html('<a class="item">'+$("#selectFileName2").val()+'<div class="ui horizontal label">删除</div></a>')
-            let regVideo = /[A-Za-z0-9_\-\u4e00-\u9fa5]+.(mp4)?(mpeg)?(avi)?(rmvb)?(ra)?(ram)?(mov)?(wmv)?/,//需要匹配的内容
-                regImg = /[A-Za-z0-9_\-\u4e00-\u9fa5]+.(gif|jpg|jpeg|bmp|png)/,
+            let regVideo = /[A-Za-z0-9_\-\u4e00-\u9fa5]+.(mp4)?(ogg)?(mpeg)?(avi)?(rmvb)?(ra)?(ram)?(mov)?(wmv)?/,//需要匹配的内容
                 sourceVal=$("#selectFileName2").val();
-                if(regImg.test(sourceVal)){
-                  _this.setState({
-                    sourceType : [].concat(1)
-                  })      
-                }else if(regVideo.test(sourceVal)){
-                  _this.setState({
-                    sourceType : [].concat(2)
-                  })
-                }
-            _this.setState({
-              swiperList : [].concat($("#selectFileName2").val())
-            })
-            console.log(_this.state.sourceType+"--"+_this.state.swiperList)
+                (regVideo.test(sourceVal)) && (_this.setState({sourceType : [].concat(1)}))
+                _this.setState({
+                  swiperList : [].concat($("#selectFileName2").val())
+                })
+          }
+        })
+
+         $('.fileList4.modal').modal('attach events', '.button#newcontImg').modal({
+          onHidden: function(){
+            $(".swiperList").html('<a class="item">'+$("#selectFileName4").val()+'<div class="ui horizontal label">删除</div></a>')
+            let regImg = /[A-Za-z0-9_\-\u4e00-\u9fa5]+.(gif|jpg|jpeg|bmp|png)/,
+                sourceVal=$("#selectFileName4").val();
+                (regImg.test(sourceVal)) && (_this.setState({sourceType : [].concat(2)}))
+                _this.setState({
+                  swiperList : [].concat($("#selectFileName4").val())
+                })
           }
         })
 
@@ -442,9 +456,13 @@ class App extends Component {
                               <div className=" three wide column">
                                 <input type="button" value="添加新幻灯片" id="newswiper" className=" ui small blue button addSwiper"/>
                                 <input type="button" value="添加按钮背景" id="newbtnBg" className="ui small ptcont blue button addbtnBg"/>  
-                                <input type="button" value="添加内容" id="newcont" className="ui small ptcont blue button addCont"/> 
+                                <select className="ui small ptcont blue button addCont">
+                                  <option value="0">传文字</option>
+                                  <option value="1">传视频</option>
+                                  <option value="2">传图片</option>
+                                </select> 
+                                
                               </div> 
-                               
                             </div>
 
                             <div className="ui grid btncont ptcont" >
@@ -458,8 +476,7 @@ class App extends Component {
 
                             </div>
 
-
-                            <div className="ui grid cont ptcont" >
+                            <div className="ui grid cont ptcont contItem" >
                               <div className=" three wide column">
                                 <label>文字内容</label>
                                 <div className="ui small left labeled icon input">  
@@ -467,9 +484,8 @@ class App extends Component {
                                 </div>
                               </div> 
                             </div>
-
-
-
+                                <input type="button" value="添加视频" id="newcontVideo" className="ui small ptcont blue button contItem"/> 
+                                <input type="button" value="添加图片" id="newcontImg" className="ui small ptcont blue button contItem"/>
 
                             <div className={"ui ptcont divided selection list swiperList "+styles.swiperList}></div>
 
@@ -648,6 +664,19 @@ class App extends Component {
                       <div className="header">素材列表</div>
                       <div className="content">
                           <FileUpload name='selectFileName3'/> 
+                      </div>
+
+                      <div className="actions"> 
+                        <div className={styles.chosefile +' chosefile'}>请选择文件</div>
+                        <input type="button" value="确定" className="ui small positive button"/> 
+                      </div> 
+                    </div>
+
+
+                    <div className="ui small fileList4 coupled modal">
+                      <div className="header">素材列表</div>
+                      <div className="content">
+                          <FileUpload name='selectFileName4'/> 
                       </div>
 
                       <div className="actions"> 
