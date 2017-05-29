@@ -92,7 +92,7 @@ class App extends Component {
             $("#areaHeight").val('');
             $("#btnName").val('');
             $("#conts").val('');
-            $("#nac").val('swiper')
+            // $("#nac").val('swiper')
             _this.setState({swiperList : []});
           },
         });
@@ -427,11 +427,11 @@ class App extends Component {
                                 <label>交互类型</label>
                                
                                 <div className="ui dropdown selection nac"> 
-                                  <div className="default text">幻灯区</div>
+                                  <div className="default text">请选择</div>
                                   <span><i className="dropdown icon"></i></span>
                                   
                                   <div className="menu">
-                                    <div className="item active" data-value="swiper">幻灯区</div>
+                                    <div className="item selected" data-value="swiper">幻灯区</div>
                                     <div className="item" data-value="button">按钮</div>
                                     <div className="item" data-value="cont">内容区</div>
                                   </div>

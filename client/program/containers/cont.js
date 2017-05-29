@@ -25,7 +25,7 @@ class btn extends Component {
           };
           return(
             <div style={Style} className='Plugin'>
-              {!({type}['type'][0]) ? <div></div> : <VideoEle type={type} path={path} style={eleStyle} />};
+              {!({type}['type'][0]) ? <div></div> : <VideoEle type={type} path={path} style={eleStyle} />}
               <p>{cont}</p>
             </div>
           )
@@ -39,15 +39,15 @@ class VideoEle extends Component {
     render()  {
       let vd=<video src={this.props.path} controls="controls" style={this.props.style}></video>,
           img=<img src={this.props.path} style={this.props.style} />,
-          type=(this.props.type)[0],
-          sw=true
-          if(type==1){
+          types=this.props.type[0],
+          sw=true;
+          if(types==1){
             sw=true
           }else{
             sw=false
           }
       return (
-         {sw} ? vd : img
+         sw ? vd : img
       )
     }
 }
