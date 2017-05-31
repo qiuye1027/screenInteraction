@@ -5,7 +5,7 @@ import util from '../../client/shared/utils'
 
 
 async function save(ctx) { 
- 	ctx.cookies.set('user_id','0') 
+ 	 
 
   
   let _body = ctx.request.body,
@@ -19,17 +19,9 @@ async function save(ctx) {
 
 	await getDBSearch.searchData(sqlstr)
 
- let sqlstr1 = "SELECT max(id) ID FROM screenDB.program where user_id = '"+/*ctx.cookies.get('user_id')*/0+"';"
- 
+ let sqlstr1 = "SELECT max(id) ID FROM screenDB.program where user_id = '"+ ctx.cookies.get('user_id')+"';"
  
   
-
-
-
-
-
-
-
  ctx.body  = await getDBSearch.searchData(sqlstr1) 
    
 }

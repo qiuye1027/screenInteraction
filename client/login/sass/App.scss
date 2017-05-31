@@ -1,0 +1,23 @@
+body {
+  background-color: #DADADA;
+
+  .grid {
+      height: 100%;
+    }
+
+}
+
+.image {
+  margin-top: -100px;
+ 
+}
+.column {
+    left: 50%;
+    position: absolute;
+    width: 400px;
+    margin-left: -200px;
+    margin-top: 30%;
+}
+.content{text-align:center;}
+
+.put{width:100% !important;}

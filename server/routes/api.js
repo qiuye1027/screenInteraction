@@ -8,6 +8,7 @@ import programList from '../controllers/programList'
 import componentList from '../controllers/componentList'
 import componentListDel from '../controllers/componentListDel'
 import saveProgram from '../controllers/saveProgram'
+import doLogin from '../controllers/doLogin'
 
 const router = new Router()
  //文件上传
@@ -34,5 +35,9 @@ router.post('/componentList', componentList.list)
 router.post('/componentListDel', componentListDel.del)
  //保存节目
 router.post('/saveProgram', saveProgram.save)
+ //登录
+router.post('/doLogin', doLogin.login)
+ //判断登录
+router.post('/isLogin', doLogin.isLogin)
 
 export default router

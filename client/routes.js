@@ -106,6 +106,14 @@ const routes = {
                 }, 'clientList')
             }
         }]
+    },{
+        //登录管理
+        path: '/login',
+        getComponent(nextState, callback) {
+            require.ensure([], require => {
+                callback(null, require('./login/containers/App'))
+            }, 'login')
+        }
     }]
 }
 
