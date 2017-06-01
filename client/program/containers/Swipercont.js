@@ -41,7 +41,11 @@ class Swipercont extends Component {
             height:height + 'px'
         };
       let imgstyle = {
-        width: '100%'
+        position: 'absolute',
+        left: '50%',
+        top: '50%',
+        height: '100%',
+        transform: 'translate(-50%,-50%)'
       }
  
 

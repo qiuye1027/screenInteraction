@@ -169,7 +169,11 @@ class App extends Component {
 
 
 //模板
-        $('.newmodel.modal').modal('attach events','.newmodel','show');
+        $('.newmodel.modal').modal('attach events','.newmodel','show').modal({
+          onApprove:function(){
+            alert("创建模板成功")
+          }
+        });
 //页面列表
 
        utils.ajax({url: '/api/programList'}).then(re => {
@@ -220,6 +224,7 @@ class App extends Component {
                 datas.height =pergramHight;
                 datas.width =pergramWidth;
                 datas.name =pergramName;
+                datas.bgPath = programBg;
 
                 utils.ajax({url: '/api/creatProgram',data:datas}).then(re => {
                    
@@ -254,7 +259,8 @@ class App extends Component {
               let datas = {}
               datas.style = obj.eq(i).attr("style")
               //把这个style直接存放进db中
-               utils.ajax({url: '/api/saveProgram',data:datas}).then(re => {})
+               utils.ajax({url: '/api/saveProgram',data:datas}).then(re => {
+               })
             })
           }
         })
@@ -512,7 +518,7 @@ class App extends Component {
   创建模板出框
     */}
 
-                <div className="ui    newmodel modal">
+                <div className="ui newmodel modal">
                     
                     <div className="header">
                         模板创建
