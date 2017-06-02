@@ -1,5 +1,4 @@
-import React, {Component} from 'react' 
-import SectionMain from '../components/SectionMain'
+import React, {Component} from 'react'  
 import styles from '../sass/App'
 
 class App extends Component {
@@ -9,10 +8,15 @@ class App extends Component {
 
     render() {
         const {userInfo, actions} = this.props
-
+ 
+        let divstyle = {
+            width: '100%',
+            border: 'none',
+            height: '510px'
+        }
         return (
             <div className={styles.app}>
-                <SectionMain userInfo={userInfo} actions={actions}></SectionMain>
+                <iframe  src="http://localhost:3001/"  style={divstyle}/>
             </div>
         )
     }
