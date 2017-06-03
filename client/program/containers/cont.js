@@ -4,9 +4,17 @@ import utils from '../../shared/utils'
 class btn extends Component {
     constructor() {
         super()
+         this.state = { 
+           styleId : ''
+        } 
     }
     componentDidMount() {
-     utils.ajax({url: '/api/savePlugin',data:this.props}).then(re => {}) 
+
+       let _this = this
+      utils.ajax({url: '/api/savePlugin',data:this.props}).then(re => {
+ 
+        _this.setState({styleId : re[0].ID})
+      })
     }
     render() {
 
@@ -14,7 +22,10 @@ class btn extends Component {
           Style = {  
             width:width + 'px',  
             height:height + 'px', 
-            overflow:'hidden'   
+            overflow:'auto'  ,
+            position:'absolute',
+            top:10,
+            left:10 
           },
           eleStyle = {
             width:'100%', 
@@ -24,7 +35,7 @@ class btn extends Component {
             transform:'translate(-50%,-50%)'
           };
           return(
-            <div style={Style} className='Plugin'>
+            <div style={Style} className='Plugin'  data-styleId={this.state.styleId}>
               {!({type}['type'][0]) ? <div></div> : <VideoEle type={type} path={path} style={eleStyle} />}
               <p>{cont}</p>
             </div>

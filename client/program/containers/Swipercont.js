@@ -6,10 +6,19 @@ import utils from '../../shared/utils'
 class Swipercont extends Component {
     constructor() {
         super()
+        this.state = { 
+           styleId : ''
+        } 
         
     }
     componentDidMount() {
-      utils.ajax({url: '/api/savePlugin',data:this.props}).then(re => {})
+
+      let _this = this
+
+      utils.ajax({url: '/api/savePlugin',data:this.props}).then(re => {
+ 
+        _this.setState({styleId : re[0].ID})
+      })
 
       const Swiper = require('swiper');
       const swiper = new Swiper(this.refs.container,            
@@ -38,7 +47,10 @@ class Swipercont extends Component {
 
       let swipeStyle = {  
             width:width + 'px',  
-            height:height + 'px'
+            height:height + 'px',
+            position:'absolute',
+            top:10,
+            left:10
         };
       let imgstyle = {
         position: 'absolute',
@@ -52,7 +64,7 @@ class Swipercont extends Component {
  
         return (
           
-        <div className="swiper-container Plugin" ref="container" style={swipeStyle}>
+        <div className="swiper-container Plugin" ref="container" style={swipeStyle} data-styleId={this.state.styleId}>
           <div className="swiper-wrapper">
           {
             datalist.map(function (item) {

@@ -111,8 +111,9 @@ class App extends Component {
                width = $("#areaWidth").val(),
                height = $("#areaHeight").val();
             if(type == 'swiper'){ 
+         
               _this.setState({
-                programArr:programArrList.concat(getSwiper(height,width,_this.state.swiperList,type))           
+                programArr:programArrList.concat(getSwiper(height,width,_this.state.swiperList,type,_this.state.ID))           
               })
 
             }else if(type == 'button'){
@@ -229,11 +230,11 @@ class App extends Component {
                 datas.height =pergramHight;
                 datas.width =pergramWidth;
                 datas.name =pergramName;
-                datas.bgPath = programBg;
+                datas.bgimg = programBg;
 
                 utils.ajax({url: '/api/creatProgram',data:datas}).then(re => {
                    
-                  _this.setState({ID:re.ID})
+                  _this.setState({ID:re[0].ID})
                 })
 
    
@@ -263,6 +264,7 @@ class App extends Component {
               
               let datas = {}
               datas.style = obj.eq(i).attr("style")
+              datas.styleId = obj.eq(i).attr("data-styleId")
               //把这个style直接存放进db中
               console.log(datas.style)
                utils.ajax({url: '/api/saveProgram',data:datas}).then(re => {
@@ -728,8 +730,8 @@ export default App
 
 
 
-function getSwiper (hei,wid,datalist,type){
-  return  <Swipercont height={hei} width={wid} datalist={datalist} type="4"/>
+function getSwiper (hei,wid,datalist,type,ID){
+  return  <Swipercont height={hei} width={wid} ID={ID} datalist={datalist} type="4"/>
   
 } 
 

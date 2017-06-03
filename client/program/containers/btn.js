@@ -4,10 +4,18 @@ import utils from '../../shared/utils'
 class btn extends Component {
     constructor() {
         super()
+         this.state = { 
+           styleId : ''
+        } 
     }
     componentDidMount() {
 
-      utils.ajax({url: '/api/savePlugin',data:this.props}).then(re => {})
+       let _this = this
+
+      utils.ajax({url: '/api/savePlugin',data:this.props}).then(re => {
+ 
+        _this.setState({styleId : re[0].ID})
+      })
 
         
     }
@@ -28,6 +36,9 @@ class btn extends Component {
             'backgroundRepeat': 'no-repeat',
             'backgroundPosition': 'center',
             'backgroundSize': 'cover',
+            position:'absolute',
+            top:10,
+            left:10
 
         }; 
 
@@ -37,7 +48,7 @@ class btn extends Component {
       
         return (
           
-          <div  className='Plugin' style={area}>
+          <div  className='Plugin' style={area} data-styleId={this.state.styleId}>
             <a href={href} style={btnStyle}></a>
           </div>        
         )
