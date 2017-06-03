@@ -11,11 +11,12 @@ async function save(ctx) {
   let _body = ctx.request.body,
   name = _body.name,
   height = _body.height,
-  width = _body.width
+  width = _body.width,
+  bgimg = _body.bgimg
 
    
-	let sqlstr = "INSERT INTO `screenDB`.`program` (`user_id`, `name`, `height`, `width`)"+
-				"VALUES ('"+ctx.cookies.get('user_id')+"', '"+name+"', '"+height+"',  '"+width+"' );"
+	let sqlstr = "INSERT INTO `screenDB`.`program` (`user_id`, `name`, `height`, `width`,`bgimg`)"+
+				"VALUES ('"+ctx.cookies.get('user_id')+"', '"+name+"', '"+height+"',  '"+width+"',  '"+bgimg+"' );"
 
 	await getDBSearch.searchData(sqlstr)
 

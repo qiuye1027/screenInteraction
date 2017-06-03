@@ -10,8 +10,8 @@ async function login(ctx) {
  
  	let res  =  await getDBSearch.searchData(str)
 	if(res.length > 0){ 
-		ctx.cookies.set('user_id',res[0].id) 
-		ctx.cookies.set('user_name',res[0].username) 
+		ctx.cookies.set('user_id',res[0].id,{ maxAge: 1000*3600 }) 
+		ctx.cookies.set('user_name',res[0].username,{ maxAge: 1000*3600 }) 
 	}
 
    ctx.body  = res

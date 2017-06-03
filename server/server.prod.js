@@ -5,11 +5,13 @@ import views from 'koa-views'
 import app from './app'
 import router from './routes'
 import clientRoute from './middlewares/clientRoute'
+import convert from 'koa-convert' 
 
 const port = process.env.port || 3000
 
 app.use(views(path.resolve(__dirname, '../views/prod'), {map: {html: 'ejs'}}))
 app.use(serve(path.resolve(__dirname, '../dist/client')))
+app.use(convert(serve( path.join( __dirname, '..', './static') )))
 app.use(clientRoute)
 app.use(router.routes())
 app.use(router.allowedMethods())
