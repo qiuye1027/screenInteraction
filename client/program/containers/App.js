@@ -33,6 +33,7 @@ class App extends Component {
       $('.menu .item').tab()
 
 //创建新交互区
+      $("#newswiper").hide()
       $(".ptcont").hide()
       $(".swiperList").show()
       $('.selection.nac.dropdown')
@@ -99,8 +100,8 @@ class App extends Component {
 
         $('.newareacent.modal').modal('attach events','.newarea').modal({
           closable  : false, 
-          onShow : function(){
-            
+          onHidden : function(){
+            $(".ui.small.modal").modal("hide")
           },
           onApprove : function() {
             
@@ -214,6 +215,9 @@ class App extends Component {
         });
         $('.newPergram.modal').modal('attach events', '.button.newPergram','show').modal({
           closable  : false, 
+          onHidden : function(){
+            $(".ui.small.modal").modal("hide")
+          },
           onApprove : function() {
             let pergramHight = $(this).find(".hightq").val(),
                 pergramWidth = $(this).find(".widthq").val(),
@@ -270,30 +274,37 @@ class App extends Component {
         
 
         $('.fileList.modal').modal('attach events', '.button#newswiper').modal({
+          // onshow:function(){
+          //   $(".newareacent").addClass("hidden");
+          // },
           onHidden: function(){
-            $(".swiperList").append('<a class="item">'+$("#selectFileName0").val()+'<div class="ui horizontal label">删除</div></a>')
-            _this.setState({
-              swiperList : _this.state.swiperList.concat($("#selectFileName0").val())
-            })
-
+            if($("#selectFileName0").val()!=''){
+                $(".swiperList").append('<a class="item">'+$("#selectFileName0").val()+'<div class="ui horizontal label">删除</div></a>')
+                _this.setState({
+                  swiperList : _this.state.swiperList.concat($("#selectFileName0").val())
+                })
+            }
           }
         })
 
         //[A-Za-z0-9_\-\u4e00-\u9fa5]+.(mp4)?(mpeg)?(avi)?(rmvb)?(ra)?(ram)?(mov)?(wmv)?
          $('.fileList2.modal').modal('attach events', '.button#newcontVideo').modal({
           onHidden: function(){
-            $(".swiperList").html('<a class="item">'+$("#selectFileName2").val()+'<div class="ui horizontal label">删除</div></a>')
-            let regVideo = /[A-Za-z0-9_\-\u4e00-\u9fa5]+.(mp4)?(ogg)?(mpeg)?(avi)?(rmvb)?(ra)?(ram)?(mov)?(wmv)?/,//需要匹配的内容
-                sourceVal=$("#selectFileName2").val();
-                (regVideo.test(sourceVal)) && (_this.setState({sourceType : [].concat(1)}))
-                _this.setState({
-                  swiperList : [].concat($("#selectFileName2").val())
-                })
+            if($("#selectFileName2").val()!=''){
+              $(".swiperList").html('<a class="item">'+$("#selectFileName2").val()+'<div class="ui horizontal label">删除</div></a>')
+              let regVideo = /[A-Za-z0-9_\-\u4e00-\u9fa5]+.(mp4)?(ogg)?(mpeg)?(avi)?(rmvb)?(ra)?(ram)?(mov)?(wmv)?/,//需要匹配的内容
+                  sourceVal=$("#selectFileName2").val();
+                  (regVideo.test(sourceVal)) && (_this.setState({sourceType : [].concat(1)}))
+                  _this.setState({
+                    swiperList : [].concat($("#selectFileName2").val())
+                  })
+            }
           }
         })
 
          $('.fileList4.modal').modal('attach events', '.button#newcontImg').modal({
           onHidden: function(){
+            if($("#selectFileName4").val()!=''){
             $(".swiperList").html('<a class="item">'+$("#selectFileName4").val()+'<div class="ui horizontal label">删除</div></a>')
             let regImg = /[A-Za-z0-9_\-\u4e00-\u9fa5]+.(gif|jpg|jpeg|bmp|png)/,
                 sourceVal=$("#selectFileName4").val();
@@ -301,15 +312,18 @@ class App extends Component {
                 _this.setState({
                   swiperList : [].concat($("#selectFileName4").val())
                 })
+            }
           }
         })
 
          $('.fileList3.modal').modal('attach events', '.button#newbtnBg').modal({
           onHidden: function(){
-            $(".swiperList").html('<a class="item">'+$("#selectFileName3").val()+'<div class="ui horizontal label">删除</div></a>')
-            _this.setState({
-              swiperList : [].concat($("#selectFileName3").val())
-            })
+            if($("#selectFileName3").val()!=''){
+              $(".swiperList").html('<a class="item">'+$("#selectFileName3").val()+'<div class="ui horizontal label">删除</div></a>')
+              _this.setState({
+                swiperList : [].concat($("#selectFileName3").val())
+              })
+            }
           }
         })
       
