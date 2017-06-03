@@ -17466,3 +17466,14 @@ ol.ui.horizontal.list li:before,
 .ui.statistic > .description {
   opacity: 0.8;
 }
+
+/*mars2017.6.3*/
+.ui.modal > .header{padding:1rem 1.5rem;}
+.ui.form{padding:1.5rem;}
+.ui.form .field > label{font-size: 1em}
+.ui.selection.dropdown,.ui.small.input{margin-top: .5rem}
+.three.wide.column input[type="button"],.three.wide.column select{margin-top: 1.5rem}
+.ui.modal>.close{padding:0;}
+.ui.form .inline.fields .field > :only-child, .ui.form .inline.field > :only-child{margin:0 0 0 1em}
+.ui.primary.buttons .button, .ui.primary.button{margin-left: .8em}
+.Plugin.ui-draggable p {word-wrap: break-word;}

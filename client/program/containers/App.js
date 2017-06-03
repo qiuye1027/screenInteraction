@@ -111,14 +111,14 @@ class App extends Component {
                height = $("#areaHeight").val();
             if(type == 'swiper'){ 
               _this.setState({
-                programArr:programArrList.concat(getSwiper(height,width,_this.state.swiperList))           
+                programArr:programArrList.concat(getSwiper(height,width,_this.state.swiperList,type))           
               })
 
             }else if(type == 'button'){
               let name = $("#btnName").val(),
                   link = $("#btnLink").val()
                _this.setState({
-                  programArr:programArrList.concat(getBtn (height,width,_this.state.swiperList,link,_this.state.ID))
+                  programArr:programArrList.concat(getBtn (height,width,_this.state.swiperList,link,_this.state.ID,type))
               })
             }else if(type == 'cont'){
               ($("#conts").val()!='') && (_this.setState({sourceType : [].concat(0)}));
@@ -129,7 +129,6 @@ class App extends Component {
               })
             }
             
-
              $( ".Plugin" ).draggable({ 
               containment: ".App__programArea__1KiBa8n0", 
               scroll: false ,
@@ -137,12 +136,14 @@ class App extends Component {
 
               
               stop: function(e,ui) { 
-                console.log(ui.position)
+                // console.log(ui.position);
+                // console.log(e)
+                // console.log(e.delegateTarget.location.origin)
+                // console.log($( ".Plugin" ).css('z-index'))
               }
 
 
             });
-
 
             //可拖拽
             $( ".App__swipercont__On3D7KLV" ).draggable({ 
@@ -152,7 +153,7 @@ class App extends Component {
 
               
               stop: function(e,ui) { 
-                console.log(ui.position)
+                console.log(ui.position);
               }
 
 
@@ -259,6 +260,7 @@ class App extends Component {
               let datas = {}
               datas.style = obj.eq(i).attr("style")
               //把这个style直接存放进db中
+              console.log(datas.style)
                utils.ajax({url: '/api/saveProgram',data:datas}).then(re => {
                })
             })
@@ -609,7 +611,7 @@ class App extends Component {
                           </div>
                         </div> 
                         <div className="field">
-                          <label>背景图片</label>
+                          背景图片
                           <div className="ui primary button add">添加素材</div> 
                         </div>  
                       </div>
@@ -712,14 +714,14 @@ export default App
 
 
 
-function getSwiper (hei,wid,datalist){
-  return  <Swipercont height={hei} width={wid} datalist={datalist} type="1"/>
+function getSwiper (hei,wid,datalist,type){
+  return  <Swipercont height={hei} width={wid} datalist={datalist} type="4"/>
   
 } 
 
-function getBtn (hei,wid,bg,href,ID){
+function getBtn (hei,wid,bg,href,ID,type){
 
-  return  <Btn height={hei} width={wid} bg={bg} href={href} ID={ID} type="2"/>
+  return  <Btn height={hei} width={wid} bg={bg} href={href} ID={ID} type="5"/>
   
 } 
 
