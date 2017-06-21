@@ -18,7 +18,7 @@ class btn extends Component {
     }
     render() {
 
-      let {width,height,cont,path,type,ID} = this.props,
+      let {width,height,cont,path,type,ID,programArrIndex} = this.props,
           Style = {  
             width:width + 'px',  
             height:height + 'px', 
@@ -35,7 +35,7 @@ class btn extends Component {
             transform:'translate(-50%,-50%)'
           };
           return(
-            <div style={Style} className='Plugin'  data-styleId={this.state.styleId}>
+            <div style={Style} className='Plugin'  data-styleId={this.state.styleId} programArrIndex={programArrIndex}>
               {!({type}['type'][0]) ? <div></div> : <VideoEle type={type} path={path} style={eleStyle} />}
               <p>{cont}</p>
             </div>

@@ -5,7 +5,8 @@ class btn extends Component {
     constructor() {
         super()
          this.state = { 
-           styleId : ''
+           styleId : '',
+           DISPLAYS : 'none'
         } 
     }
     componentDidMount() {
@@ -16,13 +17,19 @@ class btn extends Component {
  
         _this.setState({styleId : re[0].ID})
       })
-
         
+    }
+
+    showClose() {
+      this.setState({DISPLAYS : 'block'})
+    }
+    hideClose() {
+      this.setState({DISPLAYS : 'none'})
     }
 
     render() {
 
-      let {width,height,bg,href,ID} = this.props;
+      let {width,height,bg,href,ID,programArrIndex} = this.props;
 
       let btnStyle = {  
             width:width + 'px',  
@@ -37,19 +44,28 @@ class btn extends Component {
             'backgroundPosition': 'center',
             'backgroundSize': 'cover',
             position:'absolute',
-            top:10,
-            left:10
-
-        }; 
+        },
+        closeStyle = {
+            'display': this.state.DISPLAYS,
+            'width': '15px',
+            'height': '15px',
+            'color': '#db2828;',
+            'position': 'absolute',
+            'right': '-14px',
+            'top': '-13px',
+            'cursor': 'pointer',
+            'font-size': '12px'
+        }
 
        
-      let area = {display:'block',width:width} 
+      let area = {display:'block',width:width,height:height} 
 
       
         return (
           
-          <div  className='Plugin' style={area} data-styleId={this.state.styleId}>
+          <div  className='Plugin' style={area} data-styleId={this.state.styleId} data-programArrIndex={programArrIndex} onMouseOver={this.showClose.bind(this)} onMouseOut={this.hideClose.bind(this)}>
             <a href={href} style={btnStyle}></a>
+            <div class="close" style={closeStyle} onClick={this.removeProgrameItems.bind(this)}>X</div>
           </div>        
         )
     }

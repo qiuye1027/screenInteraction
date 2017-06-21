@@ -41,7 +41,7 @@ class Swipercont extends Component {
 
     render() {
 
-      let {width,height,datalist} = this.props
+      let {width,height,datalist,programArrIndex} = this.props
 
 
 
@@ -64,7 +64,7 @@ class Swipercont extends Component {
  
         return (
           
-        <div className="swiper-container Plugin" ref="container" style={swipeStyle} data-styleId={this.state.styleId}>
+        <div className="swiper-container Plugin" ref="container" style={swipeStyle} data-styleId={this.state.styleId} programArrIndex={programArrIndex}>
           <div className="swiper-wrapper">
           {
             datalist.map(function (item) {

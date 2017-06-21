@@ -14,6 +14,7 @@ class App extends Component {
         super()
         this.state = { 
            programArr : [],
+           programArrIndex : 0,
            ID : '',
            swiperList:[],
            NPcont:[],
@@ -109,23 +110,27 @@ class App extends Component {
            let programArrList = _this.state.programArr , 
                type = $("#nac").val(),
                width = $("#areaWidth").val(),
-               height = $("#areaHeight").val();
+               height = $("#areaHeight").val(),
+               programArrLength = programArrList.length;
+               _this.setState({
+                programArrIndex: programArrLength      
+              });
+               console.log(_this.state.programArrIndex)
             if(type == 'swiper'){ 
-         
               _this.setState({
-                programArr:programArrList.concat(getSwiper(height,width,_this.state.swiperList,type,_this.state.ID))           
+                programArr:programArrList.concat(getSwiper(height,width,_this.state.swiperList,type,_this.state.programArrIndex))           
               })
 
             }else if(type == 'button'){
               let name = $("#btnName").val(),
                   link = $("#btnLink").val()
                _this.setState({
-                  programArr:programArrList.concat(getBtn (height,width,_this.state.swiperList,link,_this.state.ID,type))
+                  programArr:programArrList.concat(getBtn (height,width,_this.state.swiperList,link,_this.state.ID,type,_this.state.programArrIndex))
               })
             }else if(type == 'cont'){
               ($("#conts").val()!='') && (_this.setState({sourceType : [].concat(0)}));
                _this.setState({
-                 programArr:programArrList.concat(getCont(height,width,$("#conts").val(),_this.state.swiperList,_this.state.sourceType,_this.state.ID))
+                 programArr:programArrList.concat(getCont(height,width,$("#conts").val(),_this.state.swiperList,_this.state.sourceType,_this.state.ID,_this.state.programArrIndex))
               
                 
               })
@@ -166,10 +171,6 @@ class App extends Component {
           }
         })
  
- 
-     
-
-
 
 //模板
         $('.newmodel.modal').modal('attach events','.newmodel','show').modal({
@@ -230,11 +231,11 @@ class App extends Component {
                 datas.height =pergramHight;
                 datas.width =pergramWidth;
                 datas.name =pergramName;
-                datas.bgimg = programBg;
+                datas.bgPath = programBg;
 
                 utils.ajax({url: '/api/creatProgram',data:datas}).then(re => {
                    
-                  _this.setState({ID:re[0].ID})
+                  _this.setState({ID:re.ID})
                 })
 
    
@@ -264,7 +265,6 @@ class App extends Component {
               
               let datas = {}
               datas.style = obj.eq(i).attr("style")
-              datas.styleId = obj.eq(i).attr("data-styleId")
               //把这个style直接存放进db中
               console.log(datas.style)
                utils.ajax({url: '/api/saveProgram',data:datas}).then(re => {
@@ -730,19 +730,19 @@ export default App
 
 
 
-function getSwiper (hei,wid,datalist,type,ID){
-  return  <Swipercont height={hei} width={wid} ID={ID} datalist={datalist} type="4"/>
+function getSwiper (hei,wid,datalist,type,programArrIndex){
+  return  <Swipercont height={hei} width={wid} datalist={datalist} type="4" programArrIndex={programArrIndex}/>
   
 } 
 
-function getBtn (hei,wid,bg,href,ID,type){
+function getBtn (hei,wid,bg,href,ID,type,programArrIndex){
 
-  return  <Btn height={hei} width={wid} bg={bg} href={href} ID={ID} type="5"/>
+  return  <Btn height={hei} width={wid} bg={bg} href={href} ID={ID} type="5" programArrIndex={programArrIndex}/>
   
 } 
 
-function getCont (hei,wid,cont,path,type,ID){
-  return  <Cont height={hei} width={wid} cont={cont} path={path} type={type} ID={ID}/>
+function getCont (hei,wid,cont,path,type,ID,programArrIndex){
+  return  <Cont height={hei} width={wid} cont={cont} path={path} type={type} ID={ID} programArrIndex={programArrIndex}/>
   
 } 
 
