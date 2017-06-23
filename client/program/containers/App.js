@@ -21,10 +21,9 @@ class App extends Component {
            sourceType:[],
            programList : []
         
-        } 
-
+        }
+        this.removeProgrameItems = this.removeProgrameItems.bind(this)
         this.showProgram = this.showProgram.bind(this)
-        
 
     }
     
@@ -115,7 +114,6 @@ class App extends Component {
                _this.setState({
                 programArrIndex: programArrLength      
               });
-               console.log(_this.state.programArrIndex)
             if(type == 'swiper'){ 
               _this.setState({
                 programArr:programArrList.concat(getSwiper(height,width,_this.state.swiperList,type,_this.state.programArrIndex))           
@@ -125,7 +123,7 @@ class App extends Component {
               let name = $("#btnName").val(),
                   link = $("#btnLink").val()
                _this.setState({
-                  programArr:programArrList.concat(getBtn (height,width,_this.state.swiperList,link,_this.state.ID,type,_this.state.programArrIndex))
+                  programArr:programArrList.concat(getBtn (height,width,_this.state.swiperList,link,_this.state.ID,type,_this.state.programArrIndex,_this.removeProgrameItems))
               })
             }else if(type == 'cont'){
               ($("#conts").val()!='') && (_this.setState({sourceType : [].concat(0)}));
@@ -181,7 +179,6 @@ class App extends Component {
 //页面列表
 
        utils.ajax({url: '/api/programList'}).then(re => {
-              
           _this.setState({programList:re})
         })
 
@@ -332,7 +329,16 @@ class App extends Component {
  
       
     }
- 
+    removeProgrameItems(){
+      let index = this.state.programArrIndex;
+      console.log(this.bind(this))
+      // let programArrList = this.state.programArr;
+      // programArrList.splice(index,1);
+      // this.setState({
+      //   programArr:programArrList
+      // });
+    }
+
     showProgram(id){
       //展示对应节目
 
@@ -735,9 +741,9 @@ function getSwiper (hei,wid,datalist,type,programArrIndex){
   
 } 
 
-function getBtn (hei,wid,bg,href,ID,type,programArrIndex){
+function getBtn (hei,wid,bg,href,ID,type,programArrIndex,removeProgrameItems){
 
-  return  <Btn height={hei} width={wid} bg={bg} href={href} ID={ID} type="5" programArrIndex={programArrIndex}/>
+  return  <Btn height={hei} width={wid} bg={bg} href={href} ID={ID} type="5" programArrIndex={programArrIndex} removeProgrameItems={removeProgrameItems}/>
   
 } 
 
