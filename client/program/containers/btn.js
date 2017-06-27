@@ -1,6 +1,5 @@
 import React, {Component} from 'react' 
 import utils from '../../shared/utils'
-
 class btn extends Component {
     constructor() {
         super()
@@ -12,9 +11,7 @@ class btn extends Component {
     componentDidMount() {
 
        let _this = this
-
       utils.ajax({url: '/api/savePlugin',data:this.props}).then(re => {
- 
         _this.setState({styleId : re[0].ID})
       })
         
@@ -28,7 +25,6 @@ class btn extends Component {
     }
 
     render() {
-
       let {width,height,bg,href,ID,programArrIndex,removeProgrameItems,programArr} = this.props;
 
       let btnStyle = {  
@@ -65,7 +61,7 @@ class btn extends Component {
           
           <div  className='Plugin' style={area} data-styleId={this.state.styleId} data-programArrIndex={programArrIndex} onMouseOver={this.showClose.bind(this)} onMouseOut={this.hideClose.bind(this)}>
             <a href={href} style={btnStyle}></a>
-            <div class="close" style={closeStyle} onClick={this.props.removeProgrameItems}>X</div>
+            <div class="close" style={closeStyle} onClick={this.props.removeProgrameItems.bind(this)}>X</div>
           </div>        
         )
     }

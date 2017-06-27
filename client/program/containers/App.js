@@ -28,15 +28,15 @@ class App extends Component {
     }
     
     componentDidMount() {
-      let _this = this
+    let _this = this
 //下拉框效果
-      $('.menu .item').tab()
+    $('.menu .item').tab()
 
 //创建新交互区
-      $("#newswiper").hide()
-      $(".ptcont").hide()
-      $(".swiperList").show()
-      $('.selection.nac.dropdown')
+    $("#newswiper").hide()
+    $(".ptcont").hide()
+    $(".swiperList").show()
+    $('.selection.nac.dropdown')
         .dropdown({
           allowReselection: true,//即使用户选择的值与当前所选值匹配，也会触发onChange。
           onChange: function(value) {  
@@ -185,11 +185,9 @@ class App extends Component {
         $('.pagelist.modal').modal('attach events','button.pagelist','show');
 
  
-       $('.coupled.modal')
-        .modal({
+       $('.coupled.modal').modal({
           allowMultiple: true
-        })
-      ;
+        });
       // open second modal on first modal buttons
       $('.fileList1.modal').modal('attach events', '.newPergram.modal .button.add').modal({
           onHidden: function(){
@@ -245,9 +243,6 @@ class App extends Component {
               'background-position': 'center center'
 
             })
-    
-       
-
           }
         })
 
@@ -324,22 +319,21 @@ class App extends Component {
               })
             }
           }
-        })
-      
- 
-      
-    }
-    removeProgrameItems(){
-      let index = this.state.programArrIndex;
-      console.log(this.bind(this))
-      // let programArrList = this.state.programArr;
-      // programArrList.splice(index,1);
-      // this.setState({
-      //   programArr:programArrList
-      // });
+        })    
     }
 
-    showProgram(id){
+    removeProgrameItems(e) {
+      // let index = this.state.programArrIndex;
+      // console.log(this.state.programArr)
+      let index = e.target.parentNode.getAttribute("data-programarrindex");
+      let programArrList = this.state.programArr;
+      programArrList.splice(index,1);
+      this.setState({
+        programArr:programArrList
+      })
+    }
+
+    showProgram(id) {
       //展示对应节目
 
       $('.pagelist.modal').modal('hide')
@@ -354,7 +348,7 @@ class App extends Component {
       })
     }
 
-     delProgram(id){
+     delProgram(id) {
 
        $('.pagelist.modal').modal('hide')
  
@@ -363,9 +357,6 @@ class App extends Component {
       utils.ajax({url: '/api/componentListDel',data:datas}).then(re => { })
 
      }
-
-
-
 
     render() {
  
