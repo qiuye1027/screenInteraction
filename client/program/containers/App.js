@@ -116,7 +116,7 @@ class App extends Component {
               });
             if(type == 'swiper'){ 
               _this.setState({
-                programArr:programArrList.concat(getSwiper(height,width,_this.state.swiperList,type,_this.state.programArrIndex))           
+                programArr:programArrList.concat(getSwiper(height,width,_this.state.swiperList,type,_this.state.programArrIndex,_this.removeProgrameItems))           
               })
 
             }else if(type == 'button'){
@@ -128,7 +128,7 @@ class App extends Component {
             }else if(type == 'cont'){
               ($("#conts").val()!='') && (_this.setState({sourceType : [].concat(0)}));
                _this.setState({
-                 programArr:programArrList.concat(getCont(height,width,$("#conts").val(),_this.state.swiperList,_this.state.sourceType,_this.state.ID,_this.state.programArrIndex))
+                 programArr:programArrList.concat(getCont(height,width,$("#conts").val(),_this.state.swiperList,_this.state.sourceType,_this.state.ID,_this.state.programArrIndex,_this.removeProgrameItems))
               
                 
               })
@@ -324,10 +324,16 @@ class App extends Component {
 
     removeProgrameItems(e) {
       // let index = this.state.programArrIndex;
-      // console.log(this.state.programArr)
+       
+      
       let index = e.target.parentNode.getAttribute("data-programarrindex");
-      let programArrList = this.state.programArr;
-      programArrList.splice(index,1);
+      let programArrList = [];
+      for(let i of this.state.programArr){
+        if(i.props.programArrIndex != index){
+          programArrList.push(i)
+        }
+      }
+       
       this.setState({
         programArr:programArrList
       })
@@ -727,8 +733,9 @@ export default App
 
 
 
-function getSwiper (hei,wid,datalist,type,programArrIndex){
-  return  <Swipercont height={hei} width={wid} datalist={datalist} type="4" programArrIndex={programArrIndex}/>
+function getSwiper (hei,wid,datalist,type,programArrIndex,removeProgrameItems){
+  console.log(programArrIndex)
+  return  <Swipercont height={hei} width={wid} datalist={datalist} type="4" programArrIndex={programArrIndex} removeProgrameItems={removeProgrameItems}/>
   
 } 
 
@@ -738,8 +745,8 @@ function getBtn (hei,wid,bg,href,ID,type,programArrIndex,removeProgrameItems){
   
 } 
 
-function getCont (hei,wid,cont,path,type,ID,programArrIndex){
-  return  <Cont height={hei} width={wid} cont={cont} path={path} type={type} ID={ID} programArrIndex={programArrIndex}/>
+function getCont (hei,wid,cont,path,type,ID,programArrIndex,removeProgrameItems){
+  return  <Cont height={hei} width={wid} cont={cont} path={path} type={type} ID={ID} programArrIndex={programArrIndex} removeProgrameItems={removeProgrameItems}/>
   
 } 
 

@@ -7,10 +7,19 @@ class Swipercont extends Component {
     constructor() {
         super()
         this.state = { 
-           styleId : ''
+           styleId : '',
+          DISPLAYS : 'none'
         } 
         
     }
+
+    showClose() {
+      this.setState({DISPLAYS : 'block'})
+    }
+    hideClose() {
+      this.setState({DISPLAYS : 'none'})
+    }
+
     componentDidMount() {
 
       let _this = this
@@ -58,26 +67,39 @@ class Swipercont extends Component {
         top: '50%',
         height: '100%',
         transform: 'translate(-50%,-50%)'
-      }
+      },
+       closeStyle = {
+            'display': this.state.DISPLAYS,
+            'width': '15px',
+            'height': '15px',
+            'color': '#db2828',
+            'position': 'absolute',
+            'right': '-14px',
+            'top': '-5px',
+            'cursor': 'pointer',
+            'fontSize': '12px'
+        }
  
 
  
         return (
-          
-        <div className="swiper-container Plugin" ref="container" style={swipeStyle} data-styleId={this.state.styleId} programArrIndex={programArrIndex}>
-          <div className="swiper-wrapper">
-          {
-            datalist.map(function (item) {
-                return (
-                   <div className="swiper-slide"><img src={item}  style={imgstyle}/></div>
-                )})
-          }
-            
-            
-          </div>
-          <div className="swiper-pagination"></div>
-   
-        </div>      
+         <div className=" Plugin" style={swipeStyle} data-styleId={this.state.styleId} data-programArrIndex={programArrIndex} onMouseOver={this.showClose.bind(this)} onMouseOut={this.hideClose.bind(this)}>   
+          <div className="swiper-container " ref="container" >
+            <div className="swiper-wrapper">
+            {
+              datalist.map(function (item) {
+                  return (
+                     <div className="swiper-slide"><img src={item}  style={imgstyle}/></div>
+                  )})
+            }
+              
+              
+            </div>
+            <div className="swiper-pagination"></div>
+           
+          </div>   
+           <div style={closeStyle} onClick={this.props.removeProgrameItems.bind(this)}>X</div>
+        </div>    
         )
     }
 }

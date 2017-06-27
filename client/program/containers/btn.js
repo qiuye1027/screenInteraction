@@ -61,7 +61,7 @@ class btn extends Component {
           
           <div  className='Plugin' style={area} data-styleId={this.state.styleId} data-programArrIndex={programArrIndex} onMouseOver={this.showClose.bind(this)} onMouseOut={this.hideClose.bind(this)}>
             <a href={href} style={btnStyle}></a>
-            <div class="close" style={closeStyle} onClick={this.props.removeProgrameItems.bind(this)}>X</div>
+            <div style={closeStyle} onClick={this.props.removeProgrameItems.bind(this)}>X</div>
           </div>        
         )
     }

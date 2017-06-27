@@ -5,7 +5,8 @@ class btn extends Component {
     constructor() {
         super()
          this.state = { 
-           styleId : ''
+           styleId : '',
+           DISPLAYS : 'none'
         } 
     }
     componentDidMount() {
@@ -16,17 +17,34 @@ class btn extends Component {
         _this.setState({styleId : re[0].ID})
       })
     }
+     showClose() {
+      this.setState({DISPLAYS : 'block'})
+    }
+    hideClose() {
+      this.setState({DISPLAYS : 'none'})
+    }
     render() {
 
-      let {width,height,cont,path,type,ID,programArrIndex} = this.props,
+      let {width,height,cont,path,type,ID,programArrIndex,removeProgrameItems} = this.props,
           Style = {  
             width:width + 'px',  
             height:height + 'px', 
-            overflow:'auto'  ,
+           
             position:'absolute',
             top:10,
             left:10 
           },
+           closeStyle = {
+            'display': this.state.DISPLAYS,
+            'width': '15px',
+            'height': '15px',
+            'color': '#db2828',
+            'position': 'absolute',
+            'right': '-10px',
+            
+            'cursor': 'pointer',
+            'fontSize': '12px'
+        },
           eleStyle = {
             width:'100%', 
             position:'absolute',
@@ -34,10 +52,13 @@ class btn extends Component {
             top:'50%',
             transform:'translate(-50%,-50%)'
           };
+
+          
           return(
-            <div style={Style} className='Plugin'  data-styleId={this.state.styleId} programArrIndex={programArrIndex}>
+            <div style={Style} className='Plugin'  data-styleId={this.state.styleId} data-programArrIndex={programArrIndex} onMouseOver={this.showClose.bind(this)} onMouseOut={this.hideClose.bind(this)}>
               {!({type}['type'][0]) ? <div></div> : <VideoEle type={type} path={path} style={eleStyle} />}
               <p>{cont}</p>
+              <div  style={closeStyle} onClick={this.props.removeProgrameItems.bind(this)}>X</div>
             </div>
           )
     }
