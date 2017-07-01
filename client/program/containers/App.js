@@ -348,10 +348,47 @@ class App extends Component {
       datas.id = id
  
       utils.ajax({url: '/api/componentList',data:datas}).then(re => {
-            
- 
+        this.setState({programArr:[]})
+        let programArrList = []
 
-      })
+        for(let i of re){
+          let positionJson = eval('(' + i.position + ')')  ,stylesJson = eval('(' + i.style + ')') 
+          
+          if(i.type == 4){
+
+
+            this.setState({
+              programArr:programArrList.concat(getSwiper(stylesJson.height,stylesJson.width,stylesJson.datalist,stylesJson.type,positionJson.styleId,this.removeProgrameItems))           
+            })
+
+          }else if(i.type == 5){
+        //    _this.setState({
+        //       programArr:programArrList.concat(getBtn (height,width,_this.state.swiperList,link,_this.state.ID,type,_this.state.programArrIndex,_this.removeProgrameItems))
+        //   })
+          }else{
+        //    _this.setState({
+        //      programArr:programArrList.concat(getCont(height,width,$("#conts").val(),_this.state.swiperList,_this.state.sourceType,_this.state.ID,_this.state.programArrIndex,_this.removeProgrameItems))
+        //   })
+          }
+        }
+         $( ".Plugin" ).draggable({ 
+              containment: ".App__programArea__1KiBa8n0", 
+              scroll: false ,
+              stack: ".Plugin",
+
+              
+              stop: function(e,ui) { 
+                // console.log(ui.position);
+                // console.log(e)
+                // console.log(e.delegateTarget.location.origin)
+                // console.log($( ".Plugin" ).css('z-index'))
+              }
+
+
+            });   
+       
+
+      })      
     }
 
      delProgram(id) {
@@ -734,8 +771,8 @@ export default App
 
 
 function getSwiper (hei,wid,datalist,type,programArrIndex,removeProgrameItems){
-  console.log(programArrIndex)
-  return  <Swipercont height={hei} width={wid} datalist={datalist} type="4" programArrIndex={programArrIndex} removeProgrameItems={removeProgrameItems}/>
+  
+  return  <Swipercont height={hei} key={2} width={wid} datalist={datalist} type="4" programArrIndex={programArrIndex} removeProgrameItems={removeProgrameItems}/>
   
 } 
 
