@@ -16,33 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `user`
+-- Table structure for table `rights`
 --
 
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `rights`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user` (
-  `id` int(255) NOT NULL COMMENT '用户id\n',
-  `username` varchar(255) NOT NULL COMMENT '请问他人',
-  `password` varchar(32) NOT NULL,
-  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT ' 我的',
-  `effective_time` int(255) DEFAULT NULL COMMENT '有效时间（天）',
-  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
-  `father_id` int(255) DEFAULT NULL COMMENT '所属上级id',
-  `is_active` int(11) DEFAULT '0' COMMENT '是否激活（0:未激活；1:已激活）',
+CREATE TABLE `rights` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `rights_name` varchar(255) NOT NULL COMMENT '权限名',
+  `user_name` varchar(255) DEFAULT NULL COMMENT '用户名',
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='瓦儿歌 v';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='权限表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `rights`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'qiuye','123456','2017-04-26 09:14:11',45,'测试好了，超级管理员',NULL,1);
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+LOCK TABLES `rights` WRITE;
+/*!40000 ALTER TABLE `rights` DISABLE KEYS */;
+/*!40000 ALTER TABLE `rights` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

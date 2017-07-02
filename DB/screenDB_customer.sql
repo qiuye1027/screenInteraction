@@ -16,33 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `user`
+-- Table structure for table `customer`
 --
 
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `customer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user` (
-  `id` int(255) NOT NULL COMMENT '用户id\n',
-  `username` varchar(255) NOT NULL COMMENT '请问他人',
-  `password` varchar(32) NOT NULL,
-  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT ' 我的',
-  `effective_time` int(255) DEFAULT NULL COMMENT '有效时间（天）',
-  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
-  `father_id` int(255) DEFAULT NULL COMMENT '所属上级id',
-  `is_active` int(11) DEFAULT '0' COMMENT '是否激活（0:未激活；1:已激活）',
+CREATE TABLE `customer` (
+  `id` int(255) NOT NULL,
+  `organization_name` varchar(255) NOT NULL COMMENT '组织名',
+  `level` int(11) DEFAULT NULL COMMENT '产品级别（1:显示；2:互动；3:同步）',
+  `screen_level` int(11) NOT NULL COMMENT '屏幕级别',
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `number` int(11) DEFAULT NULL COMMENT '可使用终端数',
+  `is_active` int(11) DEFAULT NULL COMMENT '是否激活（0:未激活；1:已激活）',
+  `start_time` datetime DEFAULT NULL COMMENT '使用起始日\n',
+  `end_time` datetime DEFAULT NULL COMMENT '截止日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='瓦儿歌 v';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='客户管理';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `customer`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'qiuye','123456','2017-04-26 09:14:11',45,'测试好了，超级管理员',NULL,1);
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+LOCK TABLES `customer` WRITE;
+/*!40000 ALTER TABLE `customer` DISABLE KEYS */;
+/*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-02 10:56:10
+-- Dump completed on 2017-07-02 10:56:09

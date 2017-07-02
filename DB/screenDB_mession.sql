@@ -16,33 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `user`
+-- Table structure for table `mession`
 --
 
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `mession`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user` (
-  `id` int(255) NOT NULL COMMENT '用户id\n',
-  `username` varchar(255) NOT NULL COMMENT '请问他人',
-  `password` varchar(32) NOT NULL,
-  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT ' 我的',
-  `effective_time` int(255) DEFAULT NULL COMMENT '有效时间（天）',
-  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
-  `father_id` int(255) DEFAULT NULL COMMENT '所属上级id',
-  `is_active` int(11) DEFAULT '0' COMMENT '是否激活（0:未激活；1:已激活）',
+CREATE TABLE `mession` (
+  `id` int(255) NOT NULL,
+  `user_id` varchar(255) NOT NULL COMMENT '所属人id',
+  `name` varchar(255) DEFAULT NULL COMMENT '任务名',
+  `is_allow` int(11) NOT NULL DEFAULT '0' COMMENT '审核状态（0:未审核；1:已审核）',
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='瓦儿歌 v';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='任务管理表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `mession`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'qiuye','123456','2017-04-26 09:14:11',45,'测试好了，超级管理员',NULL,1);
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+LOCK TABLES `mession` WRITE;
+/*!40000 ALTER TABLE `mession` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mession` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

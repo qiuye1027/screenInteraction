@@ -16,33 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `user`
+-- Table structure for table `sent`
 --
 
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `sent`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user` (
-  `id` int(255) NOT NULL COMMENT '用户id\n',
-  `username` varchar(255) NOT NULL COMMENT '请问他人',
-  `password` varchar(32) NOT NULL,
-  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT ' 我的',
-  `effective_time` int(255) DEFAULT NULL COMMENT '有效时间（天）',
-  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
-  `father_id` int(255) DEFAULT NULL COMMENT '所属上级id',
-  `is_active` int(11) DEFAULT '0' COMMENT '是否激活（0:未激活；1:已激活）',
+CREATE TABLE `sent` (
+  `id` int(255) NOT NULL,
+  `user_id` varchar(255) NOT NULL COMMENT '发送人id',
+  `client_id` varchar(255) DEFAULT NULL COMMENT '发送终端',
+  `result` int(11) NOT NULL COMMENT '发送结果（0:失败；1:成功）',
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='瓦儿歌 v';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='发送管理';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `sent`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'qiuye','123456','2017-04-26 09:14:11',45,'测试好了，超级管理员',NULL,1);
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+LOCK TABLES `sent` WRITE;
+/*!40000 ALTER TABLE `sent` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sent` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
