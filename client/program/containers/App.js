@@ -227,7 +227,7 @@ class App extends Component {
                 datas.height =pergramHight;
                 datas.width =pergramWidth;
                 datas.name =pergramName;
-                datas.bgPath = programBg;
+                datas.bgimg = programBg;
 
                 utils.ajax({url: '/api/creatProgram',data:datas}).then(re => {
                    

@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import styles from '../sass/App'
+import utils from '../../shared/utils'
 
 class SectionMain extends Component {
     constructor() {
@@ -84,32 +85,76 @@ class SectionMain extends Component {
                     start: TOMORROW + 'T09:00:00'
                 }
             ],
-            dayClick: function(date, jsEvent, view) {
+            dayClick: function(date, jsEvent, view) { //点击日历
                 // 日期点击
-                console.log('Clicked on: ' + date.format());
+                // console.log('Clicked on: ' + date.format());
 
-                console.log('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+                // console.log('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
 
-                console.log('Current view: ' + view.name);
+                // console.log('Current view: ' + view.name);
+
+                document.getElementById('startTime').value = date.format().split('T')[1]
+                let days = date.format().split('T')[0]+'T'
 
                 // change the day's background color just for fun
                 //$(this).css('background-color', 'red');
-                $('.newMession.modal').modal('show') ;
+                $('.newMession.modal').modal('show').modal({
+                  closable  : false, 
+                  onHidden : function(){
+                    $(".ui.small.modal").modal("hide")
+                  },
+                  onApprove : function() {
+                    
+                    
+                    let datas = {}
+                    datas.messionName = document.getElementById('messionName').value
+                    datas.startTime = days+document.getElementById('startTime').value
+                    datas.endTime = days+document.getElementById('endTime').value
+                     utils.ajax({url: '/api/messionAdd',data:datas}).then(re => {
+                       
+                    })
+                    
+
+
+                  }
+                })
+
 
             },
-             eventClick: function(calEvent, jsEvent, view) {
+             eventClick: function(calEvent, jsEvent, view) {  //点击任务
                 // 事件点击
                 console.log('Event: ' + calEvent.title);
                 console.log('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
                 console.log('View: ' + view.name);
 
                 // change the border color just for fun
-                $(this).css('border-color', 'red');
-                $('.newMession.modal').modal('show') ;
+                //$(this).css('border-color', 'red');
+
+                 $('.newMession.modal').modal('show').modal({
+                  closable  : false, 
+                  onHidden : function(){
+                    $(".ui.small.modal").modal("hide")
+                  },
+                  onApprove : function() {
+                    
+                    console.log(123)
+                  
+
+
+
+                  }
+                })
 
             }
 
         });
+
+
+
+ 
+
+
+
 
 
     
@@ -131,24 +176,23 @@ class SectionMain extends Component {
                         添加任务
                     </div>
                         <div className="ui form "> 
-                            
-                              <div className="field">
-                                <label>素材名称</label>
-                                <div className="two fields">
-                                 
-                                  <div className="field">
-                                    <input type="time"  />
-                                  </div>
-                                </div>
-                              </div> 
+                            <div className="two fields">
+                                <div className="field">
+                                    <label>任务名称</label>
+                                    <input type="text" name="messionName" id="messionName"/>
+                                </div>  
+                            </div>  
 
-                              <div className="  inline field">
-                                <div className="ui checkbox">
-                                  <input type="checkbox" tabindex="0" name="scshare" value="1"/>
-                                  <label>共享此素材</label>
+                            <div className="two fields">
+                                <div className="field">
+                                  <label>起始时间</label>
+                                  <input type="time" name="startTime" id="startTime" />
                                 </div>
-                              </div> 
-                            
+                                <div className="field">
+                                  <label>结束时间</label>
+                                  <input type="time" name="endTime" id="endTime" />
+                                </div>
+                            </div>  
                         </div>
                     
                     <div className="actions">

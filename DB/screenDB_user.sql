@@ -31,7 +31,8 @@ CREATE TABLE `user` (
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   `father_id` int(255) DEFAULT NULL COMMENT '所属上级id',
   `is_active` int(11) DEFAULT '0' COMMENT '是否激活（0:未激活；1:已激活）',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username_UNIQUE` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='瓦儿歌 v';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-02 10:56:10
+-- Dump completed on 2017-07-04 23:39:48

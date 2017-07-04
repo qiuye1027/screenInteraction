@@ -31,7 +31,7 @@ CREATE TABLE `program` (
   `width` varchar(45) DEFAULT NULL,
   `bgimg` varchar(255) DEFAULT NULL COMMENT '节目背景图片',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COMMENT='节目管理表';
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COMMENT='节目管理表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `program` (
 
 LOCK TABLES `program` WRITE;
 /*!40000 ALTER TABLE `program` DISABLE KEYS */;
-INSERT INTO `program` VALUES (24,'1','test','1233','2017-06-03 13:32:01','1233','fileupload//pic4.jpg'),(25,'1','qwer','1233','2017-06-03 23:44:13','1233','fileupload//pic4.jpg'),(26,'1','qwe1','1233','2017-06-03 23:46:53','1233','fileupload//pic4.jpg'),(27,'1','ads1','1233','2017-06-03 23:51:18','1233','fileupload//pic4.jpg'),(28,'1','test01','1233','2017-06-04 02:39:53','1233','fileupload//pic4.jpg'),(29,'0','zzch','1920','2017-06-04 03:05:28','1080',''),(30,'0','zzch','1920','2017-06-04 03:05:58','1080',''),(31,'0','','1920','2017-06-04 03:17:46','1080','fileupload//红色花纹.png'),(32,'0','zzch','1920','2017-06-04 03:19:54','1080','fileupload//红色花纹.png'),(33,'0','','1920','2017-06-04 03:22:58','1080','fileupload//image/image/image/image/image/红色花纹.png'),(34,'0','test11','1920','2017-06-04 03:23:44','1080','fileupload//红色花纹.png'),(35,'0','','1920','2017-06-04 03:30:10','1080','fileupload//红色花纹.png'),(36,'0','test23','1920','2017-06-04 03:32:19','1020','fileupload//红色花纹.png'),(37,'0','','1080','2017-06-04 03:56:20','1920','fileupload//红色花纹.png');
+INSERT INTO `program` VALUES (25,'1','qwer','1233','2017-06-03 23:44:13','1233','fileupload//pic4.jpg'),(26,'1','qwe1','1233','2017-06-03 23:46:53','1233','fileupload//pic4.jpg'),(27,'1','ads1','1233','2017-06-03 23:51:18','1233','fileupload//pic4.jpg'),(28,'1','test01','1233','2017-06-04 02:39:53','1233','fileupload//pic4.jpg'),(29,'0','zzch','1920','2017-06-04 03:05:28','1080',''),(30,'0','zzch','1920','2017-06-04 03:05:58','1080',''),(31,'0','','1920','2017-06-04 03:17:46','1080','fileupload//红色花纹.png'),(32,'0','zzch','1920','2017-06-04 03:19:54','1080','fileupload//红色花纹.png'),(33,'0','','1920','2017-06-04 03:22:58','1080','fileupload//image/image/image/image/image/红色花纹.png'),(34,'0','test11','1920','2017-06-04 03:23:44','1080','fileupload//红色花纹.png'),(35,'0','','1920','2017-06-04 03:30:10','1080','fileupload//红色花纹.png'),(36,'0','test23','1920','2017-06-04 03:32:19','1020','fileupload//红色花纹.png'),(37,'0','','1080','2017-06-04 03:56:20','1920','fileupload//红色花纹.png'),(38,'1','13e','123','2017-07-03 14:26:34','123','undefined'),(39,'1','asdv','1233','2017-07-03 14:28:00','1233','fileupload//b6d27c5914c09fc3f97a4eef89c696f4.jpg'),(40,'1','123asd','1233','2017-07-03 14:55:11','1233','fileupload//2a9ee7e1cef94d31807fa971dd388518.jpg');
 /*!40000 ALTER TABLE `program` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-02 10:56:09
+-- Dump completed on 2017-07-04 23:39:47
