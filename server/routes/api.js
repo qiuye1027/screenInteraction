@@ -10,6 +10,7 @@ import componentListDel from '../controllers/componentListDel'
 import saveProgram from '../controllers/saveProgram'
 import doLogin from '../controllers/doLogin'
 import messionAdd from '../controllers/messionAdd'
+import messionList from '../controllers/messionList'
 
 const router = new Router()
  //文件上传
@@ -40,7 +41,12 @@ router.post('/saveProgram', saveProgram.save)
 router.post('/doLogin', doLogin.login)
  //判断登录
 router.post('/isLogin', doLogin.isLogin)
-
+//任务添加
 router.post('/messionAdd', messionAdd.add)
-
+//任务列表
+router.post('/messionList', messionList.list)
+//任务详情
+router.post('/messionDetail', messionList.detail)
+//任务更新
+router.post('/messionUpdate', messionList.update)
 export default router
