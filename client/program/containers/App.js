@@ -23,7 +23,7 @@ class  App  extends  Component {
         
         }
         this.removeProgrameItems = this.removeProgrameItems.bind(this)
-        this . show program  =  this . show program . bind ( this )
+        this.showprogram  =  this.showprogram.bind(this)
         this.delProgram = this.delProgram.bind(this)
 
     }
@@ -223,9 +223,9 @@ class  App  extends  Component {
                 programBg = $("#selectFileName1").val(),
                 dates = {};
 
-                dated . height  = pergramHight;
-                dated . width  = pergramWidth;
-                dated . name  = pergramName;
+                dates.height  = pergramHight;
+                dates.width  = pergramWidth;
+                dates.name  = pergramName;
                 datas.bgimg = programBg;
 
                 utils.ajax({url: '/api/creatProgram',data:datas}).then(re => {
