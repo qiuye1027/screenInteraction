@@ -4,7 +4,7 @@ import utils from '../../shared/utils'
 import FileUpload from './fileUpload'
 import Swipercont from './Swipercont'
 import Btn from './btn'
-import  Account  from  ' ./cont '
+import Cont from './cont'
 
 
 
@@ -39,7 +39,7 @@ class  App  extends  Component {
     $(".swiperList").show()
     $('.selection.nac.dropdown')
         .dropdown({
-          allowReselection :  to true , // value with the value currently selected match even if the user selected, will trigger onChange.
+          allowReselection :  true , // value with the value currently selected match even if the user selected, will trigger onChange.
           onChange: function(value) {  
             $("#nac").val(value)
             if(value == 'swiper'){
@@ -192,7 +192,7 @@ class  App  extends  Component {
       // open second modal on first modal buttons
       $('.fileList1.modal').modal('attach events', '.newPergram.modal .button.add').modal({
           onHidden: function(){
-            $ ( " .newPergramCont " .) HTML ( ' ' ). The append ( ' your selected picture is: ' + $ ( " # selectFileName1 " .) Val ())
+            $ ( " .newPergramCont " ).html( '' ).append( ' your selected picture is: ' + $ ( " # selectFileName1 ").val())
             _this.setState({
               NPcont : [].concat($("#selectFileName").val())
             })
@@ -235,8 +235,8 @@ class  App  extends  Component {
 
    
             $("#container").css({
-              ' Height ' : pergramHight;
-              " Width " , pergramWidth;
+              ' Height ' : pergramHight,
+              " Width " : pergramWidth,
               'backgroundImage':'url('+programBg+')',
               'background-repeat': 'no-repeat',
               'background-size': 'cover',
@@ -286,7 +286,7 @@ class  App  extends  Component {
           onHidden: function(){
             if($("#selectFileName2").val()!=''){
               $(".swiperList").html('<a class="item">'+$("#selectFileName2").val()+'<div class="ui horizontal label">删除</div></a>')
-              the let regVideo = / [ A-Za-Z0-9 _ \ - \ U 4e0 0- \ U 9fa5] + . (MP4) ? (OGG) ? (MPEG) ? (AVI) ? (RMVB) ? (RA) ? (RAM) ? (mov) ? (WMV) ? / , // content needs to match 
+              let regVideo = /[A-Za-z0-9_\-\u4e00-\u9fa5]+.(mp4)?(ogg)?(mpeg)?(avi)?(rmvb)?(ra)?(ram)?(mov)?(wmv)?/,//需要匹配的内容
                   sourceVal=$("#selectFileName2").val();
                   (regVideo.test(sourceVal)) && (_this.setState({sourceType : [].concat(1)}))
                   _this.setState({
@@ -339,7 +339,7 @@ class  App  extends  Component {
       })
     }
 
-    show program ( id ) {
+    showprogram ( id ) {
       // display the corresponding program
 
       $('.pagelist.modal').modal('hide')
@@ -391,7 +391,7 @@ class  App  extends  Component {
       })      
     }
 
-     Sub-program ( ID ) {
+     delProgram ( id ) {
 
        $('.pagelist.modal').modal('hide')
 
@@ -430,21 +430,21 @@ class  App  extends  Component {
  
 
         return (
-            <div className="container">
+          <div className="container">
                 <div className="ui buttons teal small">  
                   <a className="ui button saveProgram">保存节目</a>
-                  < A className = " UI Button " > Save program < / A >
+                  <a className="ui button ">另存节目</a>
                   <a className="ui button ">保存模板</a>
-                  < A className = " UI Button " > Load Template < / A >
+                  <a className="ui button ">加载模板</a>
                   <a className="ui button ">模板管理</a>
-                  < A className = " UI Button " > Download single program < / A > 
+                  <a className="ui button ">下载单机节目</a> 
                 </div>
                 <div className={styles.programBtn}>
                     <div className="ui vertical teal buttons">
-                    < Button className = " UI newPergram Button " > New Program < / Button >
+                    <button className="ui button newPergram">新建节目</button>
                       <button className="ui button pagelist">页面列表</button>
                       <button className="ui button newarea">新建交互区域</button>
-                      < The Button className = " ui the Button newmodel " > Create a template < / the Button >
+                      <button className="ui button newmodel">创建模板</button>
                       <button className="ui button perview">预览</button>
                     </div>
                 </div>
@@ -459,16 +459,19 @@ class  App  extends  Component {
                 </div> 
                 
              
-                 
+          
 
-{ / *
-Save the program pop-up box
-  * / }
+ 
+
+
+{/*
+保存节目 弹出框
+  */}
 
                <div className="ui small saveProgram modal transition  " >
                 <div className="header">保存节目</div>
                 <div className="content">
-                  < The p- > Your program will be saved for later viewing < / the p- >
+                  <p>你的节目将被保存，以便日后查看</p>
                 </div>
                 <div className="actions">
                   <div className="ui negative button">取消 </div>
@@ -480,24 +483,25 @@ Save the program pop-up box
  
 
     
-{ / *
-  New interactive pop-up box area
-    * / }
+{/*
+
+  新建交互区域弹出框
+    */}
 
                 <div className="ui fullscreen newareacent modal transition hidden">
                     <i className="close icon"></i>
-                    < Div className = " header " > Locale < / div >
+                    <div className="header">区域设置</div>
                     <div className="contents">
                       <div className="ui form">
                         
                         <div className="field">
-                          < Label > area attribute < / label > 
+                          <label>区域属性</label> 
                           <div className="ui grid">
                               <div className=" three wide column">
-                                < Label > interaction type < / label >
+                                <label>交互类型</label>
                                
                                 <div className="ui dropdown selection nac"> 
-                                  < Div className = " default text " > select < / div >
+                                  <div className="default text">请选择</div>
                                   <span><i className="dropdown icon"></i></span>
                                   
                                   <div className="menu">
@@ -511,13 +515,13 @@ Save the program pop-up box
 
                               </div>
                               <div className=" three wide column">
-                                < Label > width < / label >
+                                <label>宽</label>
                                 <div className="ui small left labeled icon input">  
                                     <input type="number" id="areaWidth" name="areaWidth" /> 
                                 </div>
                               </div>
                               <div className=" three wide column">
-                                < Label > high < / label >
+                                <label>高</label>
                                 <div className="ui small left labeled icon input">  
                                     <input type="number" id="areaHeight" name="areaHeight" /> 
                                 </div>
@@ -528,8 +532,8 @@ Save the program pop-up box
                                 <input type="button" value="添加按钮背景" id="newbtnBg" className="ui small ptcont blue button addbtnBg"/>  
                                 <select className="ui small ptcont blue button addCont">
                                   <option value="0">传文字</option>
-                                  < Option value = " . 1 " > pass the video < / Option >
-                                  < The Option value = " 2 " > transfer pictures < / the Option >
+                                  <option value="1">传视频</option>
+                                  <option value="2">传图片</option>
                                 </select> 
                                 
                               </div> 
@@ -538,7 +542,7 @@ Save the program pop-up box
                             <div className="ui grid btncont ptcont" >
                               
                               <div className=" three wide column">
-                                < Label > link address < / label >
+                                <label>链接地址</label>
                                 <div className="ui small left labeled icon input">  
                                     <input type="text" id="btnLink" name="btnLink" /> 
                                 </div>
@@ -548,7 +552,7 @@ Save the program pop-up box
 
                             <div className="ui grid cont ptcont contItem" >
                               <div className=" three wide column">
-                                < Label > text < / label >
+                                <label>文字内容</label>
                                 <div className="ui small left labeled icon input">  
                                     <textarea id="conts" ></textarea>
                                 </div>
@@ -570,7 +574,7 @@ Save the program pop-up box
                     </div>
                     <div className="actions">
                         <div className="ui small negative button">
-                               cancel
+                               取消
                         </div> 
                           <input type="button" value="创建"  className="ui small positive button"/> 
                     </div>
@@ -578,21 +582,21 @@ Save the program pop-up box
 
 
 
-{ / *
-  Create a template out of the box
-    * / }
+{/*
+  创建模板出框
+    */}
 
                 <div className="ui newmodel modal">
                     
                     <div className="header">
-                        Create a template
+                        模板创建
                     </div>
                         <div className="ui form "> 
                          <div className="field">
-                            < Label > type of template < / label >
+                            <label>模板类型</label>
                              
                               <div className="ui dropdown selection"> 
-                                < Div className = " default text " > button in the interactive area < / div >
+                                <div className="default text">按钮交互区</div>
                                 <span><i className="dropdown icon"></i></span>
                                 
                                 <div className="menu">
@@ -608,15 +612,15 @@ Save the program pop-up box
                           </div> 
                             
                           <div className="field">
-                            < Label > Template Properties < / label >
+                            <label>模板属性</label>
                             <div className="two inline fields">
                              
                               <div className="field">
-                                high
+                                高
                                 <input type="text" name="hight" />
                               </div>
                               <div className="inline field">
-                                width
+                                宽
                                 <input type="text" name="weight" />
                               </div>
                             </div>
@@ -626,70 +630,70 @@ Save the program pop-up box
                     
                     <div className="actions">
                         <div className="ui small negative button">
-                               Do not
+                               不
                         </div> 
                           <input type="button" value="是" className="ui small positive button"/> 
                     </div>
                 </div>
 
-{ / *
-Program list popup
-  * / }
+{/*
+节目列表弹出框
+  */}
                 <div className="ui pagelist modal"> 
                     <div className="header">
-                        Program list
+                        节目列表
                     </div>
                      <div className="ui form "> 
                         <div className="ui middle aligned divided list">
-                          {} PROLIST
+                          {proList}
                         </div>
                     </div> 
                 </div>
 
 
-{ / *
-    New pop-up program
-  * / }
+{/*
+    新建节目弹出框
+  */}
                     
                   <div className="ui newPergram coupled modal transition hidden">
-                      < Div className = " header " > New Program < / div >
+                      <div className="header">新建节目</div>
                       <div className="ui form "> 
                           
                         <div className="field">
                            
                           <div className="two inline fields">
                            <div className="field">
-                              Program Name
+                              节目名称
                               <input type="text" id="programName" />
                             </div>
                             <div className="field">
-                              High (px)
+                              高(px)
                               <input type="number" id="programHight" className="hightq"/>
                             </div>
                             <div className="inline field">
-                              Width (px)
+                              宽(px)
                               <input type="number" id="programWidth" className="widthq" />
                             </div>
                           </div>
                         </div> 
                         <div className="field">
-                          Background picture
+                          背景图片
                           <div className="ui primary button add">添加素材</div> 
                         </div>  
                       </div>
                       <div className="actions">
                         <div className={"newPergramCont "+styles.NPcont}></div>
                           <div className="ui small negative button">
-                                 Do not
+                                 不
                           </div> 
                             <input type="button" value="是" className="ui small positive button"/> 
                       </div>
                     </div>
 
 
-                    { / *
-                      File upload pop-up single file
-                    * / }
+                    {/*
+                      文件上传弹出框 单个文件
+                    */}
 
                     <div className="ui small fileList coupled modal">
                       <div className="header">素材列表</div>
@@ -698,7 +702,7 @@ Program list popup
                       </div>
 
                       <div className="actions"> 
-                        < Div className = { Styles . Chosefile  + ' chosefile ' } > select File < / div >
+                        <div className={styles.chosefile +' chosefile'}>请选择文件</div>
                         <input type="button" value="确定" className="ui small positive button"/> 
                       </div> 
                     </div>
@@ -711,7 +715,7 @@ Program list popup
                       </div>
 
                       <div className="actions"> 
-                        < Div className = { Styles . Chosefile  + ' chosefile ' } > select File < / div >
+                        <div className={styles.chosefile +' chosefile'}>请选择文件</div>
                         <input type="button" value="确定" className="ui small positive button"/> 
                       </div> 
                     </div>
@@ -724,7 +728,7 @@ Program list popup
                       </div>
 
                       <div className="actions"> 
-                        < Div className = { Styles . Chosefile  + ' chosefile ' } > select File < / div >
+                        <div className={styles.chosefile +' chosefile'}>请选择文件</div>
                         <input type="button" value="确定" className="ui small positive button"/> 
                       </div> 
                     </div>
@@ -737,7 +741,7 @@ Program list popup
                       </div>
 
                       <div className="actions"> 
-                        < Div className = { Styles . Chosefile  + ' chosefile ' } > select File < / div >
+                        <div className={styles.chosefile +' chosefile'}>请选择文件</div>
                         <input type="button" value="确定" className="ui small positive button"/> 
                       </div> 
                     </div>
@@ -750,7 +754,7 @@ Program list popup
                       </div>
 
                       <div className="actions"> 
-                        < Div className = { Styles . Chosefile  + ' chosefile ' } > select File < / div >
+                        <div className={styles.chosefile +' chosefile'}>请选择文件</div>
                         <input type="button" value="确定" className="ui small positive button"/> 
                       </div> 
                     </div>
