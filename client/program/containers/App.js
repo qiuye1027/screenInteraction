@@ -4,12 +4,12 @@ import utils from '../../shared/utils'
 import FileUpload from './fileUpload'
 import Swipercont from './Swipercont'
 import Btn from './btn'
-import Cont from './cont'
+import  Account  from  ' ./cont '
 
 
 
  
-class App extends Component {
+class  App  extends  Component {
     constructor() {
         super()
         this.state = { 
@@ -17,28 +17,29 @@ class App extends Component {
            programArrIndex : 0,
            ID : '',
            swiperList:[],
-           NPcont:[],
+           NPcont : [],
            sourceType:[],
            programList : []
         
         }
         this.removeProgrameItems = this.removeProgrameItems.bind(this)
-        this.showProgram = this.showProgram.bind(this)
+        this . show program  =  this . show program . bind ( this )
+        this.delProgram = this.delProgram.bind(this)
 
     }
     
     componentDidMount() {
     let _this = this
-//下拉框效果
+// drop-down box effect
     $('.menu .item').tab()
 
-//创建新交互区
+// Create a new interactive zone
     $("#newswiper").hide()
     $(".ptcont").hide()
     $(".swiperList").show()
     $('.selection.nac.dropdown')
         .dropdown({
-          allowReselection: true,//即使用户选择的值与当前所选值匹配，也会触发onChange。
+          allowReselection :  to true , // value with the value currently selected match even if the user selected, will trigger onChange.
           onChange: function(value) {  
             $("#nac").val(value)
             if(value == 'swiper'){
@@ -85,7 +86,7 @@ class App extends Component {
             }
           }
         })
-        // 初始化新建交互区域，清空数据
+        // initialize a new interactive area, clearing the data
         $('.newareacent.modal').modal({
           onShow : function(){
             $(".swiperList").html('');
@@ -112,7 +113,7 @@ class App extends Component {
                height = $("#areaHeight").val(),
                programArrLength = programArrList.length;
                _this.setState({
-                programArrIndex: programArrLength      
+                programArrIndex : programArrLength      
               });
             if(type == 'swiper'){ 
               _this.setState({
@@ -135,7 +136,7 @@ class App extends Component {
             }
             
              $( ".Plugin" ).draggable({ 
-              containment: ".App__programArea__1KiBa8n0", 
+              containment :  " .App__programArea__1KiBa8n0 " ,
               scroll: false ,
               stack: ".Plugin",
 
@@ -150,9 +151,9 @@ class App extends Component {
 
             });
 
-            //可拖拽
+            // draggable
             $( ".App__swipercont__On3D7KLV" ).draggable({ 
-              containment: ".App__programArea__1KiBa8n0", 
+              containment :  " .App__programArea__1KiBa8n0 " ,
               scroll: false ,
               stack: ".App__swipercont__On3D7KLV",
 
@@ -170,13 +171,13 @@ class App extends Component {
         })
  
 
-//模板
+// template
         $('.newmodel.modal').modal('attach events','.newmodel','show').modal({
           onApprove:function(){
-            alert("创建模板成功")
+            Alert ( " Creating a successful template " )
           }
         });
-//页面列表
+// Page List
 
        utils.ajax({url: '/api/programList'}).then(re => {
           _this.setState({programList:re})
@@ -191,15 +192,15 @@ class App extends Component {
       // open second modal on first modal buttons
       $('.fileList1.modal').modal('attach events', '.newPergram.modal .button.add').modal({
           onHidden: function(){
-            $(".newPergramCont").html('').append('你选择的图片为：'+$("#selectFileName1").val())
+            $ ( " .newPergramCont " .) HTML ( ' ' ). The append ( ' your selected picture is: ' + $ ( " # selectFileName1 " .) Val ())
             _this.setState({
               NPcont : [].concat($("#selectFileName").val())
             })
           }
         })
       
-//创建新节目
-// 初始化新建节目弹出窗，清空数据
+// Create a new program
+// initialize the new program pop-up windows, clear data
         $('.newPergram.modal').modal({
           onShow : function(){
             $(".newPergramCont").html("");
@@ -218,15 +219,15 @@ class App extends Component {
           onApprove : function() {
             let pergramHight = $(this).find(".hightq").val(),
                 pergramWidth = $(this).find(".widthq").val(),
-                pergramName = $("#programName").val(),
+                pergramName =  $ ( " #programName " ). val ();
                 programBg = $("#selectFileName1").val(),
-                datas = {}; 
+                dates = {};
 
 
-                datas.height =pergramHight;
-                datas.width =pergramWidth;
-                datas.name =pergramName;
-                datas.bgPath = programBg;
+                dated . height  = pergramHight;
+                dated . width  = pergramWidth;
+                dated . name  = pergramName;
+                datas.bgimg = programBg;
 
                 utils.ajax({url: '/api/creatProgram',data:datas}).then(re => {
                    
@@ -235,8 +236,8 @@ class App extends Component {
 
    
             $("#container").css({
-              'height':pergramHight,
-              'width':pergramWidth,
+              ' Height ' : pergramHight;
+              " Width " , pergramWidth;
               'backgroundImage':'url('+programBg+')',
               'background-repeat': 'no-repeat',
               'background-size': 'cover',
@@ -246,7 +247,7 @@ class App extends Component {
           }
         })
 
-// 保存节目
+// Save program
         $('.saveProgram.modal').modal('attach events', '.button.saveProgram','show').modal({
           closable  : false, 
           onApprove : function() {
@@ -257,7 +258,7 @@ class App extends Component {
               
               let datas = {}
               datas.style = obj.eq(i).attr("style")
-              //把这个style直接存放进db中
+              // this style is directly deposited into the db
               console.log(datas.style)
                utils.ajax({url: '/api/saveProgram',data:datas}).then(re => {
                })
@@ -286,7 +287,7 @@ class App extends Component {
           onHidden: function(){
             if($("#selectFileName2").val()!=''){
               $(".swiperList").html('<a class="item">'+$("#selectFileName2").val()+'<div class="ui horizontal label">删除</div></a>')
-              let regVideo = /[A-Za-z0-9_\-\u4e00-\u9fa5]+.(mp4)?(ogg)?(mpeg)?(avi)?(rmvb)?(ra)?(ram)?(mov)?(wmv)?/,//需要匹配的内容
+              the let regVideo = / [ A-Za-Z0-9 _ \ - \ U 4e0 0- \ U 9fa5] + . (MP4) ? (OGG) ? (MPEG) ? (AVI) ? (RMVB) ? (RA) ? (RAM) ? (mov) ? (WMV) ? / , // content needs to match 
                   sourceVal=$("#selectFileName2").val();
                   (regVideo.test(sourceVal)) && (_this.setState({sourceType : [].concat(1)}))
                   _this.setState({
@@ -335,12 +336,12 @@ class App extends Component {
       }
        
       this.setState({
-        programArr:programArrList
+        programArr : programArrList
       })
     }
 
-    showProgram(id) {
-      //展示对应节目
+    show program ( id ) {
+      // display the corresponding program
 
       $('.pagelist.modal').modal('hide')
 
@@ -364,15 +365,15 @@ class App extends Component {
           }else if(i.type == 5){
         //    _this.setState({
         //       programArr:programArrList.concat(getBtn (height,width,_this.state.swiperList,link,_this.state.ID,type,_this.state.programArrIndex,_this.removeProgrameItems))
-        //   })
+        //    })
           }else{
         //    _this.setState({
         //      programArr:programArrList.concat(getCont(height,width,$("#conts").val(),_this.state.swiperList,_this.state.sourceType,_this.state.ID,_this.state.programArrIndex,_this.removeProgrameItems))
-        //   })
+        //    })
           }
         }
          $( ".Plugin" ).draggable({ 
-              containment: ".App__programArea__1KiBa8n0", 
+              containment :  " .App__programArea__1KiBa8n0 " ,
               scroll: false ,
               stack: ".Plugin",
 
@@ -391,13 +392,20 @@ class App extends Component {
       })      
     }
 
-     delProgram(id) {
+     Sub-program ( ID ) {
 
        $('.pagelist.modal').modal('hide')
+
+        
  
-      let datas = {}
+      let datas = {},_this = this;
       datas.id = id 
-      utils.ajax({url: '/api/componentListDel',data:datas}).then(re => { })
+      utils.ajax({url: '/api/componentListDel',data:datas}).then(re => { 
+        utils.ajax({url: '/api/programList'}).then(re => {
+          _this.setState({programList:re})
+        })
+
+      })
 
      }
 
@@ -412,7 +420,7 @@ class App extends Component {
           return (
             <div className="item" key={item.id}>
               <div className="right floated content">
-                <div className="ui button tiny" onClick={_this.delProgram.bind(this,item.id)}  >删除</div>
+                <div className="ui button tiny" onClick={_this.delProgram.bind(_this,item.id)}  >删除</div>
               </div> 
               <a className="header" onClick={_this.showProgram.bind(this,item.id)} data-id={item.id}>{item.name}</a>
             </div>
@@ -426,18 +434,18 @@ class App extends Component {
             <div className="container">
                 <div className="ui buttons teal small">  
                   <a className="ui button saveProgram">保存节目</a>
-                  <a className="ui button ">另存节目</a>
+                  < A className = " UI Button " > Save program < / A >
                   <a className="ui button ">保存模板</a>
-                  <a className="ui button ">加载模板</a>
+                  < A className = " UI Button " > Load Template < / A >
                   <a className="ui button ">模板管理</a>
-                  <a className="ui button ">下载单机节目</a> 
+                  < A className = " UI Button " > Download single program < / A > 
                 </div>
                 <div className={styles.programBtn}>
                     <div className="ui vertical teal buttons">
-                    <button className="ui button newPergram">新建节目</button>
+                    < Button className = " UI newPergram Button " > New Program < / Button >
                       <button className="ui button pagelist">页面列表</button>
                       <button className="ui button newarea">新建交互区域</button>
-                      <button className="ui button newmodel">创建模板</button>
+                      < The Button className = " ui the Button newmodel " > Create a template < / the Button >
                       <button className="ui button perview">预览</button>
                     </div>
                 </div>
@@ -454,14 +462,14 @@ class App extends Component {
              
                  
 
-{/*
-保存节目 弹出框
-  */}
+{ / *
+Save the program pop-up box
+  * / }
 
                <div className="ui small saveProgram modal transition  " >
                 <div className="header">保存节目</div>
                 <div className="content">
-                  <p>你的节目将被保存，以便日后查看</p>
+                  < The p- > Your program will be saved for later viewing < / the p- >
                 </div>
                 <div className="actions">
                   <div className="ui negative button">取消 </div>
@@ -473,25 +481,24 @@ class App extends Component {
  
 
     
-{/*
-
-  新建交互区域弹出框
-    */}
+{ / *
+  New interactive pop-up box area
+    * / }
 
                 <div className="ui fullscreen newareacent modal transition hidden">
                     <i className="close icon"></i>
-                    <div className="header">区域设置</div>
+                    < Div className = " header " > Locale < / div >
                     <div className="contents">
                       <div className="ui form">
                         
                         <div className="field">
-                          <label>区域属性</label> 
+                          < Label > area attribute < / label > 
                           <div className="ui grid">
                               <div className=" three wide column">
-                                <label>交互类型</label>
+                                < Label > interaction type < / label >
                                
                                 <div className="ui dropdown selection nac"> 
-                                  <div className="default text">请选择</div>
+                                  < Div className = " default text " > select < / div >
                                   <span><i className="dropdown icon"></i></span>
                                   
                                   <div className="menu">
@@ -505,13 +512,13 @@ class App extends Component {
 
                               </div>
                               <div className=" three wide column">
-                                <label>宽</label>
+                                < Label > width < / label >
                                 <div className="ui small left labeled icon input">  
                                     <input type="number" id="areaWidth" name="areaWidth" /> 
                                 </div>
                               </div>
                               <div className=" three wide column">
-                                <label>高</label>
+                                < Label > high < / label >
                                 <div className="ui small left labeled icon input">  
                                     <input type="number" id="areaHeight" name="areaHeight" /> 
                                 </div>
@@ -522,8 +529,8 @@ class App extends Component {
                                 <input type="button" value="添加按钮背景" id="newbtnBg" className="ui small ptcont blue button addbtnBg"/>  
                                 <select className="ui small ptcont blue button addCont">
                                   <option value="0">传文字</option>
-                                  <option value="1">传视频</option>
-                                  <option value="2">传图片</option>
+                                  < Option value = " . 1 " > pass the video < / Option >
+                                  < The Option value = " 2 " > transfer pictures < / the Option >
                                 </select> 
                                 
                               </div> 
@@ -532,7 +539,7 @@ class App extends Component {
                             <div className="ui grid btncont ptcont" >
                               
                               <div className=" three wide column">
-                                <label>链接地址</label>
+                                < Label > link address < / label >
                                 <div className="ui small left labeled icon input">  
                                     <input type="text" id="btnLink" name="btnLink" /> 
                                 </div>
@@ -542,7 +549,7 @@ class App extends Component {
 
                             <div className="ui grid cont ptcont contItem" >
                               <div className=" three wide column">
-                                <label>文字内容</label>
+                                < Label > text < / label >
                                 <div className="ui small left labeled icon input">  
                                     <textarea id="conts" ></textarea>
                                 </div>
@@ -564,7 +571,7 @@ class App extends Component {
                     </div>
                     <div className="actions">
                         <div className="ui small negative button">
-                               取消
+                               cancel
                         </div> 
                           <input type="button" value="创建"  className="ui small positive button"/> 
                     </div>
@@ -572,21 +579,21 @@ class App extends Component {
 
 
 
-{/*
-  创建模板出框
-    */}
+{ / *
+  Create a template out of the box
+    * / }
 
                 <div className="ui newmodel modal">
                     
                     <div className="header">
-                        模板创建
+                        Create a template
                     </div>
                         <div className="ui form "> 
                          <div className="field">
-                            <label>模板类型</label>
+                            < Label > type of template < / label >
                              
                               <div className="ui dropdown selection"> 
-                                <div className="default text">按钮交互区</div>
+                                < Div className = " default text " > button in the interactive area < / div >
                                 <span><i className="dropdown icon"></i></span>
                                 
                                 <div className="menu">
@@ -602,15 +609,15 @@ class App extends Component {
                           </div> 
                             
                           <div className="field">
-                            <label>模板属性</label>
+                            < Label > Template Properties < / label >
                             <div className="two inline fields">
                              
                               <div className="field">
-                                高
+                                high
                                 <input type="text" name="hight" />
                               </div>
                               <div className="inline field">
-                                宽
+                                width
                                 <input type="text" name="weight" />
                               </div>
                             </div>
@@ -620,70 +627,70 @@ class App extends Component {
                     
                     <div className="actions">
                         <div className="ui small negative button">
-                               不
+                               Do not
                         </div> 
                           <input type="button" value="是" className="ui small positive button"/> 
                     </div>
                 </div>
 
-{/*
-节目列表弹出框
-  */}
+{ / *
+Program list popup
+  * / }
                 <div className="ui pagelist modal"> 
                     <div className="header">
-                        节目列表
+                        Program list
                     </div>
                      <div className="ui form "> 
                         <div className="ui middle aligned divided list">
-                          {proList}
+                          {} PROLIST
                         </div>
                     </div> 
                 </div>
 
 
-{/*
-    新建节目弹出框
-  */}
+{ / *
+    New pop-up program
+  * / }
                     
                   <div className="ui newPergram coupled modal transition hidden">
-                      <div className="header">新建节目</div>
+                      < Div className = " header " > New Program < / div >
                       <div className="ui form "> 
                           
                         <div className="field">
                            
                           <div className="two inline fields">
                            <div className="field">
-                              节目名称
+                              Program Name
                               <input type="text" id="programName" />
                             </div>
                             <div className="field">
-                              高(px)
+                              High (px)
                               <input type="number" id="programHight" className="hightq"/>
                             </div>
                             <div className="inline field">
-                              宽(px)
+                              Width (px)
                               <input type="number" id="programWidth" className="widthq" />
                             </div>
                           </div>
                         </div> 
                         <div className="field">
-                          背景图片
+                          Background picture
                           <div className="ui primary button add">添加素材</div> 
                         </div>  
                       </div>
                       <div className="actions">
                         <div className={"newPergramCont "+styles.NPcont}></div>
                           <div className="ui small negative button">
-                                 不
+                                 Do not
                           </div> 
                             <input type="button" value="是" className="ui small positive button"/> 
                       </div>
                     </div>
 
 
-                    {/*
-                      文件上传弹出框 单个文件
-                    */}
+                    { / *
+                      File upload pop-up single file
+                    * / }
 
                     <div className="ui small fileList coupled modal">
                       <div className="header">素材列表</div>
@@ -692,7 +699,7 @@ class App extends Component {
                       </div>
 
                       <div className="actions"> 
-                        <div className={styles.chosefile +' chosefile'}>请选择文件</div>
+                        < Div className = { Styles . Chosefile  + ' chosefile ' } > select File < / div >
                         <input type="button" value="确定" className="ui small positive button"/> 
                       </div> 
                     </div>
@@ -705,7 +712,7 @@ class App extends Component {
                       </div>
 
                       <div className="actions"> 
-                        <div className={styles.chosefile +' chosefile'}>请选择文件</div>
+                        < Div className = { Styles . Chosefile  + ' chosefile ' } > select File < / div >
                         <input type="button" value="确定" className="ui small positive button"/> 
                       </div> 
                     </div>
@@ -718,7 +725,7 @@ class App extends Component {
                       </div>
 
                       <div className="actions"> 
-                        <div className={styles.chosefile +' chosefile'}>请选择文件</div>
+                        < Div className = { Styles . Chosefile  + ' chosefile ' } > select File < / div >
                         <input type="button" value="确定" className="ui small positive button"/> 
                       </div> 
                     </div>
@@ -731,7 +738,7 @@ class App extends Component {
                       </div>
 
                       <div className="actions"> 
-                        <div className={styles.chosefile +' chosefile'}>请选择文件</div>
+                        < Div className = { Styles . Chosefile  + ' chosefile ' } > select File < / div >
                         <input type="button" value="确定" className="ui small positive button"/> 
                       </div> 
                     </div>
@@ -744,7 +751,7 @@ class App extends Component {
                       </div>
 
                       <div className="actions"> 
-                        <div className={styles.chosefile +' chosefile'}>请选择文件</div>
+                        < Div className = { Styles . Chosefile  + ' chosefile ' } > select File < / div >
                         <input type="button" value="确定" className="ui small positive button"/> 
                       </div> 
                     </div>
@@ -786,14 +793,3 @@ function getCont (hei,wid,cont,path,type,ID,programArrIndex,removeProgrameItems)
   return  <Cont height={hei} width={wid} cont={cont} path={path} type={type} ID={ID} programArrIndex={programArrIndex} removeProgrameItems={removeProgrameItems}/>
   
 } 
-
-
-
-
-
-
-
-
-
-
-

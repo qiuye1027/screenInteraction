@@ -1,16 +1,149 @@
-.section-main {
-    font-size: 40px;
+.colsm4{width:50%;float:left;text-align:center;
+  
+}
+.modal-btn {
+  float: right;
+  display: block;
+  font-size: 26px;
+  border: 0;
+  color: #bce8f1;
+  &:hover {
+    color: #bce8f1;
+    background: #ebf3ee;
+  }
+  &:nth-child(2) {
+    border-radius: 0;
+  }
+}
 
-    .btn {
-        display: inline-block;
-        margin-left: 20px;
-        padding: 2px 6px;
-        border: 1px solid #222d32;
-        text-decoration: none;
-        font-size: 14px;
-        color: #222d32;
+.modal-dialog {
+  width: 92%;
+}
+
+.modal-header {
+  width: 100%;
+  padding: 0;
+  .modal-title {
+    padding: 15px;
+  }
+  &:hover {
+    cursor: move;
+  }
+}
+
+.modal-body, .modal-footer {
+  min-height: 100px;
+}
+
+.row {
+  width: 98%;
+  > div {
+    border: 1px solid #bfabab;
+    margin-left: -1px;
+    height: 550px;
+    > h3 {
+      text-align: center;
     }
-    .info {
-        font-size: 20px;
+  }
+}
+
+#setBtn {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+li {
+  list-style-type: none;
+}
+
+.tree-node:hover {
+  cursor: pointer;
+}
+
+a {
+  color: #000;
+  &:hover {
+    text-decoration: none;
+    color: #000;
+  }
+}
+
+ul li i:first-child {
+  margin: 0 5px;
+}
+
+.tree-table {
+  tr td span {
+    margin: 5px 10px;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+  text-align: center;
+  height: 100%;
+  border-color: #bdacac;
+  font-size: 8px;
+}
+
+.t-select {
+  background: #dee7ea;
+}
+
+.t-default {
+  background: #b1d6e8;
+  font-weight: bold;
+}
+
+.tree-table {
+  .t-leaf {
+    padding: 5px 0;
+  }
+  .td-title {
+    padding: 3px 0;
+    font-weight: bold;
+  }
+}
+
+#select_tree_table{
+  table {
+    background: #dee7ea;
+  }
+}
+.tree_data {
+  word-wrap: break-word;
+  text-align: left;
+  .dataInfo{
+    line-height: 30px;
+    margin-top: 10px;
+    text-align: left;
+    lable{
+      width: 120px;
+      height:30px;
+      line-height: 30px;
+      margin-right: 15px;
+      text-align:right;
+      padding-right: 5px;
+      display: inline-block;
+      box-sizing: border-box;
     }
+    input{
+      text-indent: 1em;
+      height: 30px;
+      line-height: 30px
+    }
+    .ulList{
+      display: inline-block;
+      vertical-align: top;
+      li{position: relative;
+        &:hover{
+          .close{display:block}
+        }
+        .close{display: none;width:20px;height:20px;line-height:20px;font-size:16px;text-align:center;color:#ccc;position:absolute;right: 0;top: 0;}
+      }
+    }
+  }
 }
