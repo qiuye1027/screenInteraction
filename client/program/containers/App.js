@@ -223,7 +223,6 @@ class  App  extends  Component {
                 programBg = $("#selectFileName1").val(),
                 dates = {};
 
-
                 dated . height  = pergramHight;
                 dated . width  = pergramWidth;
                 dated . name  = pergramName;

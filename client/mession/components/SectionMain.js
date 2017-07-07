@@ -1,115 +1,25 @@
 import React, {Component} from 'react'
 import styles from '../sass/App'
+import utils from '../../shared/utils'
 
 class SectionMain extends Component {
     constructor() {
         super()
+        this.state = {
+            eventArr : []
+        }
     }
      componentDidMount() {
 
-        var todayDate = moment().startOf('day');
-        var YM = todayDate.format('YYYY-MM');
-        var YESTERDAY = todayDate.clone().subtract(1, 'day').format('YYYY-MM-DD');
-        var TODAY = todayDate.format('YYYY-MM-DD');
-        var TOMORROW = todayDate.clone().add(1, 'day').format('YYYY-MM-DD');
+        let _this = this;
+ 
+        shoeMession()
+
+
+ 
 
 
 
-       $('#calendar').fullCalendar({
-          
-
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: ''
-            },  
-            editable: false,
-            eventLimit: true, // allow "more" link when too many events
-            navLinks: false,
-            defaultView : 'agendaWeek',
-            locale: 'zh-cn',  
-            events: [
-                {
-                    title: 'All Day Event',
-                    start: YM + '-01'
-                },
-                {
-                    title: 'Long Event',
-                    start: YM + '-07',
-                    end: YM + '-10'
-                },
-                {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: YM + '-09T16:00:00'
-                },
-                {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: YM + '-16T16:00:00'
-                },
-                {
-                    title: 'Conference',
-                    start: YESTERDAY,
-                    end: TOMORROW
-                },
-                {
-                    title: 'Meeting',
-                    start: TODAY + 'T10:30:00',
-                    end: TODAY + 'T12:30:00'
-                },
-                {
-                    title: 'Lunch',
-                    start: TODAY + 'T12:00:00'
-                },
-                {
-                    title: 'Meeting',
-                    start: TODAY + 'T14:30:00'
-                },
-                {
-                    title: 'Happy Hour',
-                    start: TODAY + 'T17:30:00'
-                },
-                {
-                    title: 'Dinner',
-                    start: TODAY + 'T20:00:00'
-                },
-                {
-                    title: 'Birthday Party',
-                    start: TOMORROW + 'T07:00:00'
-                },
-                {
-                    title: 'Click for Google',
-                    url: 'http://google.com/',
-                    start: TOMORROW + 'T09:00:00'
-                }
-            ],
-            dayClick: function(date, jsEvent, view) {
-                // 日期点击
-                console.log('Clicked on: ' + date.format());
-
-                console.log('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-
-                console.log('Current view: ' + view.name);
-
-                // change the day's background color just for fun
-                //$(this).css('background-color', 'red');
-                $('.newMession.modal').modal('show') ;
-
-            },
-             eventClick: function(calEvent, jsEvent, view) {
-                // 事件点击
-                console.log('Event: ' + calEvent.title);
-                console.log('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-                console.log('View: ' + view.name);
-
-                // change the border color just for fun
-                $(this).css('border-color', 'red');
-                $('.newMession.modal').modal('show') ;
-
-            }
-
-        });
 
 
     
@@ -131,24 +41,23 @@ class SectionMain extends Component {
                         添加任务
                     </div>
                         <div className="ui form "> 
-                            
-                              <div className="field">
-                                <label>素材名称</label>
-                                <div className="two fields">
-                                 
-                                  <div className="field">
-                                    <input type="time"  />
-                                  </div>
-                                </div>
-                              </div> 
+                            <div className="two fields">
+                                <div className="field">
+                                    <label>任务名称</label>
+                                    <input type="text" name="messionName" id="messionName"  />
+                                </div>  
+                            </div>  
 
-                              <div className="  inline field">
-                                <div className="ui checkbox">
-                                  <input type="checkbox" tabindex="0" name="scshare" value="1"/>
-                                  <label>共享此素材</label>
+                            <div className="two fields">
+                                <div className="field">
+                                  <label>起始时间</label>
+                                  <input type="datetime-local" name="startTime" id="startTime" />
                                 </div>
-                              </div> 
-                            
+                                <div className="field">
+                                  <label>结束时间</label>
+                                  <input type="datetime-local" name="endTime" id="endTime" />
+                                </div>
+                            </div>  
                         </div>
                     
                     <div className="actions">
@@ -167,3 +76,139 @@ class SectionMain extends Component {
 }
 
 export default SectionMain
+
+
+
+
+function shoeMession (){
+
+
+        let eventData = [];
+
+        utils.ajax({url: '/api/messionList'}).then(re => {
+           for(let i of re){
+
+                let da = {},messionName = i.name,isAllow = i.is_allow
+                da.messionId = i.id
+     
+
+                 utils.ajax({url: '/api/messionDetail',data:da}).then(res => {
+               
+                    for(let o of res){
+                         eventData.push({
+                            title: messionName,
+                            start: o.execute_start_time.split('.')[0],
+                            end: o.execute_end_time.split('.')[0],
+                            id : i.id
+                        })     
+                    }
+    
+                })
+            }  
+
+        })
+
+        setTimeout(function(){
+            
+            $('#calendar').fullCalendar({
+          
+
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: ''
+                },  
+                editable: false,
+                eventLimit: true, // allow "more" link when too many events
+                navLinks: false,
+                defaultView : 'agendaWeek',
+                locale: 'zh-cn',  
+                events: eventData
+
+                
+                ,
+                dayClick: function(date, jsEvent, view) { //点击日历
+                    // 日期点击
+                    // console.log('Clicked on: ' + date.format());
+
+                    // console.log('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+
+                    // console.log('Current view: ' + view.name);
+
+                    document.getElementById('startTime').value = date.format()
+                   
+                    // change the day's background color just for fun
+                    //$(this).css('background-color', 'red');
+                    $('.newMession.modal').modal('show').modal({
+                      closable  : false, 
+                      onHidden : function(){
+                        $(".ui.small.modal").modal("hide")
+                      },
+                      onApprove : function() {
+                        
+                        
+                        let datas = {}
+                        datas.messionName = document.getElementById('messionName').value
+                        datas.startTime = document.getElementById('startTime').value
+                        datas.endTime = document.getElementById('endTime').value
+                         utils.ajax({url: '/api/messionAdd',data:datas}).then(re => {
+                            shoeMession()
+
+                        })
+                        
+
+
+                      }
+                    })
+
+
+                },
+                 eventClick: function(calEvent, jsEvent, view) {  //点击任务
+                    // 事件点击
+                    //console.log(  calEvent );
+                    // console.log('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+                    // console.log('View: ' + view.name);
+                    
+                    
+                    document.getElementById('messionName').value = calEvent.title
+                    document.getElementById('startTime').value = calEvent.start._i
+                    document.getElementById('endTime').value = calEvent.end._i
+                    document.getElementById('messionName').disabled=false
+ 
+
+                     $('.newMession.modal').modal('show').modal({
+                      closable  : false, 
+                      onHidden : function(){
+                        $(".ui.small.modal").modal("hide")
+                      },
+                      onApprove : function() {
+                        
+                        let datas = {}
+                        datas.messionId = calEvent.id 
+                        datas.startTime = document.getElementById('startTime').value
+                        datas.endTime = document.getElementById('endTime').value
+
+
+                         utils.ajax({url: '/api/messionUpdate',data:datas}).then(re => {
+                            shoeMession()
+
+                        })
+
+
+
+                      }
+                    })
+
+                }
+
+            });
+
+
+        },100)
+             
+
+  
+
+
+
+}
