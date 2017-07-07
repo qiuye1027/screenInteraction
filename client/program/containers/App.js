@@ -9,7 +9,7 @@ import Cont from './cont'
 
 
  
-class  App  extends  Component {
+class App extends Component {
     constructor() {
         super()
         this.state = { 
@@ -17,29 +17,28 @@ class  App  extends  Component {
            programArrIndex : 0,
            ID : '',
            swiperList:[],
-           NPcont : [],
+           NPcont:[],
            sourceType:[],
            programList : []
         
         }
         this.removeProgrameItems = this.removeProgrameItems.bind(this)
-        this.showprogram  =  this.showprogram.bind(this)
-        this.delProgram = this.delProgram.bind(this)
+        this.showProgram = this.showProgram.bind(this)
 
     }
     
     componentDidMount() {
     let _this = this
-// drop-down box effect
+//下拉框效果
     $('.menu .item').tab()
 
-// Create a new interactive zone
+//创建新交互区
     $("#newswiper").hide()
     $(".ptcont").hide()
     $(".swiperList").show()
     $('.selection.nac.dropdown')
         .dropdown({
-          allowReselection :  true , // value with the value currently selected match even if the user selected, will trigger onChange.
+          allowReselection: true,//即使用户选择的值与当前所选值匹配，也会触发onChange。
           onChange: function(value) {  
             $("#nac").val(value)
             if(value == 'swiper'){
@@ -86,7 +85,7 @@ class  App  extends  Component {
             }
           }
         })
-        // initialize a new interactive area, clearing the data
+        // 初始化新建交互区域，清空数据
         $('.newareacent.modal').modal({
           onShow : function(){
             $(".swiperList").html('');
@@ -113,7 +112,7 @@ class  App  extends  Component {
                height = $("#areaHeight").val(),
                programArrLength = programArrList.length;
                _this.setState({
-                programArrIndex : programArrLength      
+                programArrIndex: programArrLength      
               });
             if(type == 'swiper'){ 
               _this.setState({
@@ -136,7 +135,7 @@ class  App  extends  Component {
             }
             
              $( ".Plugin" ).draggable({ 
-              containment :  " .App__programArea__1KiBa8n0 " ,
+              containment: ".App__programArea__1KiBa8n0", 
               scroll: false ,
               stack: ".Plugin",
 
@@ -151,9 +150,9 @@ class  App  extends  Component {
 
             });
 
-            // draggable
+            //可拖拽
             $( ".App__swipercont__On3D7KLV" ).draggable({ 
-              containment :  " .App__programArea__1KiBa8n0 " ,
+              containment: ".App__programArea__1KiBa8n0", 
               scroll: false ,
               stack: ".App__swipercont__On3D7KLV",
 
@@ -171,13 +170,13 @@ class  App  extends  Component {
         })
  
 
-// template
+//模板
         $('.newmodel.modal').modal('attach events','.newmodel','show').modal({
           onApprove:function(){
-            Alert ( " Creating a successful template " )
+            alert("创建模板成功")
           }
         });
-// Page List
+//页面列表
 
        utils.ajax({url: '/api/programList'}).then(re => {
           _this.setState({programList:re})
@@ -192,15 +191,15 @@ class  App  extends  Component {
       // open second modal on first modal buttons
       $('.fileList1.modal').modal('attach events', '.newPergram.modal .button.add').modal({
           onHidden: function(){
-            $ ( " .newPergramCont " ).html( '' ).append( ' your selected picture is: ' + $ ( " # selectFileName1 ").val())
+            $(".newPergramCont").html('').append('你选择的图片为：'+$("#selectFileName1").val())
             _this.setState({
               NPcont : [].concat($("#selectFileName").val())
             })
           }
         })
       
-// Create a new program
-// initialize the new program pop-up windows, clear data
+//创建新节目
+// 初始化新建节目弹出窗，清空数据
         $('.newPergram.modal').modal({
           onShow : function(){
             $(".newPergramCont").html("");
@@ -219,14 +218,15 @@ class  App  extends  Component {
           onApprove : function() {
             let pergramHight = $(this).find(".hightq").val(),
                 pergramWidth = $(this).find(".widthq").val(),
-                pergramName =  $ ( " #programName " ). val ();
+                pergramName = $("#programName").val(),
                 programBg = $("#selectFileName1").val(),
-                dates = {};
+                datas = {}; 
 
-                dates.height  = pergramHight;
-                dates.width  = pergramWidth;
-                dates.name  = pergramName;
-                datas.bgimg = programBg;
+
+                datas.height =pergramHight;
+                datas.width =pergramWidth;
+                datas.name =pergramName;
+                datas.bgPath = programBg;
 
                 utils.ajax({url: '/api/creatProgram',data:datas}).then(re => {
                    
@@ -235,8 +235,8 @@ class  App  extends  Component {
 
    
             $("#container").css({
-              ' Height ' : pergramHight,
-              " Width " : pergramWidth,
+              'height':pergramHight,
+              'width':pergramWidth,
               'backgroundImage':'url('+programBg+')',
               'background-repeat': 'no-repeat',
               'background-size': 'cover',
@@ -246,7 +246,7 @@ class  App  extends  Component {
           }
         })
 
-// Save program
+// 保存节目
         $('.saveProgram.modal').modal('attach events', '.button.saveProgram','show').modal({
           closable  : false, 
           onApprove : function() {
@@ -257,7 +257,7 @@ class  App  extends  Component {
               
               let datas = {}
               datas.style = obj.eq(i).attr("style")
-              // this style is directly deposited into the db
+              //把这个style直接存放进db中
               console.log(datas.style)
                utils.ajax({url: '/api/saveProgram',data:datas}).then(re => {
                })
@@ -335,12 +335,12 @@ class  App  extends  Component {
       }
        
       this.setState({
-        programArr : programArrList
+        programArr:programArrList
       })
     }
 
-    showprogram ( id ) {
-      // display the corresponding program
+    showProgram(id) {
+      //展示对应节目
 
       $('.pagelist.modal').modal('hide')
 
@@ -364,15 +364,15 @@ class  App  extends  Component {
           }else if(i.type == 5){
         //    _this.setState({
         //       programArr:programArrList.concat(getBtn (height,width,_this.state.swiperList,link,_this.state.ID,type,_this.state.programArrIndex,_this.removeProgrameItems))
-        //    })
+        //   })
           }else{
         //    _this.setState({
         //      programArr:programArrList.concat(getCont(height,width,$("#conts").val(),_this.state.swiperList,_this.state.sourceType,_this.state.ID,_this.state.programArrIndex,_this.removeProgrameItems))
-        //    })
+        //   })
           }
         }
          $( ".Plugin" ).draggable({ 
-              containment :  " .App__programArea__1KiBa8n0 " ,
+              containment: ".App__programArea__1KiBa8n0", 
               scroll: false ,
               stack: ".Plugin",
 
@@ -391,20 +391,13 @@ class  App  extends  Component {
       })      
     }
 
-     delProgram ( id ) {
+     delProgram(id) {
 
        $('.pagelist.modal').modal('hide')
-
-        
  
-      let datas = {},_this = this;
+      let datas = {}
       datas.id = id 
-      utils.ajax({url: '/api/componentListDel',data:datas}).then(re => { 
-        utils.ajax({url: '/api/programList'}).then(re => {
-          _this.setState({programList:re})
-        })
-
-      })
+      utils.ajax({url: '/api/componentListDel',data:datas}).then(re => { })
 
      }
 
@@ -419,7 +412,7 @@ class  App  extends  Component {
           return (
             <div className="item" key={item.id}>
               <div className="right floated content">
-                <div className="ui button tiny" onClick={_this.delProgram.bind(_this,item.id)}  >删除</div>
+                <div className="ui button tiny" onClick={_this.delProgram.bind(this,item.id)}  >删除</div>
               </div> 
               <a className="header" onClick={_this.showProgram.bind(this,item.id)} data-id={item.id}>{item.name}</a>
             </div>
@@ -430,7 +423,7 @@ class  App  extends  Component {
  
 
         return (
-          <div className="container">
+            <div className="container">
                 <div className="ui buttons teal small">  
                   <a className="ui button saveProgram">保存节目</a>
                   <a className="ui button ">另存节目</a>
@@ -459,10 +452,7 @@ class  App  extends  Component {
                 </div> 
                 
              
-          
-
- 
-
+                 
 
 {/*
 保存节目 弹出框
@@ -796,3 +786,14 @@ function getCont (hei,wid,cont,path,type,ID,programArrIndex,removeProgrameItems)
   return  <Cont height={hei} width={wid} cont={cont} path={path} type={type} ID={ID} programArrIndex={programArrIndex} removeProgrameItems={removeProgrameItems}/>
   
 } 
+
+
+
+
+
+
+
+
+
+
+
