@@ -11,6 +11,7 @@ import saveProgram from '../controllers/saveProgram'
 import doLogin from '../controllers/doLogin'
 import messionAdd from '../controllers/messionAdd'
 import messionList from '../controllers/messionList'
+import user from '../controllers/user'
 
 const router = new Router()
  //文件上传
@@ -49,4 +50,10 @@ router.post('/messionList', messionList.list)
 router.post('/messionDetail', messionList.detail)
 //任务更新
 router.post('/messionUpdate', messionList.update)
+
+
+//用户列表
+router.post('/userList', user.list)
+//用户权限
+router.post('/userRights', user.rigths)
 export default router

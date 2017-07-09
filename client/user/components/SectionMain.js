@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import styles from '../sass/SectionMain'
+import styles from '../sass/SectionMain' 
+import utils from '../../shared/utils'
 
 class SectionMain extends Component {
     constructor() {
@@ -52,6 +53,21 @@ class SectionMain extends Component {
       let _this = this;
       $('#default_tree').append(this.loadTree(_this.state.data));
       this.nodeClick($('#default_tree'));
+
+//用户列表
+      utils.ajax({url: '/api/userList'}).then(re => {
+           
+
+      })
+
+
+// 点击后查询 用户权限
+      let datas = {}
+      datas.id = 1
+
+      utils.ajax({url: '/api/userRights',data:datas}).then(re => {
+           
+      })
     }
 
 
