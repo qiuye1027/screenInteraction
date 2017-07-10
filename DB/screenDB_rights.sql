@@ -25,10 +25,10 @@ DROP TABLE IF EXISTS `rights`;
 CREATE TABLE `rights` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `rights_name` varchar(255) NOT NULL COMMENT '权限名',
-  `user_name` varchar(255) DEFAULT NULL COMMENT '用户名',
+  `user_id` varchar(255) DEFAULT NULL COMMENT '用户名',
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='权限表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,6 +37,7 @@ CREATE TABLE `rights` (
 
 LOCK TABLES `rights` WRITE;
 /*!40000 ALTER TABLE `rights` DISABLE KEYS */;
+INSERT INTO `rights` VALUES (1,'读','1','2017-07-09 02:01:54'),(2,'写','1','2017-07-09 02:01:54'),(3,'删','1','2017-07-09 02:01:54');
 /*!40000 ALTER TABLE `rights` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-04 23:39:47
+-- Dump completed on 2017-07-09 11:36:01

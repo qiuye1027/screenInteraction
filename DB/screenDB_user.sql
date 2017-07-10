@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `id` int(255) NOT NULL COMMENT '用户id\n',
+  `id` int(255) NOT NULL AUTO_INCREMENT COMMENT '用户id\n',
   `username` varchar(255) NOT NULL COMMENT '请问他人',
   `password` varchar(32) NOT NULL,
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT ' 我的',
@@ -31,9 +31,8 @@ CREATE TABLE `user` (
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   `father_id` int(255) DEFAULT NULL COMMENT '所属上级id',
   `is_active` int(11) DEFAULT '0' COMMENT '是否激活（0:未激活；1:已激活）',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='瓦儿歌 v';
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='瓦儿歌 v';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +41,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'qiuye','123456','2017-04-26 09:14:11',45,'测试好了，超级管理员',NULL,1);
+INSERT INTO `user` VALUES (1,'qiuye','123456','2017-04-26 09:14:11',45,'测试好了，超级管理员',NULL,1),(2,'zty','123456','2017-07-09 02:33:31',45,NULL,1,1),(3,'wxl','123456','2017-07-09 02:33:31',34,NULL,1,1),(4,'wx','123456','2017-07-09 02:33:31',33,NULL,NULL,1),(5,'wzl','123456','2017-07-09 02:33:31',30,NULL,4,1),(6,'qwe','123456','2017-07-09 02:43:47',22,NULL,2,1),(7,'sdf','123456','2017-07-09 02:43:47',12,NULL,2,1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-04 23:39:48
+-- Dump completed on 2017-07-09 11:36:02

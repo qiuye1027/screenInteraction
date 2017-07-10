@@ -23,13 +23,13 @@ DROP TABLE IF EXISTS `mession`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mession` (
-  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `id` int(255) NOT NULL,
   `user_id` varchar(255) NOT NULL COMMENT '所属人id',
   `name` varchar(255) DEFAULT NULL COMMENT '任务名',
   `is_allow` int(11) NOT NULL DEFAULT '0' COMMENT '审核状态（0:未审核；1:已审核）',
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='任务管理表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='任务管理表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,6 @@ CREATE TABLE `mession` (
 
 LOCK TABLES `mession` WRITE;
 /*!40000 ALTER TABLE `mession` DISABLE KEYS */;
-INSERT INTO `mession` VALUES (1,'1','qwe',0,'2017-07-04 15:19:19'),(2,'1','test',0,'2017-07-04 15:25:45'),(3,'1','test',0,'2017-07-04 15:34:45');
 /*!40000 ALTER TABLE `mession` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-04 23:39:48
+-- Dump completed on 2017-07-09 11:36:02
