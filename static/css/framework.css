@@ -3016,11 +3016,18 @@ body > .ui.grid {
 .ui.menu .item {
   font-size: 1rem;
 }
-
-.ui.vertical.menu {
-  width: 15rem;
+.ui.menu .item span{
+  display: inline-block;
+  width: 5rem;
+  margin-right: 15px;
 }
 
+.ui.vertical.menu {
+  width: 40%;
+  margin-right: 2%;
+  box-sizing: border-box;
+  float: left
+}
 .ui.large.menu .item {
   font-size: 1.125rem;
 }
