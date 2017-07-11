@@ -89,7 +89,7 @@ class SectionMain extends Component {
                   </div>
                 <div className="ui maintenance modal"> 
                     <div className="ui text container">
-                    <table className="ui bottom attached table">
+                      <table className="ui bottom attached table">
                         <thead>
                           <tr>
                             <th>维护者</th>
@@ -99,21 +99,21 @@ class SectionMain extends Component {
                         </thead>
                         <Tlist></Tlist>
                       </table>
-                      </div>
+                    </div>
                 </div>
                 <div className="ui review modal"> 
                     <div className="ui text container">
-                    <table className="ui bottom attached table">
+                      <table className="ui bottom attached table">
                         <thead>
                           <tr>
                               <th>审核者</th>
                               <th>审核操作</th>
-                              <th>审核时间</th>>
+                              <th>审核时间</th>
                           </tr>
                         </thead>
                         <Review></Review>
                       </table>
-                      </div>
+                    </div>
                 </div>
                 <div className="ui fullscreen newmodel2 modal">
                     <i className="close icon"></i>
