@@ -37,11 +37,11 @@ class SectionMain extends Component {
         return (
             <section className={styles.sectionMain} className="container">
                 <div className={styles.dropdown}>
-                    <div className="ui selection dropdown" tabindex="0">
+                    <div className="ui selection dropdown" tabIndex="0">
                         <input type="hidden" name="selection" />
                         <i className="dropdown icon"></i>
                         <div className="default text">待审核节目</div>
-                        <div className="menu transition hidden" tabindex="-1">
+                        <div className="menu transition hidden" tabIndex="-1">
                         <div className="item" data-value="icheck">待审核节目</div>
                         <div className="item" data-value="aCheck">已审核节目</div>
                         </div>

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import styles from '../sass/SectionMain' 
 import utils from '../../shared/utils'
-
+import DataList from './DataList'
 class SectionMain extends Component {
     constructor() {
         super()
@@ -46,7 +46,8 @@ class SectionMain extends Component {
             ExpTime:'有效时间',
             power:'权限设置',
             tlmg:'终端管理'
-          }
+          },
+          childData:{}
         }
     }
     componentDidMount() {
@@ -92,7 +93,9 @@ class SectionMain extends Component {
         li.click(function(e){
           var index=$(this).index()
            e.stopPropagation(); 
-               $('#tree_data div').html(_this.editTreeData(tData[index]))
+           // $('#tree_data div').html(_this.editTreeData(tData[index]))
+           console.log(tData[index])
+           _this.setState({childData:tData[index]})
         })
         // 处理有子节点的
         if(tData[i].children != undefined){
@@ -171,10 +174,15 @@ class SectionMain extends Component {
     }
 
     render() {
+      let _this = this;
         return (
             <div className="container">
               <div id="default_tree" className={styles.colsm4}><h3>原始树结构</h3></div>
-              <div id="tree_data" className={styles.tree_data}><h3>选中的数据</h3><div></div></div>
+              <div id="tree_data" className={styles.tree_data}><h3>选中的数据</h3>
+                <div>
+                  <DataList data={_this.state.childData}></DataList>
+                </div>
+              </div>
             </div>
         )
     }

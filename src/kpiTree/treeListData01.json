@@ -1,0 +1,7 @@
+[  
+  {"kid":"010","kname":"综合指标1","hasChild":"1","pid":"01"},  
+  {"kid":"011","kname":"分析类指标1","hasChild":"1","pid":"01"},  
+  {"kid":"012","kname":"组合指标1","hasChild":"1","pid":"01"},  
+  {"kid":"013","kname":"移动业务计费收入1","hasChild":"1","pid":"01"},  
+  {"kid":"014","kname":"2G业务1","hasChild":"1","pid":"01"}  
+]  

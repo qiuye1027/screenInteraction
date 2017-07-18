@@ -1,0 +1,116 @@
+.kpitree_panel {
+  position: relative;
+  width: 308px;
+  background-color: #F2F2F2;
+  border: 1px solid #cfcfcf;
+}
+
+.kpitree_panel_height_01 {
+  height: 548px;
+}
+
+.kpitree_panel_height_02 {
+  height: 378px;
+}
+
+.ksearchdiv {
+  width: 310px;
+  height: 30px;
+  margin-right: 50%;
+}
+.kidBox{
+  padding:0 200px
+}
+.kpiLeft{
+  width: 50%;
+  float: left
+}
+.editBox{
+  width: 50%;
+  height: 100%;
+  float: left;
+}
+.ksearch-input {
+  border: 1px;
+  width: 145px;
+  height: auto;
+  border-radius: 10px;
+}
+
+.ksearch-icon {
+  position: relative;
+  left: -24px;
+  width: 17px;
+  height: 17px;
+}
+
+.ksearch-button {
+  position: relative;
+  left: 150px;
+  top: -22px;
+  font-size: 12px;
+  color: #999999;
+  padding-top: 3px;
+  text-align: center;
+  cursor: pointer;
+  width: 40px;
+  height: 24px;
+  border: solid 0.8px #CBCBCB;
+  -webkit-border-radius: 8px;
+}
+
+.kreturn-button {
+  position: relative;
+  left: 171px;
+  top: -22px;
+  font-size: 12px;
+  color: #999999;
+  padding-top: 3px;
+  text-align: center;
+  cursor: pointer;
+  width: 40px;
+  height: 24px;
+  border: solid 0.8px #CBCBCB;
+  -webkit-border-radius: 8px;
+}
+
+.kselecte-button {
+  position: relative;
+  left: 226px;
+  top: -46px;
+  font-size: 12px;
+  color: #999999;
+  padding-top: 3px;
+  text-align: center;
+  cursor: pointer;
+  width: 60px;
+  height: 25px;
+  border: solid 0.8px #CBCBCB;
+  -webkit-border-radius: 8px;
+  background-color: #F2F2F2;
+}
+
+.kbottom-content {
+  padding: 10px;
+  color: #999999;
+  margin-left: 13px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 280px;
+  margin-top: 20px;
+  background-color: #F7F7F7;
+}
+
+.kbottom-content_height_01 {
+  height: 480px;
+}
+
+.kbottom-content_height_02 {
+  height: 318px;
+}
+
+.knode-hide-show-icon {
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+}

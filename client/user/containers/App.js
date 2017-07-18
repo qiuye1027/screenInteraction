@@ -1,5 +1,5 @@
 import React, {Component} from 'react' 
-import SectionMain from '../components/SectionMain'
+import KpiTree from '../components/KpiTree'
 import styles from '../sass/App'
 
 class App extends Component {
@@ -12,7 +12,7 @@ class App extends Component {
 
         return (
             <div className={styles.app}>
-                <SectionMain userInfo={userInfo} actions={actions}></SectionMain>
+                <KpiTree userInfo={userInfo} actions={actions}></KpiTree>
             </div>
         )
     }
