@@ -5,16 +5,21 @@ import React,{Component} from "react"
 import { browserHistory } from 'react-router';
 import styles from "../sass/kpiTree"; 
 import ThisData from './ThisData' 
+
+
+import utils from '../../shared/utils' 
+
+
 export default class KpiTree extends Component{  
     constructor(props){  
         super(props);  
         this.state={  
                 data:[  
-                  {"kid":"1","kname":"综合指标","hasChild":"1","pid":"-1"},  
-                  {"kid":"2","kname":"分析类指标","hasChild":"1","pid":"-1"},  
-                  {"kid":"3","kname":"组合指标","hasChild":"1","pid":"-1"},  
-                  {"kid":"4","kname":"移动业务计费收入","hasChild":"1","pid":"-1"},  
-                  {"kid":"5","kname":"2G业务","hasChild":"1","pid":"-1"},  
+                  {"kid":"1","kname":"综合指标","hasChild":"1"},  
+                  {"kid":"2","kname":"分析类指标","hasChild":"1"},  
+                  {"kid":"3","kname":"组合指标","hasChild":"1"},  
+                  {"kid":"4","kname":"移动业务计费收入","hasChild":"1"},  
+                  {"kid":"5","kname":"2G业务","hasChild":"1"},  
                 ],
                 data1:[  
                   {"kid":"01","kname":"综合指标1","hasChild":"1","pid":"-1"},  
@@ -97,6 +102,13 @@ export default class KpiTree extends Component{
         let _main=this.refs.kpiTree;  
         this._fetchTreeNodeData("",_main,0); 
         // this._fetchTreeNodeData(nodeId,currentNode,20);
+
+
+
+         utils.ajax({url: '/api/userList'}).then(re => {})
+
+
+
     }  
     _selectAllCheckBox=(parentNodeId,event)=>{  
         let _items=$("#" + parentNodeId+" input")  
