@@ -98,7 +98,8 @@ export default class KpiTree extends Component{
         this._fetchTreeNodeData("",_main,0); 
         // this._fetchTreeNodeData(nodeId,currentNode,20);
     }
-    _renderTreeNode=(nodeObj,treeData,paddingLeft)=>{  
+    _renderTreeNode=(nodeObj,treeData,paddingLeft)=>{ 
+    // console.log(1) 
         let _self=this;  
         let hasAllSelectBox=false; 
         if(treeData.length>0){  
@@ -138,8 +139,8 @@ export default class KpiTree extends Component{
                 if(data.hasChild=="1"){
                     _div.appendChild(_i);  
                 }  
-                else if(data.hasChild=="0"){  
-                    _div.appendChild(_span);
+                else if(data.hasChild=="0"){ 
+                    _div.appendChild(_span);   
                 }  
                 _div.appendChild(_span); 
                 nodeObj.appendChild(_div);  
@@ -188,9 +189,9 @@ export default class KpiTree extends Component{
   
     }  
     _handleClick=(nodeId,event)=>{
-        console.log(nodeId)
         let cData;
-        let _clickImg=event.currentTarget.previousElementSibling;  
+        let _clickImg=event.currentTarget.previousElementSibling;
+        // console.log(_clickImg)  
         let currentNode=event.currentTarget.parentNode;
         let datas='data' + nodeId.substr(1,(nodeId.length-1))
         // if( nodeId=='1' ){
@@ -205,15 +206,17 @@ export default class KpiTree extends Component{
         let index=currentNode.id.substr(currentNode.id.length-1,1)
         // console.log(cData[index-1])
         this.setState({thisData:cData[index-1]});
-        if(_clickImg.className.indexOf("square")!=-1){  
+        if(_clickImg.className.indexOf("square")!=-1){ 
             _clickImg.className="minus icon";
-            if(currentNode.childNodes[3]!=null&currentNode.childNodes[3]!=undefined){  
+            if(currentNode.childNodes[2]!=null&currentNode.childNodes[2]!=undefined){
                 this._showOrHideNode(currentNode,1); 
-            }  
-            else {  
+            }else {
+                // if(_clickImg==null){
+                //     return false;
+                // }  
                 this._fetchTreeNodeData(nodeId,currentNode,20);  
             }  
-        }else if(_clickImg.className.indexOf("minus icon")!=-1){  
+        }else if(_clickImg.className.indexOf("minus icon")!=-1){
             _clickImg.className="add square icon";  
             this._showOrHideNode(currentNode,0);  
         }  
