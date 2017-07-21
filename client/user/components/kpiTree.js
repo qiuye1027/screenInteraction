@@ -15,38 +15,74 @@ export default class KpiTree extends Component{
         super(props);  
         this.state={  
                 data:[  
-                  {"kid":"1","kname":"综合指标","hasChild":"1"},  
-                  {"kid":"2","kname":"分析类指标","hasChild":"1"},  
-                  {"kid":"3","kname":"组合指标","hasChild":"1"},  
-                  {"kid":"4","kname":"移动业务计费收入","hasChild":"1"},  
-                  {"kid":"5","kname":"2G业务","hasChild":"1"},  
+                  {
+                    "kid":"1",
+                    "kname":"综合指标",
+                    "hasChild":"1",
+                    "pid":"-1",
+                    "id":'1',
+                    "username":'张三1',
+                    "password":'123456',
+                    "remark":'李四死敌1',
+                    "create_time":"2017-01-01",
+                    "effective_time":1,
+                    "power":'权限设置1',
+                    "tlmg":'终端管理1'
+                  },  
+                  {"kid":"2","kname":"分析类指标","hasChild":"1","pid":"-1"},  
+                  {"kid":"3","kname":"组合指标","hasChild":"1","pid":"-1"},  
+                  {"kid":"4","kname":"移动业务计费收入","hasChild":"1","pid":"-1"},  
+                  {"kid":"5","kname":"2G业务","hasChild":"1","pid":"-1"},  
                 ],
                 data1:[  
-                  {"kid":"01","kname":"综合指标1","hasChild":"1","pid":"-1"},  
+                  {
+                    "kid":"01",
+                    "kname":"综合指标",
+                    "hasChild":"1",
+                    "pid":"-1",
+                    "id":'01',
+                    "username":'张三01',
+                    "password":'123456',
+                    "remark":'李四死敌01',
+                    "create_time":"2017-01-011",
+                    "effective_time":11,
+                    "power":'权限设置01',
+                    "tlmg":'终端管理01'
+                  },  
                   {"kid":"02","kname":"分析类指标2","hasChild":"1","pid":"-1"},  
                   {"kid":"03","kname":"组合指标3","hasChild":"1","pid":"-1"},  
                   {"kid":"04","kname":"移动业务计费收入4","hasChild":"1","pid":"-1"},  
                   {"kid":"05","kname":"2G业务5","hasChild":"1","pid":"-1"}  
                 ],
                 data01:[  
-                  {"kid":"011","kname":"综合指标01","hasChild":"1","pid":"01"},  
-                  {"kid":"012","kname":"分析类指标02","hasChild":"1","pid":"01"},  
-                  {"kid":"013","kname":"组合指标03","hasChild":"1","pid":"01"},  
-                  {"kid":"014","kname":"移动业务计费收入04","hasChild":"1","pid":"01"},  
-                  {"kid":"015","kname":"2G业务05","hasChild":"1","pid":"01"}  
+                  {
+                    "kid":"001",
+                    "kname":"综合指标",
+                    "hasChild":"1",
+                    "pid":"-1",
+                    "id":'011',
+                    "username":'张三011',
+                    "password":'123456',
+                    "remark":'李四死敌011',
+                    "create_time":"2017-01-0111",
+                    "effective_time":111,
+                    "power":'权限设置011',
+                    "tlmg":'终端管理011'
+                  },  
+                  {"kid":"002","kname":"分析类指标02","hasChild":"1","pid":"01"},  
+                  {"kid":"003","kname":"组合指标03","hasChild":"1","pid":"01"},  
+                  {"kid":"004","kname":"移动业务计费收入04","hasChild":"1","pid":"01"},  
+                  {"kid":"005","kname":"2G业务05","hasChild":"1","pid":"01"}  
                 ],
-                data011:[
-                  {"kid":"0111","kname":"综合指标000","hasChild":"0","pid":"010"},  
-                  {"kid":"0112","kname":"分析类指标000","hasChild":"0","pid":"010"},  
-                  {"kid":"0113","kname":"组合指标000","hasChild":"0","pid":"010"},  
-                  {"kid":"0114","kname":"移动业务计费收入000","hasChild":"0","pid":"010"},  
-                  {"kid":"0115","kname":"2G业务000","hasChild":"0","pid":"010"}  
+                data001:[
+                  {"kid":"0001","kname":"综合指标000","hasChild":"0","pid":"010"},  
+                  {"kid":"0002","kname":"分析类指标000","hasChild":"0","pid":"010"},  
+                  {"kid":"0003","kname":"组合指标000","hasChild":"0","pid":"010"},  
+                  {"kid":"0004","kname":"移动业务计费收入000","hasChild":"0","pid":"010"},  
+                  {"kid":"0005","kname":"2G业务000","hasChild":"0","pid":"010"}  
                 ],
                 thisData:{},
         }  
-        this._handleSelect=this._handleSelect.bind(this);  
-        this._handleSearch=this._handleSearch.bind(this);  
-        this._handleReturn=this._handleReturn.bind(this);  
     }
     componentDidMount=()=>{  
         let _main=this.refs.kpiTree;  
