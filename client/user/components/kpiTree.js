@@ -75,11 +75,20 @@ export default class KpiTree extends Component{
                   {"kid":"005","kname":"2G业务05","hasChild":"1","pid":"01"}  
                 ],
                 data001:[
-                  {"kid":"0001","kname":"综合指标000","hasChild":"0","pid":"010"},  
-                  {"kid":"0002","kname":"分析类指标000","hasChild":"0","pid":"010"},  
-                  {"kid":"0003","kname":"组合指标000","hasChild":"0","pid":"010"},  
-                  {"kid":"0004","kname":"移动业务计费收入000","hasChild":"0","pid":"010"},  
-                  {"kid":"0005","kname":"2G业务000","hasChild":"0","pid":"010"}  
+                  {
+                    "kid":"0001",
+                    "kname":"综合指标last",
+                    "hasChild":"0",
+                    "pid":"-1",
+                    "id":'011',
+                    "username":'张三last',
+                    "password":'123456last',
+                    "remark":'李四死敌last',
+                    "create_time":"2017-01-01last",
+                    "effective_time":111000,
+                    "power":'权限设置last',
+                    "tlmg":'终端管理last'
+                  }
                 ],
                 thisData:{},
         }  
@@ -98,7 +107,7 @@ export default class KpiTree extends Component{
                     hasAllSelectBox=true  
                 }  
             }
-            let _node=treeData.map((data,index)=>{  
+            let _node=treeData.map((data,index)=>{
                 let _kname=data.kname;  
                 let _div=document.createElement("div");  
                 _div.pid="node"+data.pid;
@@ -192,6 +201,7 @@ export default class KpiTree extends Component{
         //     cData = this.state.data01
         // }
         cData = this.state[datas];
+
         let index=currentNode.id.substr(currentNode.id.length-1,1)
         // console.log(cData[index-1])
         this.setState({thisData:cData[index-1]});
