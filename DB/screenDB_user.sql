@@ -24,9 +24,9 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `id` int(255) NOT NULL AUTO_INCREMENT COMMENT '用户id\n',
-  `username` varchar(255) NOT NULL COMMENT '请问他人',
+  `username` varchar(255) NOT NULL COMMENT '用户名',
   `password` varchar(32) NOT NULL,
-  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT ' 我的',
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT ' 创建时间',
   `effective_time` int(255) DEFAULT NULL COMMENT '有效时间（天）',
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   `father_id` int(255) DEFAULT NULL COMMENT '所属上级id',

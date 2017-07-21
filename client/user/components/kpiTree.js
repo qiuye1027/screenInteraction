@@ -5,6 +5,11 @@ import React,{Component} from "react"
 import { browserHistory } from 'react-router';
 import styles from "../sass/kpiTree"; 
 import ThisData from './ThisData' 
+
+
+import utils from '../../shared/utils' 
+
+
 export default class KpiTree extends Component{  
     constructor(props){  
         super(props);  
@@ -42,12 +47,12 @@ export default class KpiTree extends Component{
         this._handleSelect=this._handleSelect.bind(this);  
         this._handleSearch=this._handleSearch.bind(this);  
         this._handleReturn=this._handleReturn.bind(this);  
-    }  
+    }
     componentDidMount=()=>{  
         let _main=this.refs.kpiTree;  
         this._fetchTreeNodeData("",_main,0); 
         // this._fetchTreeNodeData(nodeId,currentNode,20);
-    } 
+    }
     _renderTreeNode=(nodeObj,treeData,paddingLeft)=>{  
         let _self=this;  
         let hasAllSelectBox=false; 
