@@ -5,8 +5,6 @@ import React,{Component} from "react"
 import { browserHistory } from 'react-router';
 import styles from "../sass/kpiTree"; 
 import ThisData from './ThisData' 
-
-
 import utils from '../../shared/utils' 
 
 
@@ -91,7 +89,20 @@ export default class KpiTree extends Component{
                   }
                 ],
                 thisData:{},
-        }  
+        }
+        //用户列表
+      utils.ajax({url: '/api/userList'}).then(re => {
+        console.log(re)
+      })
+
+
+// 点击后查询 用户权限
+      let datas = {}
+      datas.id = 1
+
+      utils.ajax({url: '/api/userRights',data:datas}).then(re => {
+
+      }) 
     }
     componentDidMount=()=>{  
         let _main=this.refs.kpiTree;  

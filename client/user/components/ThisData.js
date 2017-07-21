@@ -18,12 +18,13 @@ class ThisData extends Component {
           }
         }
     }
-    handleChange(event) {
-      let _self = this;
+    handleChange(word,event) {
+      console.log(word)
       let name = event.target.name;
       let data = this.state.thisData;
       data[name] = event.target.value;
       this.setState({thisData: data});
+      // 在此获取 修改后数据  this.state.thisData
     }
 
     componentDidMount() {
@@ -84,16 +85,16 @@ class ThisData extends Component {
         if(o == 'id'){
           formDom.push(
             <div className="field">
-                  <label>{_self.state.editArr[o]}</label>
-                  <input type="text" name={o} disabled value={_self.state.thisData[o]} placeholder={o} onChange={this.handleChange.bind(this)} />
+                  <label htmlFor={o}>{_self.state.editArr[o]}</label>
+                  <input type="text" name={o} id={o} disabled value={_self.state.thisData[o]} placeholder={o} onChange={this.handleChange.bind(this)} />
             </div>
           )
         }else if(o == 'username'){
           formDom.push(
             <div className="field">
-              <label>{_self.state.editArr[o]}</label>
+              <label htmlFor={o}>{_self.state.editArr[o]}</label>
               <div className="ui icon input">
-                <input type="text" name={o} className={styles.input} value={_self.state.thisData[o]} placeholder={o} onChange={this.handleChange.bind(this)} />
+                <input type="text" name={o} id={o} className={styles.input} value={_self.state.thisData[o]} placeholder={o} onChange={this.handleChange.bind(this)} />
                 <i className="user icon"></i>
               </div>
             </div>
@@ -101,18 +102,32 @@ class ThisData extends Component {
         }else if(o == 'password'){
           formDom.push(  
             <div className="field">
-              <label>{_self.state.editArr[o]}</label>
+              <label htmlFor={o}>{_self.state.editArr[o]}</label>
               <div className="ui icon input">
-                <input type="password" name={o} className={styles.input} value={_self.state.thisData[o]} placeholder={o} onChange={this.handleChange.bind(this)} />
+                <input type="password" name={o} id={o} className={styles.input} value={_self.state.thisData[o]} placeholder={o} onChange={this.handleChange.bind(this)} />
                 <i className="lock icon"></i>
               </div>
+            </div>
+          )
+        }else if(o == 'create_time'){
+          formDom.push(
+            <div className={styles.fields}>
+                  <label htmlFor={o}>{_self.state.editArr[o]}</label>
+                  <input type="text" name={o} id={o} value={_self.state.thisData[o]} placeholder={o} onChange={this.handleChange.bind(this)} />
+            </div>
+          )
+        }else if(o == 'effective_time'){
+          formDom.push(
+            <div className={styles.fields}>
+                  <label htmlFor={o}>{_self.state.editArr[o]}</label>
+                  <input type="text" name={o} id={o} value={_self.state.thisData[o]} placeholder={o} onChange={this.handleChange.bind(this)} />
             </div>
           )
         }else{
           formDom.push(
             <div className="field">
-                  <label>{_self.state.editArr[o]}</label>
-                  <input type="text" name={o} value={_self.state.thisData[o]} placeholder={o} onChange={this.handleChange.bind(this)} />
+                  <label htmlFor={o}>{_self.state.editArr[o]}</label>
+                  <input type="text" name={o} id={o} value={_self.state.thisData[o]} placeholder={o} onChange={this.handleChange.bind(this)} />
             </div>
           )  
         }
