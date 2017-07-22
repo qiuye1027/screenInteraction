@@ -268,12 +268,15 @@ class App extends Component {
         
 
         $('.fileList.modal').modal('attach events', '.button#newswiper').modal({
-          // onshow:function(){
-          //   $(".newareacent").addClass("hidden");
-          // },
-          onHidden: function(){
+        //   onShow : function(){
+        //     console.log(123)
+        //   }
+        // }).modal({
+         
+          onHidden: function(){ 
             if($("#selectFileName0").val()!=''){
                 $(".swiperList").append('<a class="item">'+$("#selectFileName0").val()+'<div class="ui horizontal label">删除</div></a>')
+
                 _this.setState({
                   swiperList : _this.state.swiperList.concat($("#selectFileName0").val())
                 })
@@ -771,19 +774,20 @@ export default App
 
 
 function getSwiper (hei,wid,datalist,type,programArrIndex,removeProgrameItems){
+  console.log(datalist)
   
-  return  <Swipercont height={hei} key={2} width={wid} datalist={datalist} type="4" programArrIndex={programArrIndex} removeProgrameItems={removeProgrameItems}/>
+  return  <Swipercont height={hei} key={programArrIndex} width={wid} datalist={datalist} type="4" programArrIndex={programArrIndex} removeProgrameItems={removeProgrameItems}/>
   
 } 
 
 function getBtn (hei,wid,bg,href,ID,type,programArrIndex,removeProgrameItems){
 
-  return  <Btn height={hei} width={wid} bg={bg} href={href} ID={ID} type="5" programArrIndex={programArrIndex} removeProgrameItems={removeProgrameItems}/>
+  return  <Btn height={hei} width={wid} key={programArrIndex}  bg={bg} href={href} ID={ID} type="5" programArrIndex={programArrIndex} removeProgrameItems={removeProgrameItems}/>
   
 } 
 
 function getCont (hei,wid,cont,path,type,ID,programArrIndex,removeProgrameItems){
-  return  <Cont height={hei} width={wid} cont={cont} path={path} type={type} ID={ID} programArrIndex={programArrIndex} removeProgrameItems={removeProgrameItems}/>
+  return  <Cont height={hei} width={wid} key={programArrIndex}  cont={cont} path={path} type={type} ID={ID} programArrIndex={programArrIndex} removeProgrameItems={removeProgrameItems}/>
   
 } 
 

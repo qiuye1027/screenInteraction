@@ -87,9 +87,10 @@ class Swipercont extends Component {
           <div className="swiper-container " ref="container" >
             <div className="swiper-wrapper">
             {
-              datalist.map(function (item) {
+              datalist.map(function (item,ins) {
+ 
                   return (
-                     <div className="swiper-slide"><img src={item}  style={imgstyle}/></div>
+                     <div className="swiper-slide" key={ins}><img src={item}  style={imgstyle}/></div>
                   )})
             }
               

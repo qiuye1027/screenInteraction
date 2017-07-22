@@ -55,7 +55,7 @@ class btn extends Component {
 
           
           return(
-            <div style={Style} className='Plugin'  data-styleId={this.state.styleId} data-programArrIndex={programArrIndex} onMouseOver={this.showClose.bind(this)} onMouseOut={this.hideClose.bind(this)}>
+            <div style={Style} className='Plugin'  data-styleId={this.state.styleId} data-programArrIndex={programArrIndex}   onMouseOver={this.showClose.bind(this)} onMouseOut={this.hideClose.bind(this)}>
               {!({type}['type'][0]) ? <div></div> : <VideoEle type={type} path={path} style={eleStyle} />}
               <p>{cont}</p>
               <div  style={closeStyle} onClick={this.props.removeProgrameItems.bind(this)}>X</div>

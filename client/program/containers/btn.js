@@ -28,12 +28,12 @@ class btn extends Component {
       let {width,height,bg,href,ID,programArrIndex,removeProgrameItems,programArr} = this.props;
 
       let btnStyle = {  
-            width: width + 'px',  
-            height: height + 'px',
+            width: Number(width) + 'px',  
+            height: Number(height) + 'px',
             display:'block',
             border: '1px solid #333',
             'textAlign': 'center',
-            'lineHeight': height + 'px',
+            'lineHeight': Number(height) + 'px',
             'borderRadius': '5px',
             'backgroundImage': 'url('+ bg +')',
             'backgroundRepeat': 'no-repeat',
@@ -54,12 +54,12 @@ class btn extends Component {
         }
 
        
-      let area = {display:'block',width:width,height:height} 
+      let area = {display:'block',width:Number(width) ,height:Number(height)} 
 
       
         return (
           
-          <div  className='Plugin' style={area} data-styleId={this.state.styleId} data-programArrIndex={programArrIndex} onMouseOver={this.showClose.bind(this)} onMouseOut={this.hideClose.bind(this)}>
+          <div  className='Plugin' style={area}  data-styleId={this.state.styleId} data-programArrIndex={programArrIndex} onMouseOver={this.showClose.bind(this)} onMouseOut={this.hideClose.bind(this)}>
             <a href={href} style={btnStyle}></a>
             <div style={closeStyle} onClick={this.props.removeProgrameItems.bind(this)}>X</div>
           </div>        
