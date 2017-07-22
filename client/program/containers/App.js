@@ -276,7 +276,7 @@ class App extends Component {
           onHidden: function(){ 
             if($("#selectFileName0").val()!=''){
                 $(".swiperList").append('<a class="item">'+$("#selectFileName0").val()+'<div class="ui horizontal label">删除</div></a>')
-
+                delItem ()
                 _this.setState({
                   swiperList : _this.state.swiperList.concat($("#selectFileName0").val())
                 })
@@ -289,6 +289,7 @@ class App extends Component {
           onHidden: function(){
             if($("#selectFileName2").val()!=''){
               $(".swiperList").html('<a class="item">'+$("#selectFileName2").val()+'<div class="ui horizontal label">删除</div></a>')
+              delItem ()
               let regVideo = /[A-Za-z0-9_\-\u4e00-\u9fa5]+.(mp4)?(ogg)?(mpeg)?(avi)?(rmvb)?(ra)?(ram)?(mov)?(wmv)?/,//需要匹配的内容
                   sourceVal=$("#selectFileName2").val();
                   (regVideo.test(sourceVal)) && (_this.setState({sourceType : [].concat(1)}))
@@ -303,6 +304,7 @@ class App extends Component {
           onHidden: function(){
             if($("#selectFileName4").val()!=''){
             $(".swiperList").html('<a class="item">'+$("#selectFileName4").val()+'<div class="ui horizontal label">删除</div></a>')
+            delItem ()
             let regImg = /[A-Za-z0-9_\-\u4e00-\u9fa5]+.(gif|jpg|jpeg|bmp|png)/,
                 sourceVal=$("#selectFileName4").val();
                 (regImg.test(sourceVal)) && (_this.setState({sourceType : [].concat(2)}))
@@ -317,6 +319,7 @@ class App extends Component {
           onHidden: function(){
             if($("#selectFileName3").val()!=''){
               $(".swiperList").html('<a class="item">'+$("#selectFileName3").val()+'<div class="ui horizontal label">删除</div></a>')
+              delItem ()
               _this.setState({
                 swiperList : [].concat($("#selectFileName3").val())
               })
@@ -792,7 +795,11 @@ function getCont (hei,wid,cont,path,type,ID,programArrIndex,removeProgrameItems)
 } 
 
 
-
+function delItem (){
+  $('.horizontal').click(function(){
+    $(this).parent().remove()
+  })
+}
 
 
 
