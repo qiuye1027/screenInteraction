@@ -91,7 +91,9 @@ export default class KpiTree extends Component{
                 thisData:{},
         }
         //用户列表
-      utils.ajax({url: '/api/userList'}).then(re => {
+        let datao ={};
+        datao.id = null     //    datao.id = 1 
+      utils.ajax({url: '/api/userList',data:datao}).then(re => {
         console.log(re)
       })
 

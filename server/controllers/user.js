@@ -7,8 +7,9 @@ async function getUserInfo(ctx) {
 }
 
 async function list(ctx) { 
-
-	let list = await getDBSearch.searchData("SELECT * FROM user where father_id is null;")
+	let _body = ctx.request.body
+	let id = _body.id == undefined ? "is null" : "= '" +_body.id + "'"
+	let list = await getDBSearch.searchData("SELECT * FROM user where father_id "+id+";")
 
 	
 
@@ -21,10 +22,7 @@ async function list(ctx) {
 			list[i].hasChild = 0
 		}
 
-	}
-	 
-
- 
+	} 
   ctx.body  =  list
    
 }
