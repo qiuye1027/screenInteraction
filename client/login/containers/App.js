@@ -23,9 +23,7 @@ class App extends Component {
         datas.password =$("#password").val();
 
         utils.ajax({url: '/api/doLogin',data:datas}).then(re => {
-
-            console.log(re.length)
-              
+  
            if(re.length != 0){
             location.href='/'
            }else{
