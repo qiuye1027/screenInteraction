@@ -17484,3 +17484,45 @@ ol.ui.horizontal.list li:before,
 .ui.form .inline.fields .field > :only-child, .ui.form .inline.field > :only-child{margin:0 0 0 1em}
 .ui.primary.buttons .button, .ui.primary.button{margin-left: .8em}
 .Plugin.ui-draggable p {word-wrap: break-word;}
+
+
+
+
+.ui-resizable-handle {
+    position: absolute;
+    font-size: 0.1px;
+    display: block;
+    -ms-touch-action: none;
+    touch-action: none;
+}
+.ui-resizable-e {
+    cursor: e-resize;
+    width: 7px;
+    right: -5px;
+    top: 0;
+    height: 100%;
+}
+.ui-resizable-s {
+    cursor: s-resize;
+    height: 7px;
+    width: 100%;
+    bottom: -5px;
+    left: 0;
+}
+.ui-resizable-se {
+    cursor: se-resize;
+    width: 12px;
+    height: 12px;
+    right: 1px;
+    bottom: 1px;
+}
+.ui-icon {
+    width: 16px;
+    height: 16px;
+}
+.ui-icon, .ui-widget-content .ui-icon {
+    background-image: url(../../images/ui-icons_222222_256x240.png);
+}
+.ui-icon-gripsmall-diagonal-se {
+    background-position: -64px -224px;
+}

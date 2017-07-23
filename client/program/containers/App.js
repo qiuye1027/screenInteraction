@@ -134,7 +134,7 @@ class App extends Component {
               })
             }
             
-             $( ".Plugin" ).draggable({ 
+             $( ".Plugin" ).resizable().draggable({ 
               containment: ".App__programArea__1KiBa8n0", 
               scroll: false ,
               stack: ".Plugin",
@@ -368,13 +368,13 @@ class App extends Component {
             })
 
           }else if(i.type == 5){
-        //    _this.setState({
-        //       programArr:programArrList.concat(getBtn (height,width,_this.state.swiperList,link,_this.state.ID,type,_this.state.programArrIndex,_this.removeProgrameItems))
-        //   })
+           _this.setState({
+              programArr:programArrList.concat(getBtn (height,width,_this.state.swiperList,link,_this.state.ID,type,_this.state.programArrIndex,_this.removeProgrameItems))
+          })
           }else{
-        //    _this.setState({
-        //      programArr:programArrList.concat(getCont(height,width,$("#conts").val(),_this.state.swiperList,_this.state.sourceType,_this.state.ID,_this.state.programArrIndex,_this.removeProgrameItems))
-        //   })
+           _this.setState({
+             programArr:programArrList.concat(getCont(height,width,$("#conts").val(),_this.state.swiperList,_this.state.sourceType,_this.state.ID,_this.state.programArrIndex,_this.removeProgrameItems))
+          })
           }
         }
          $( ".Plugin" ).draggable({ 
@@ -391,7 +391,7 @@ class App extends Component {
               }
 
 
-            });   
+            }).resizable();  
        
 
       })      
@@ -777,7 +777,6 @@ export default App
 
 
 function getSwiper (hei,wid,datalist,type,programArrIndex,removeProgrameItems){
-  console.log(datalist)
   
   return  <Swipercont height={hei} key={programArrIndex} width={wid} datalist={datalist} type="4" programArrIndex={programArrIndex} removeProgrameItems={removeProgrameItems}/>
   
