@@ -56,4 +56,6 @@ router.post('/messionUpdate', messionList.update)
 router.post('/userList', user.list)
 //用户权限
 router.post('/userRights', user.rigths)
+//用户权限edit
+router.post('/editProps', user.editProps)
 export default router

@@ -36,4 +36,17 @@ async function rigths(ctx) {
 }
 
 
-export default {getUserInfo,list,rigths}
+
+async function editProps(ctx) { 
+
+ let _body = ctx.request.body
+ 
+ ctx.body  =  await getDBSearch.searchData("UPDATE `screenDB`.`user` SET `username`='"+_body.username+"', `password`='"+_body.password+"', `effective_time`='"+_body.effective_time+"', `is_active`='"+_body.is_active+"' WHERE `id`='"+_body.id+"';")
+   
+}
+
+
+
+
+
+export default {getUserInfo,list,rigths,editProps}
