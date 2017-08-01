@@ -186,7 +186,7 @@ class App extends Component {
 
  
        $('.coupled.modal').modal({
-          allowMultiple: true
+          allowMultiple: false
         });
       // open second modal on first modal buttons
       $('.fileList1.modal').modal('attach events', '.newPergram.modal .button.add').modal({
