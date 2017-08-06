@@ -186,7 +186,7 @@ class App extends Component {
 
  
        $('.coupled.modal').modal({
-          allowMultiple: false
+          allowMultiple: true
         });
       // open second modal on first modal buttons
       $('.fileList1.modal').modal('attach events', '.newPergram.modal .button.add').modal({
@@ -778,9 +778,9 @@ export default App
 
 
 
-function getSwiper (hei,wid,datalist,type,programArrIndex,removeProgrameItems,ID){
+function getSwiper (hei,wid,datalist,type,programArrIndex,removeProgrameItems){
   
-  return  <Swipercont height={hei} key={programArrIndex} width={wid} datalist={datalist} ID={ID} type="4" programArrIndex={programArrIndex} removeProgrameItems={removeProgrameItems}/>
+  return  <Swipercont height={hei} key={programArrIndex} width={wid} datalist={datalist} type="4" programArrIndex={programArrIndex} removeProgrameItems={removeProgrameItems}/>
   
 } 
 
