@@ -12,7 +12,7 @@ async function save(ctx) {
   name = _body.name,
   height = _body.height,
   width = _body.width,
-  bgimg = _body.bgimg
+  bgimg = _body.bgPath
 
    
 	let sqlstr = "INSERT INTO `screenDB`.`program` (`user_id`, `name`, `height`, `width`,`bgimg`)"+
