@@ -116,7 +116,7 @@ class App extends Component {
               });
             if(type == 'swiper'){ 
               _this.setState({
-                programArr:programArrList.concat(getSwiper(height,width,_this.state.swiperList,type,_this.state.programArrIndex,_this.removeProgrameItems))           
+                programArr:programArrList.concat(getSwiper(height,width,_this.state.swiperList,type,_this.state.programArrIndex,_this.removeProgrameItems,_this.state.ID))           
               })
 
             }else if(type == 'button'){
@@ -186,7 +186,7 @@ class App extends Component {
 
  
        $('.coupled.modal').modal({
-          allowMultiple: false
+          allowMultiple: true
         });
       // open second modal on first modal buttons
       $('.fileList1.modal').modal('attach events', '.newPergram.modal .button.add').modal({
@@ -227,10 +227,11 @@ class App extends Component {
                 datas.width =pergramWidth;
                 datas.name =pergramName;
                 datas.bgPath = programBg;
+ 
 
                 utils.ajax({url: '/api/creatProgram',data:datas}).then(re => {
                    
-                  _this.setState({ID:re.ID})
+                  _this.setState({ID:re[0].ID})
                 })
 
    
@@ -257,6 +258,7 @@ class App extends Component {
               
               let datas = {}
               datas.style = obj.eq(i).attr("style")
+              datas.styleId = obj.eq(i).attr("data-styleid")
               //把这个style直接存放进db中
               console.log(datas.style)
                utils.ajax({url: '/api/saveProgram',data:datas}).then(re => {
@@ -364,7 +366,7 @@ class App extends Component {
 
 
             this.setState({
-              programArr:programArrList.concat(getSwiper(stylesJson.height,stylesJson.width,stylesJson.datalist,stylesJson.type,positionJson.styleId,this.removeProgrameItems))           
+              programArr:programArrList.concat(getSwiper(stylesJson.height,stylesJson.width,stylesJson.datalist,stylesJson.type,positionJson.styleId,this.removeProgrameItems,_this.state.ID))           
             })
 
           }else if(i.type == 5){
