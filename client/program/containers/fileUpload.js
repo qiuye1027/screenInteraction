@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import styles from '../sass/App'
 import utils from '../../shared/utils'
-import Test from './Test'
 let filePath = ''
 
 class FileUpload extends Component {
@@ -18,7 +17,7 @@ class FileUpload extends Component {
       let {name} = this.props
       if(this.props.name=='selectFileName1'){
         this.findFile('',_this,name)  
-      }   
+      } 
     }
 
     findFile(path,_this,name){
@@ -72,7 +71,6 @@ class FileUpload extends Component {
             <div className="ui breadcrumb">
               <a className="section" data-path="">全部素材</a>
             </div>
-            <Test></Test>
             <div className="ui list" dangerouslySetInnerHTML={{__html:this.state.folderlists}}></div> 
           </div>        
         )
