@@ -778,9 +778,9 @@ export default App
 
 
 
-function getSwiper (hei,wid,datalist,type,programArrIndex,removeProgrameItems){
+function getSwiper (hei,wid,datalist,type,programArrIndex,removeProgrameItems,ID){
   
-  return  <Swipercont height={hei} key={programArrIndex} width={wid} datalist={datalist} type="4" programArrIndex={programArrIndex} removeProgrameItems={removeProgrameItems}/>
+  return  <Swipercont height={hei} key={programArrIndex} width={wid} datalist={datalist} ID={ID}  type="4" programArrIndex={programArrIndex} removeProgrameItems={removeProgrameItems}/>
   
 } 
 
